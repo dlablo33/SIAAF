@@ -1,0 +1,106 @@
+/* resources/css/app.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* resources/css/app.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Estilos personalizados */
+.login-container {
+    @apply min-h-screen flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8;
+}
+
+.login-box {
+    @apply max-w-md w-full space-y-8 p-10 bg-white rounded-lg shadow-xl;
+}
+
+.login-title {
+    @apply text-center text-3xl font-extrabold text-gray-900;
+}
+
+.login-subtitle {
+    @apply text-center text-xl font-semibold text-gray-700 tracking-wider uppercase;
+}
+
+.login-input {
+    @apply appearance-none block w-full px-5 py-3 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 
+           focus:outline-none focus:ring-blue-500 focus:border-blue-500;
+}
+
+.login-button {
+    @apply w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-lg font-medium 
+           text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 
+           transition duration-150 ease-in-out;
+}
+
+.forgot-password {
+    @apply text-sm text-blue-600 hover:text-blue-800 hover:underline transition duration-150 ease-in-out;
+}
+
+/* Estilo especial para el botón como en la imagen */
+.login-button-special {
+    @apply w-full py-3 px-6 rounded-md text-lg font-semibold text-white 
+           bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900
+           shadow-lg transform hover:scale-105 transition-all duration-300;
+    border: none;
+    letter-spacing: 0.05em;
+}
+
+/* Efecto de pulsación */
+.login-button-special:active {
+    @apply transform scale-95;
+}
+
+/* Para pantallas pequeñas */
+@media (max-width: 640px) {
+    .login-box {
+        @apply p-6;
+    }
+    .login-title {
+        @apply text-2xl;
+    }
+    .login-subtitle {
+        @apply text-lg;
+    }
+    .login-button-special {
+        @apply py-2 px-4 text-base;
+    }
+}
+
+/* Ajustes responsivos específicos */
+@media (max-width: 400px) {
+    .login-box {
+        @apply p-4 shadow-none border border-gray-200;
+    }
+    .login-subtitle {
+        @apply text-sm;
+    }
+    .login-input {
+        @apply px-3 py-2;
+    }
+}
+
+/* Dark mode opcional */
+@media (prefers-color-scheme: dark) {
+    .login-box {
+        @apply bg-gray-800;
+    }
+    .login-title, .login-subtitle {
+        @apply text-white;
+    }
+    .login-input {
+        @apply bg-gray-700 text-white border-gray-600;
+    }
+    label {
+        @apply text-gray-300;
+    }
+}
+
+.login-button-special {
+    @apply w-full py-3 px-6 rounded-md text-lg font-semibold text-white 
+           bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900
+           shadow-lg transform hover:scale-105 transition-all duration-300 active:scale-95;
+}
