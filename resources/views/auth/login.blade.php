@@ -77,7 +77,7 @@
             <!-- Mensaje de servicios -->
             <div class="mt-6 text-center">
                 <p class="text-xs text-[#00404a]">
-                    Ofrecemos servicios shelter: administrativos, contables, fiscales, RRHH e import-export
+                    Ofrecemos servicios shelter: administrativos, contables, fiscales, nóminas e import-export
                 </p>
             </div>
         </div>

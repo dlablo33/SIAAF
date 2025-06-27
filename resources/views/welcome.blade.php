@@ -111,7 +111,7 @@
         <!-- Lado Izquierdo - Imagen con overlay -->
         <div class="relative w-full lg:w-1/2 h-64 lg:h-auto bg-cover bg-center group overflow-hidden">
             <div class="absolute inset-0 bg-gradient-to-t from-[#01163d]/80 to-[#c1611a]/30 z-10"></div>
-            <img src="{{ asset('img/Fondo.png') }}" alt="Imagen descriptiva" 
+            <img src="{{ asset('img/Fondo2.png') }}" alt="Imagen descriptiva" 
                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
             
             <div class="absolute bottom-0 left-0 p-8 z-20 text-white">
