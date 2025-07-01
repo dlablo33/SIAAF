@@ -33,7 +33,9 @@ class RegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
+            'nombre' => ['required', 'string', 'max:255'],
+            'a_paterno' => ['required', 'string', 'max:255'],
+            'a_materno' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             // Agregar validación para el rol solo si es necesario
@@ -41,7 +43,9 @@ class RegisteredUserController extends Controller
         ]);
 
         $userData = [
-            'name' => $request->name,
+            'nombre' => $request->nombre,
+            'a_paterno' => $request->a_paterno,
+            'a_materno' => $request->a_materno,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'role' => 'staff' // Rol por defecto para nuevos registros

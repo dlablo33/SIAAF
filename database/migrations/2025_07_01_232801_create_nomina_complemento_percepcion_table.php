@@ -1,0 +1,42 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('nomina_complemento_percepcion', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('empleado_id');
+            $table->unsignedInteger('suelo');
+            $table->unsignedInteger('septimo');
+            $table->unsignedInteger('bono_puntualidad');
+            $table->unsignedInteger('bono_asistencia');
+            $table->unsignedInteger('bono_despensa');
+            $table->unsignedInteger('bono_extra');
+            $table->unsignedInteger('vacaciones');
+            $table->unsignedInteger('prima_vac');
+            $table->unsignedInteger('devoluciones');;
+            $table->unsignedInteger('total');
+            $table->timestamps();
+        });
+
+        Schema::table('nomina_complemento_percepcion', function ($table) {
+            $table->foreign('empleado_id')->references('id')->on('empleado');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('nomina_complemento_percepcion');
+    }
+};
