@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('permiso_sol', function (Blueprint $table) {
+        Schema::create('permiso_solicitud', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('empleado_id');
             $table->unsignedInteger('tipo_id');

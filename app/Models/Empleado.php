@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Department;
+use App\Models\HR\EsquemaPago;
+use App\Models\HR\Papeleria;
+use App\Models\HR\VacacionesHistorial;
 
 class Empleado extends Authenticatable
 {
@@ -18,11 +21,28 @@ class Empleado extends Authenticatable
      *
      * @var list<string>
      */
+    protected $table = 'empleado';
+
     protected $fillable = [
-        'name',
+        'nombre',
+        'a_paterno',
+        'a_materno',
         'email',
         'password',
-        'role' // Añade este campo
+        'role', // Añade este campo
+        'foto_perfil',
+        'curp',
+        'rfc',
+        'nss',
+        'fecha_nacimiento',
+        'domicilio',
+        'telefono',
+        'contacto',
+        'telefono_contacto',
+        'empresa',
+        'puesto',
+        'fecha_ingreso',
+        'vac_restante'
     ];
 
     /**
@@ -49,23 +69,37 @@ class Empleado extends Authenticatable
     }
 
     public function isAdministrador()
-{
-    return $this->role === 'administrador';
-}
+    {
+        return $this->role === 'administrador';
+    }
 
-public function isGerente()
-{
-    return $this->role === 'gerente';
-}
+    public function isGerente()
+    {
+        return $this->role === 'gerente';
+    }
 
-public function isCoordinador()
-{
-    return $this->role === 'coordinador';
-}
+    public function isCoordinador()
+    {
+        return $this->role === 'coordinador';
+    }
 
-public function isStaff()
-{
-    return $this->role === 'staff';
-}
+    public function isStaff()
+    {
+        return $this->role === 'staff';
+    }
 
+    public function esquemaPago()
+    {
+        return $this->hasMany(EsquemaPago::class);
+    }
+
+    public function vacacionesHistorial()
+    {
+        return $this->hasMany(VacacionesHistorial::class);
+    }
+
+    public function papeleria()
+    {
+        return $this->hasMany(Papeleria::class);
+    }
 }

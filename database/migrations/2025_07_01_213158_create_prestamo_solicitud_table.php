@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('prestamo_sol', function (Blueprint $table) {
+        Schema::create('prestamo_solicitud', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('empleado_id');
             $table->date('fecha_solicitud');
