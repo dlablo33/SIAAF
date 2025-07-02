@@ -11,15 +11,15 @@ class Client extends Model
     use HasFactory;
 
     protected $fillable = [
-        'type', 
-        'name', 
-        'rfc', 
-        'email', 
-        'phone', 
-        'address', 
-        'status', 
-        'notes', 
-        'user_id',
+        'type',
+        'name',
+        'rfc',
+        'email',
+        'phone',
+        'address',
+        'status',
+        'notes',
+        'empleado_id',
         'document_status',
         'documents'
     ];
@@ -30,9 +30,9 @@ class Client extends Model
     ];
 
     // Relaciones
-    public function user()
+    public function empleado()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Empleado::class);
     }
 
     public function companies()
@@ -80,7 +80,7 @@ class Client extends Model
     {
         $required = self::requiredDocuments($this->type);
         $uploaded = $this->documents ?: [];
-        
+
         $missing = array_diff_key($required, $uploaded);
         $this->document_status = empty($missing) ? 'complete' : 'incomplete';
         $this->save();
@@ -91,7 +91,7 @@ class Client extends Model
     {
         $required = self::requiredDocuments($this->type);
         $uploaded = $this->documents ?: [];
-        
+
         return array_diff_key($required, $uploaded);
     }
 }

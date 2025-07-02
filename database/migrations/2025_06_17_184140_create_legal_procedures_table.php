@@ -18,7 +18,7 @@ Schema::create('legal_procedures', function (Blueprint $table) {
     $table->text('description')->nullable();
     $table->enum('status', ['pending', 'in_progress', 'completed', 'rejected']);
     $table->foreignId('client_id')->constrained()->onDelete('cascade');
-    $table->foreignId('user_id')->constrained()->onDelete('cascade');
+    $table->foreignId('empleado_id')->constrained()->onDelete('cascade');
     $table->date('start_date');
     $table->date('end_date')->nullable();
     $table->timestamps();

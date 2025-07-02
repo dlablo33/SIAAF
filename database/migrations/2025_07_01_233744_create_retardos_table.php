@@ -21,13 +21,16 @@ return new class extends Migration
             $table->unsignedInteger('jueves');
             $table->unsignedInteger('viernes');
             $table->unsignedInteger('total');
-            $table->unsignedInteger('desc_nomina');
-            $table->unsignedInteger('desc_complemento');
+            $table->unsignedBigInteger('retardos_descuento_id');
             $table->timestamps();
         });
 
         Schema::table('retardos', function ($table) {
             $table->foreign('empleado_id')->references('id')->on('empleado');
+        });
+
+        Schema::table('retardos', function ($table) {
+            $table->foreign('retardos_descuento_id')->references('id')->on('retardos_decuento');
         });
     }
 

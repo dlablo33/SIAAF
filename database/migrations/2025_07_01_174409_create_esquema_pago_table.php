@@ -19,9 +19,9 @@ return new class extends Migration
             $table->unsignedInteger('bono_puntualidad');
             $table->unsignedInteger('bono_asistencia');
             $table->unsignedInteger('despensa');
-            $table->unsignedInteger('septimo');
+            $table->unsignedInteger('septimo_dia');
             $table->unsignedInteger('total_sem');
-            $table->unsignedInteger('mensual_ant');
+            $table->unsignedInteger('mensual_anticipado');
             $table->timestamps();
         });
 

@@ -10,15 +10,15 @@ class LegalAdvice extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['client_id', 'user_id', 'topic', 'notes', 'date'];
+    protected $fillable = ['client_id', 'empleado_id', 'topic', 'notes', 'date'];
 
     public function client()
     {
         return $this->belongsTo(Client::class);
     }
 
-    public function user()
+    public function empleado()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Empleado::class);
     }
 }
