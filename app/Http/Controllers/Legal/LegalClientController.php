@@ -37,7 +37,7 @@ class LegalClientController extends Controller
             'notes' => 'nullable|string'
         ]);
 
-        $client = Client::create($validated + ['user_id' => auth()->id()]);
+        $client = Client::create($validated + ['empleado_id' => auth()->id()]);
 
         // Procesar documentos
         $this->processDocuments($request, $client);
@@ -91,7 +91,7 @@ class LegalClientController extends Controller
                 Storage::delete($file);
             }
         }
-        
+
         $client->delete();
         return redirect()->route('legal.clients.index')
             ->with('success', 'Cliente eliminado correctamente');
@@ -112,18 +112,18 @@ class LegalClientController extends Controller
 
         foreach ($requiredDocs as $docKey) {
             $requestKey = $client->type.'_'.$docKey;
-            
+
             if ($request->hasFile($requestKey)) {
                 // Eliminar documento anterior si existe
                 if (isset($documents[$docKey])) {
                     Storage::delete($documents[$docKey]);
                 }
-                
+
                 // Almacenar nuevo documento
                 $file = $request->file($requestKey);
                 $filename = Str::slug($client->name).'_'.$docKey.'.'.$file->extension();
                 $path = $file->storeAs('client_docs/'.$client->id, $filename);
-                
+
                 $documents[$docKey] = $path;
             }
         }

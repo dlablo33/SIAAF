@@ -22,11 +22,11 @@ Schema::create('clients', function (Blueprint $table) {
     $table->text('address')->nullable();
     $table->enum('status', ['active', 'inactive', 'pending'])->default('pending');
     $table->text('notes')->nullable();
-    $table->foreignId('user_id')->constrained()->onDelete('cascade');
+    $table->foreignId('empleado_id')->constrained()->onDelete('cascade');
             $table->enum('document_status', ['complete', 'incomplete'])
                   ->default('incomplete')
                   ->after('status');
-                  
+
             $table->json('documents')
                   ->nullable()
                   ->after('document_status');

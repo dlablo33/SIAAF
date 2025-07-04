@@ -11,7 +11,7 @@ class LegalProcedure extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'description', 'status', 'client_id', 'user_id', 'start_date', 'end_date'
+        'name', 'description', 'status', 'client_id', 'empleado_id', 'start_date', 'end_date'
     ];
 
     public function client()
@@ -19,8 +19,8 @@ class LegalProcedure extends Model
         return $this->belongsTo(Client::class);
     }
 
-    public function user()
+    public function empleado()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Empleado::class);
     }
 }

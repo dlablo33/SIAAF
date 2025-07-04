@@ -37,12 +37,12 @@ class Department extends Model
      */
     public function users(): HasMany
     {
-        return $this->hasMany(User::class);
+        return $this->hasMany(Empleado::class);
     }
 
     /**
      * Obtener todos los departamentos disponibles
-     * 
+     *
      * @return array
      */
     public static function getAllDepartments(): array
@@ -64,7 +64,7 @@ class Department extends Model
 
     /**
      * Obtener nombre del departamento
-     * 
+     *
      * @param int $departmentId
      * @return string
      */
@@ -75,7 +75,7 @@ class Department extends Model
 
     /**
      * Verificar si un departamento existe
-     * 
+     *
      * @param int $departmentId
      * @return bool
      */
