@@ -12,6 +12,8 @@ use App\Http\Controllers\Legal\AdviceController;
 use App\Http\Controllers\Legal\ProcedureController;
 use App\Http\Controllers\Legal\AppointmentController;
 
+use App\Http\Controllers\Cotizadora\CotizadorController;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -64,3 +66,6 @@ Route::get('/clients/{client}/documents', [LegalClientController::class, 'showDo
     
 Route::get('/clients/{client}/download/{document}', [LegalClientController::class, 'downloadDocument'])
     ->name('clients.download');
+
+
+

@@ -457,12 +457,12 @@
     <!-- Botón de Opciones -->
     <a href="#" class="nav-item flex items-center px-3 py-2 rounded-lg text-sm text-white hover:bg-opacity-10 hover:bg-white"
        data-tooltip="Opciones">
-        <i class="fas fa-cog text-lg w-6 text-center text-white"></i>
-        <span class="nav-text ml-3 text-white">Opciones</span>
+        <i class="fa fa-calendar text-lg w-6 text-center text-white"></i>
+        <span class="nav-text ml-3 text-white">Calendario</span>
     </a>
     
     <!-- Botón de Cerrar sesión -->
-    <form method="POST" action="{{ route('logout') }}" class="mt-2">
+    <form method="POST" action="#" class="mt-2">
         @csrf
         <button class="nav-item flex items-center w-full text-left px-3 py-2 rounded-lg text-sm text-white hover:bg-opacity-10 hover:bg-red-500"
                 data-tooltip="Cerrar sesión">
