@@ -11,6 +11,8 @@ use App\Http\Controllers\Legal\RequirementController;
 use App\Http\Controllers\Legal\AdviceController;
 use App\Http\Controllers\Legal\ProcedureController;
 use App\Http\Controllers\Legal\AppointmentController;
+
+use App\Http\Controllers\Cotizadora\CotizadorController;
 use App\Http\Controllers\RH\NominaController;
 
 Route::get('/', function () {
