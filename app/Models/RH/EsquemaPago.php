@@ -2,11 +2,11 @@
 
 namespace App\Models\HR;
 
-use App\Models\Client;
 use App\Models\Empleado;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class EsquemaPago extends Client
+class EsquemaPago extends Model
 {
 
     use HasFactory;

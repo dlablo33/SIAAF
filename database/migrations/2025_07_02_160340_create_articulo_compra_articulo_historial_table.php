@@ -23,18 +23,18 @@ return new class extends Migration
             $table->unsignedInteger('precio');
             $table->unsignedInteger('cantidad');
             $table->timestamps();
+        });
 
-            Schema::table('articulo_compra_historial', function ($table) {
-                $table->foreign('tipo_id')->references('id')->on('cat_tipo');
-            });
+        Schema::table('articulo_compra_historial', function ($table) {
+            $table->foreign('tipo_id')->references('id')->on('cat_tipo');
+        });
 
-            Schema::table('articulo_compra_historial', function ($table) {
-                $table->foreign('medida_id')->references('id')->on('cat_tipo');
-            });
+        Schema::table('articulo_compra_historial', function ($table) {
+            $table->foreign('medida_id')->references('id')->on('cat_medida');
+        });
 
-            Schema::table('articulo_compra_historial', function ($table) {
-                $table->foreign('proveedor_id')->references('id')->on('cat_tipo');
-            });
+        Schema::table('articulo_compra_historial', function ($table) {
+            $table->foreign('proveedor_id')->references('id')->on('cat_proveedor');
         });
     }
 

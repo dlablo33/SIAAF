@@ -11,6 +11,7 @@ use App\Http\Controllers\Legal\RequirementController;
 use App\Http\Controllers\Legal\AdviceController;
 use App\Http\Controllers\Legal\ProcedureController;
 use App\Http\Controllers\Legal\AppointmentController;
+use App\Http\Controllers\RH\NominaController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -31,36 +32,40 @@ require __DIR__.'/auth.php';
 Route::prefix('legal')->name('legal.')->middleware(['auth'])->group(function () {
     // Clientes
     Route::resource('clients', LegalClientController::class);
-    
+
     // Empresas
     Route::resource('companies', CompanyController::class);
-    
+
     // Documentos
     Route::resource('documents', DocumentController::class);
-    
+
     // Requisitos
     Route::resource('requirements', RequirementController::class);
-    
+
     // Asesorías
     Route::resource('advices', AdviceController::class);
-    
+
     // Trámites
     Route::resource('procedures', ProcedureController::class);
-    
+
     // Citas
     Route::resource('appointments', AppointmentController::class);
-    
+
     // Rutas adicionales
     Route::get('clients/{client}/documents', [LegalClientController::class, 'documents'])->name('clients.documents');
     Route::get('documents/expiring', [DocumentController::class, 'expiring'])->name('documents.expiring');
 });
 
+Route::prefix('rh')->name('rh.')->middleware(['auth'])->group(function () {
+    // Nomina
+    Route::resource('nomina', NominaController::class);
+});
 
 Route::resource('clients', LegalClientController::class);
 
 // Rutas adicionales para documentos
 Route::get('/clients/{client}/documents', [LegalClientController::class, 'showDocuments'])
     ->name('clients.documents');
-    
+
 Route::get('/clients/{client}/download/{document}', [LegalClientController::class, 'downloadDocument'])
     ->name('clients.download');

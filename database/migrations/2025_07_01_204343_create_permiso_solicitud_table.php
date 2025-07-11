@@ -13,28 +13,28 @@ return new class extends Migration
     {
         Schema::create('permiso_solicitud', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('empleado_id');
-            $table->unsignedInteger('tipo_id');
+            $table->unsignedBigInteger('empleados_id');
+            $table->unsignedBigInteger('tipo_id');
             $table->string('razon');
             $table->unsignedInteger('periodo');
             $table->unsignedInteger('fecha');
             $table->unsignedInteger('minutos');
             $table->string('obvervaciones');
             $table->boolean('autorizacion');
-            $table->unsignedInteger('permiso_id');
+            $table->unsignedBigInteger('permiso_historial_id');
             $table->timestamps();
         });
 
-        Schema::table('permiso_sol', function ($table) {
-            $table->foreign('empleado_id')->references('id')->on('empleado');
+        Schema::table('permiso_solicitud', function ($table) {
+            $table->foreign('empleados_id')->references('id')->on('empleados');
         });
 
-        Schema::table('permiso_sol', function ($table) {
+        Schema::table('permiso_solicitud', function ($table) {
             $table->foreign('tipo_id')->references('id')->on('cat_permiso_tipo');
         });
 
-        Schema::table('permiso_sol', function ($table) {
-            $table->foreign('permiso_id')->references('id')->on('empleado');
+        Schema::table('permiso_solicitud', function ($table) {
+            $table->foreign('permiso_historial_id')->references('id')->on('permiso_historial');
         });
     }
 
@@ -43,6 +43,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('permiso_sol');
+        Schema::dropIfExists('permiso_solicitud');
     }
 };

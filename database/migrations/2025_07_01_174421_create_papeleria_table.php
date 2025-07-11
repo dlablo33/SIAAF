@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('papeleria', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('empleado_id');
+            $table->unsignedBigInteger('empleados_id');
             $table->string('comprobante_domicilio');
             $table->string('ine');
             $table->string('nss');
@@ -27,7 +27,7 @@ return new class extends Migration
         });
 
         Schema::table('papeleria', function ($table) {
-            $table->foreign('empleado_id')->references('id')->on('empleado');
+            $table->foreign('empleados_id')->references('id')->on('empleados');
         });
     }
 

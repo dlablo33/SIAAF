@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('esquema_pago', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('empleado_id');
+            $table->unsignedBigInteger('empleados_id');
             $table->string('tipo');
             $table->unsignedInteger('sueldo');
             $table->unsignedInteger('bono_puntualidad');
@@ -26,7 +26,7 @@ return new class extends Migration
         });
 
         Schema::table('esquema_pago', function ($table) {
-            $table->foreign('empleado_id')->references('id')->on('empleado');
+            $table->foreign('empleados_id')->references('id')->on('empleados');
         });
     }
 

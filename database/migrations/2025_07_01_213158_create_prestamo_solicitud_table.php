@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('prestamo_solicitud', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('empleado_id');
+            $table->unsignedBigInteger('empleados_id');
             $table->date('fecha_solicitud');
             $table->unsignedInteger('periodo');
             $table->unsignedInteger('monto_pedido');
@@ -21,11 +21,11 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::table('prestamo_sol', function ($table) {
-            $table->foreign('empleado_id')->references('id')->on('prestamo');
+        Schema::table('prestamo_solicitud', function ($table) {
+            $table->foreign('empleados_id')->references('id')->on('empleados');
         });
 
-        Schema::table('prestamo_sol', function ($table) {
+        Schema::table('prestamo_solicitud', function ($table) {
             $table->foreign('prestamo_id')->references('id')->on('prestamo');
         });
     }
@@ -35,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('prestamo_sol');
+        Schema::dropIfExists('prestamo_solicitud');
     }
 };

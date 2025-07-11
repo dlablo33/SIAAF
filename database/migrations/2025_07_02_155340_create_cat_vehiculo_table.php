@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('placa');
             $table->string('niv');
-            $table->string('marca_id');
+            $table->unsignedBigInteger('marca_id');
             $table->string('modelo');
             $table->string('año');
             $table->string('color');

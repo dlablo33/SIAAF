@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('vacaciones_historial', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('empleado_id');
+            $table->unsignedBigInteger('empleados_id');
             $table->string('concepto');
             $table->unsignedInteger('dias');
             $table->string('fechas');
@@ -21,8 +21,8 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::table('historial_vacaciones', function ($table) {
-            $table->foreign('empleado_id')->references('id')->on('empleado');
+        Schema::table('vacaciones_historial', function ($table) {
+            $table->foreign('empleados_id')->references('id')->on('empleados');
         });
     }
 

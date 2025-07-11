@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('sugerencias', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('empleado_id');
+            $table->unsignedBigInteger('empleados_id');
             $table->string('nombre');
             $table->timestamps();
         });
 
         Schema::table('sugerencias', function ($table) {
-            $table->foreign('empleado_id')->references('id')->on('empleado');
+            $table->foreign('empleados_id')->references('id')->on('empleados');
         });
 
     }

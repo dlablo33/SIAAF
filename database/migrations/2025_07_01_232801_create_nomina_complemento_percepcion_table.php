@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('nomina_complemento_percepcion', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('empleado_id');
+            $table->unsignedBigInteger('empleados_id');
             $table->unsignedInteger('suelo');
             $table->unsignedInteger('septimo');
             $table->unsignedInteger('bono_puntualidad');
@@ -28,7 +28,7 @@ return new class extends Migration
         });
 
         Schema::table('nomina_complemento_percepcion', function ($table) {
-            $table->foreign('empleado_id')->references('id')->on('empleado');
+            $table->foreign('empleados_id')->references('id')->on('empleados');
         });
     }
 

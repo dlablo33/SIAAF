@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('tipo_id');
             $table->unsignedBigInteger('departamento_id');
             $table->unsignedBigInteger('almacen_id');
-            $table->unsignedBigInteger('empleado_id');
+            $table->unsignedBigInteger('empleados_id');
             $table->date('fecha_asignacion');
             $table->string('color');
             $table->unsignedInteger('año');
@@ -38,7 +38,7 @@ return new class extends Migration
         });
 
         Schema::table('articulo_responsable', function ($table) {
-            $table->foreign('empleado_id')->references('id')->on('cat_empleado');
+            $table->foreign('empleados_id')->references('id')->on('empleados');
         });
     }
 

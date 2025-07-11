@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('empleado', function (Blueprint $table) {
+        Schema::create('empleados', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
             $table->string('a_paterno');
@@ -19,21 +19,19 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('role');
-            $table->string('foto_perfil');
+            $table->string('foto_perfil')->nullable();
             $table->string('curp');
-            $table->string('rfc');
-            $table->string('nss');
+            $table->string('rfc')->nullable();
+            $table->string('nss')->nullable();
             $table->date('fecha_nacimiento');
-            $table->string('correo');
             $table->string('domicilio');
-            $table->unsignedInteger('telefono');
-            $table->string('contacto');
-            $table->string('contacto_telefono');
+            $table->string('telefono');
+            $table->string('contacto')->nullable();
+            $table->string('contacto_telefono')->nullable();
             $table->string('empresa');
-            $table->string('puesto');
+            $table->string('puesto')->nullable();
             $table->date('fecha_ingreso');
-            $table->string('vac_restantes');
+            $table->unsignedInteger('vac_restantes')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });
@@ -46,12 +44,13 @@ return new class extends Migration
 
         Schema::create('sessions', function (Blueprint $table) {
             $table->string('id')->primary();
-            $table->foreignId('empleado_id')->nullable()->index();
+            $table->foreignId('user_id')->nullable()->index();
             $table->string('ip_address', 45)->nullable();
             $table->text('user_agent')->nullable();
             $table->longText('payload');
             $table->integer('last_activity')->index();
         });
+
     }
 
     /**

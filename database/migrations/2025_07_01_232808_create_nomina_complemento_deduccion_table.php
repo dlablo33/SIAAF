@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('nomina_complemento_deduccion', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('empleado_id');
+            $table->unsignedBigInteger('empleados_id');
             $table->unsignedInteger('faltas');
             $table->unsignedInteger('deduccion');
             $table->unsignedInteger('vacaciones');
@@ -28,7 +28,7 @@ return new class extends Migration
         });
 
         Schema::table('nomina_complemento_deduccion', function ($table) {
-            $table->foreign('empleado_id')->references('id')->on('empleado');
+            $table->foreign('empleados_id')->references('id')->on('empleados');
         });;
     }
 

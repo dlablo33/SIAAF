@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('prestamo', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('empleado_id');
+            $table->unsignedBigInteger('empleados_id');
             $table->string('tipo');
             $table->unsignedInteger('periodo_inicio');
             $table->unsignedInteger('periodo_fin');
@@ -26,7 +26,7 @@ return new class extends Migration
         });
 
         Schema::table('prestamo', function ($table) {
-            $table->foreign('empleado_id')->references('id')->on('empleado');
+            $table->foreign('empleados_id')->references('id')->on('empleados');
         });
 
     }

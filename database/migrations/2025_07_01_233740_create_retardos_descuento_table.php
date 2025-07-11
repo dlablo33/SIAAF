@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('retardos_descuento', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('empleado_id');
+            $table->unsignedBigInteger('empleados_id');
             $table->unsignedInteger('nomina_diferencia_bono');
             $table->unsignedInteger('nomina_retardo');
             $table->unsignedInteger('complemento_diferencia_bono');
@@ -22,7 +22,7 @@ return new class extends Migration
         });
 
         Schema::table('retardos_descuento', function ($table) {
-            $table->foreign('empleado_id')->references('id')->on('empleado');
+            $table->foreign('empleados_id')->references('id')->on('empleados');
         });
     }
 

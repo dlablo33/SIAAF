@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('vacaciones_solicitud', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('empleado_id');
+            $table->unsignedBigInteger('empleados_id');
             $table->string('tipo');
             $table->unsignedInteger('periodo');
             $table->unsignedInteger('vac_disponibles');
@@ -26,8 +26,8 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::table('vacaciones_sol', function ($table) {
-            $table->foreign('empleado_id')->references('id')->on('empleado');
+        Schema::table('vacaciones_solicitud', function ($table) {
+            $table->foreign('empleados_id')->references('id')->on('empleados');
         });
 
     }
@@ -37,6 +37,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('vacaciones_sol');
+        Schema::dropIfExists('vacaciones_solicitud');
     }
 };

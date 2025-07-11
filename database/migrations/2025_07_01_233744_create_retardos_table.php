@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('retardos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('empleado_id');
+            $table->unsignedBigInteger('empleados_id');
             $table->unsignedInteger('periodo');
             $table->unsignedInteger('lunes');
             $table->unsignedInteger('martes');
@@ -26,11 +26,11 @@ return new class extends Migration
         });
 
         Schema::table('retardos', function ($table) {
-            $table->foreign('empleado_id')->references('id')->on('empleado');
+            $table->foreign('empleados_id')->references('id')->on('empleados');
         });
 
         Schema::table('retardos', function ($table) {
-            $table->foreign('retardos_descuento_id')->references('id')->on('retardos_decuento');
+            $table->foreign('retardos_descuento_id')->references('id')->on('retardos_descuento');
         });
     }
 

@@ -11,27 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-// database/migrations/[timestamp]_create_clients_table.php
-Schema::create('clients', function (Blueprint $table) {
-    $table->id();
-    $table->enum('type', ['physical', 'moral']); // Persona física o moral
-    $table->string('name');
-    $table->string('rfc')->nullable();
-    $table->string('email')->nullable();
-    $table->string('phone')->nullable();
-    $table->text('address')->nullable();
-    $table->enum('status', ['active', 'inactive', 'pending'])->default('pending');
-    $table->text('notes')->nullable();
-    $table->foreignId('empleado_id')->constrained()->onDelete('cascade');
-            $table->enum('document_status', ['complete', 'incomplete'])
-                  ->default('incomplete')
-                  ->after('status');
-
-            $table->json('documents')
-                  ->nullable()
-                  ->after('document_status');
-    $table->timestamps();
-});
+        // database/migrations/[timestamp]_create_clients_table.php
+        Schema::create('clients', function (Blueprint $table) {
+            $table->id();
+            $table->enum('type', ['physical', 'moral']); // Persona física o moral
+            $table->string('name');
+            $table->string('rfc')->nullable();
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();
+            $table->text('address')->nullable();
+            $table->enum('status', ['active', 'inactive', 'pending'])->default('pending');
+            $table->enum('document_status', ['complete', 'incomplete'])->default('incomplete');
+            $table->json('documents')->nullable();
+            $table->text('notes')->nullable();
+            $table->foreignId('empleado_id')->constrained()->onDelete('cascade');
+            $table->timestamps();
+        });
     }
 
     /**

@@ -21,7 +21,7 @@ class Empleado extends Authenticatable
      *
      * @var list<string>
      */
-    protected $table = 'empleado';
+    protected $table = 'empleados';
 
     protected $fillable = [
         'nombre',

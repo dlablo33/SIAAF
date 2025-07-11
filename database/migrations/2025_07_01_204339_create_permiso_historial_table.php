@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('permiso_historial', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('empleado_id');
+            $table->unsignedBigInteger('empleados_id');
             $table->unsignedInteger('periodo');
             $table->unsignedInteger('lunes');
             $table->unsignedInteger('martes');
@@ -27,7 +27,7 @@ return new class extends Migration
         });
 
         Schema::table('permiso_historial', function ($table) {
-            $table->foreign('empleado_id')->references('id')->on('empleado');
+            $table->foreign('empleados_id')->references('id')->on('empleados');
         });
     }
 
