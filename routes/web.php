@@ -13,6 +13,7 @@ use App\Http\Controllers\Legal\ProcedureController;
 use App\Http\Controllers\Legal\AppointmentController;
 
 use App\Http\Controllers\Cotizadora\CotizadorController;
+use App\Http\Controllers\RH\EmpleadosController;
 use App\Http\Controllers\RH\NominaController;
 
 Route::get('/', function () {
@@ -29,7 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 Route::prefix('legal')->name('legal.')->middleware(['auth'])->group(function () {
     // Clientes
@@ -61,6 +62,10 @@ Route::prefix('legal')->name('legal.')->middleware(['auth'])->group(function () 
 Route::prefix('rh')->name('rh.')->middleware(['auth'])->group(function () {
     // Nomina
     Route::resource('nomina', NominaController::class);
+
+    //Empleados
+    Route::resource('empleados', EmpleadosController::class);
+    Route::post('empleados/updatePassword', [EmpleadosController::class ,'updatePassword'])->name('empleados.updatePassword');
 });
 
 Route::resource('clients', LegalClientController::class);

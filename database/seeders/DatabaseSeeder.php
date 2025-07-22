@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Department;
-use App\Models\Empleado;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // Usuario Administrador
-        Empleado::create([
+        User::create([
             'name' => 'Administrador Principal',
             'email' => 'admin@example.com',
             'password' => Hash::make('password123'), // Cambia esto en producción
@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // Usuario Gerente
-        Empleado::create([
+        User::create([
             'name' => 'Gerente Ejemplo',
             'email' => 'gerente@example.com',
             'password' => Hash::make('password123'),
@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // Usuario Coordinador
-        Empleado::create([
+        User::create([
             'name' => 'Coordinador Demo',
             'email' => 'coordinador@example.com',
             'password' => Hash::make('password123'),
@@ -39,7 +39,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // Usuario Staff (rol por defecto)
-        Empleado::create([
+        User::create([
             'name' => 'Staff Regular',
             'email' => 'staff@example.com',
             'password' => Hash::make('password123'),
@@ -47,12 +47,12 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // Usuarios adicionales de prueba
-        Empleado::factory(5)->create([
+        User::factory(5)->create([
             'role' => 'staff'
         ]);
 
         // Si necesitas más usuarios con roles específicos
-        Empleado::factory()->create([
+        User::factory()->create([
             'name' => 'Segundo Administrador',
             'email' => 'admin2@example.com',
             'password' => Hash::make('password123'),

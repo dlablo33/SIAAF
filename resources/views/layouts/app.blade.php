@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html class="" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="utf-8">
     <title>{{ config('app.name', 'Laravel') }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    @vite(['resources/css/app.css', 'resources/js/app.js',])
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <script src="//unpkg.com/alpinejs" defer></script>
@@ -33,7 +33,8 @@
         /* Sidebar retráctil */
         .sidebar {
             width: 80px;
-            overflow: hidden;
+            overflow: auto;
+            scrollbar-width: none;
             transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
@@ -286,11 +287,11 @@
     </style>
 </head>
 
-<body class="font-sans antialiased bg-gray-100">
+<body class="font-sans antialiased bg-gray-100 dark:bg-gray-900">
     <div class="flex min-h-screen text-gray-800">
 
         {{-- Sidebar retráctil con botón de toggle --}}
-        <aside class="sidebar bg-gray-200 flex flex-col justify-between p-5 fixed h-full overflow-y-auto z-10">
+        <aside class="sidebar bg-gray-200 dark:bg-gray-950 flex flex-col justify-between p-5 fixed h-full z-10">
             <button class="toggle-btn ">
                 <i class="fas fa-chevron-left"></i>
             </button>
@@ -307,13 +308,13 @@
                         <span class="nav-text ml-3">Dashboard</span>
                     </a>
                     <a href="#"
-                        class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700"
+                        class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300"
                         data-tooltip="Dirección">
                         <i class="fas fa-user-tie text-lg w-6 text-center"></i>
                         <span class="nav-text ml-3">Dirección</span>
                     </a>
                     <a href="#"
-                        class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700"
+                        class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300"
                         data-tooltip="Dirección">
                         <i class="fas fa-shopping-bag text-lg w-6 text-center"></i>
                         <span class="nav-text ml-3">Gerencia General</span>
@@ -322,7 +323,7 @@
 
                     <!-- Menú principal Legal-Fiscal (ahora desplegable) -->
                     <div class="nav-main-item">
-                        <div class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 cursor-pointer"
+                        <div class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300 cursor-pointer"
                             data-tooltip="Legal">
                             <i class="fas fa-balance-scale text-lg w-6 text-center"></i>
                             <span class="nav-text ml-3">Legal-Fiscal</span>
@@ -334,7 +335,7 @@
                             <!-- Submenú Trámites -->
                             <div class="nav-subitem pl-6">
                                 <div
-                                    class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 cursor-pointer">
+                                    class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300 cursor-pointer">
                                     <i class="fas fa-file-alt text-lg w-6 text-center"></i>
                                     <span class="nav-text ml-3">Trámites</span>
                                     <i
@@ -344,17 +345,17 @@
                                 <!-- Subniveles de Trámites -->
                                 <div class="nav-sublevel pl-6 hidden">
                                     <a href="#"
-                                        class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700">
+                                        class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300">
                                         <i class="fas fa-plus-circle text-lg w-6 text-center"></i>
                                         <span class="nav-text ml-3">Nuevo Trámite</span>
                                     </a>
                                     <a href="#"
-                                        class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700">
+                                        class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300">
                                         <i class="fas fa-tasks text-lg w-6 text-center"></i>
                                         <span class="nav-text ml-3">Trámites Activos</span>
                                     </a>
                                     <a href="#"
-                                        class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700">
+                                        class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300">
                                         <i class="fas fa-file-signature text-lg w-6 text-center"></i>
                                         <span class="nav-text ml-3">Formatos</span>
                                     </a>
@@ -364,7 +365,7 @@
                             <!-- Submenú Clientes -->
                             <div class="nav-subitem pl-6">
                                 <div
-                                    class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 cursor-pointer">
+                                    class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300 cursor-pointer">
                                     <i class="fas fa-users text-lg w-6 text-center"></i>
                                     <span class="nav-text ml-3">Clientes</span>
                                     <i
@@ -374,12 +375,12 @@
                                 <!-- Subniveles de Clientes -->
                                 <div class="nav-sublevel pl-6 hidden">
                                     <a href="{{ route('legal.clients.create') }}"
-                                        class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700">
+                                        class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300">
                                         <i class="fas fa-user-plus text-lg w-6 text-center"></i>
                                         <span class="nav-text ml-3">Alta de Clientes</span>
                                     </a>
                                     <a href="{{ route('legal.clients.index') }}"
-                                        class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700">
+                                        class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300">
                                         <i class="fas fa-address-book text-lg w-6 text-center"></i>
                                         <span class="nav-text ml-3">Clientes</span>
                                     </a>
@@ -389,7 +390,7 @@
                             <!-- Submenú Citas -->
                             <div class="nav-subitem pl-6">
                                 <div
-                                    class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 cursor-pointer">
+                                    class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300 cursor-pointer">
                                     <i class="fas fa-calendar-alt text-lg w-6 text-center"></i>
                                     <span class="nav-text ml-3">Citas</span>
                                     <i
@@ -399,12 +400,12 @@
                                 <!-- Subniveles de Citas -->
                                 <div class="nav-sublevel pl-6 hidden">
                                     <a href="#"
-                                        class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700">
+                                        class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300">
                                         <i class="fas fa-calendar-plus text-lg w-6 text-center"></i>
                                         <span class="nav-text ml-3">Nueva Cita</span>
                                     </a>
                                     <a href="#"
-                                        class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700">
+                                        class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300">
                                         <i class="fas fa-list-alt text-lg w-6 text-center"></i>
                                         <span class="nav-text ml-3">Citas</span>
                                     </a>
@@ -417,43 +418,43 @@
 
 
                     <a href="#"
-                        class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700"
+                        class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300"
                         data-tooltip="Contabilidad">
                         <i class="fas fa-calculator text-lg w-6 text-center"></i>
                         <span class="nav-text ml-3">Contabilidad</span>
                     </a>
                     <a href="#"
-                        class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700"
+                        class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300"
                         data-tooltip="Administración">
                         <i class="fas fa-university text-lg w-6 text-center"></i>
                         <span class="nav-text ml-3">Administración</span>
                     </a>
                     <a href="#"
-                        class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700"
+                        class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300"
                         data-tooltip="Administración">
                         <i class="fas fa-book text-lg w-6 text-center"></i>
                         <span class="nav-text ml-3">Administración Interna</span>
                     </a>
                     <a href="#"
-                        class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700"
+                        class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300"
                         data-tooltip="Nóminas">
                         <i class="fas fa-money-check-alt text-lg w-6 text-center"></i>
                         <span class="nav-text ml-3">Nóminas</span>
                     </a>
                     <a href="#"
-                        class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700"
+                        class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300"
                         data-tooltip="Importaciones">
                         <i class="fas fa-truck-loading text-lg w-6 text-center"></i>
                         <span class="nav-text ml-3">Comercio Exterior</span>
                     </a>
                     <a href="#"
-                        class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700"
+                        class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300"
                         data-tooltip="Comercial">
                         <i class="fas fa-briefcase text-lg w-6 text-center"></i>
                         <span class="nav-text ml-3">Comercial</span>
                     </a>
                     <a href="#"
-                        class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700"
+                        class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300"
                         data-tooltip="Dirección">
                         <i class="fas fa-desktop text-lg w-6 text-center"></i>
                         <span class="nav-text ml-3">Sistemas</span>
@@ -461,7 +462,7 @@
 
                     <!-- Menú principal Recursos Humanos (ahora desplegable) -->
                     <div class="nav-main-item">
-                        <div class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 cursor-pointer"
+                        <div class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300 cursor-pointer"
                             data-tooltip="Dirección">
                             <i class="fas fa-users text-lg w-6 text-center"></i>
                             <span class="nav-text ml-3">Recursos Humanos</span>
@@ -474,7 +475,7 @@
                             <!-- Submenú Nominas -->
                             <div class="nav-subitem pl-6">
                                 <div
-                                    class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 cursor-pointer">
+                                    class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300 cursor-pointer">
                                     <a href="{{ route('rh.nomina.index') }}">
                                         <i class="fas fa-money-check-dollar text-lg w-6 text-center"></i>
                                         <span class="nav-text ml-3">Nomina</span>
@@ -485,7 +486,7 @@
                             <!-- Submenú Dispersion -->
                             <div class="nav-subitem pl-6">
                                 <div
-                                    class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 cursor-pointer">
+                                    class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300 cursor-pointer">
                                     <i class="fas fa-calendar-alt text-lg w-6 text-center"></i>
                                     <span class="nav-text ml-3">Dispersion</span>
                                     <i
@@ -495,12 +496,12 @@
                                 <!-- Subniveles de Dispersion -->
                                 <div class="nav-sublevel pl-6 hidden">
                                     <a href="#"
-                                        class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700">
+                                        class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300">
                                         <i class="fas fa-money-bill text-lg w-6 text-center"></i>
                                         <span class="nav-text ml-3">Fiscal</span>
                                     </a>
                                     <a href="#"
-                                        class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700">
+                                        class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300">
                                         <i class="fas fa-money-bill-1 text-lg w-6 text-center"></i>
                                         <span class="nav-text ml-3">Complemento</span>
                                     </a>
@@ -510,7 +511,7 @@
                             <!-- Submenú Retardos -->
                             <div class="nav-subitem pl-6">
                                 <div
-                                    class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 cursor-pointer">
+                                    class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300 cursor-pointer">
                                     <i class="fas fa-user-clock text-lg w-6 text-center"></i>
                                     <span class="nav-text ml-3">Retardos</span>
                                 </div>
@@ -519,16 +520,27 @@
                             <!-- Submenú Prestamos -->
                             <div class="nav-subitem pl-6">
                                 <div
-                                    class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 cursor-pointer">
+                                    class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300 cursor-pointer">
                                     <i class="fas fa-money-bill-transfer text-lg w-6 text-center"></i>
                                     <span class="nav-text ml-3">Prestamos</span>
+                                </div>
+                            </div>
+
+                            <!-- Submenú Prestamos -->
+                            <div class="nav-subitem pl-6">
+                                <div
+                                    class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300 cursor-pointer">
+                                    <a href="{{ route('rh.empleados.index') }}">
+                                        <i class="fas fa-solid fa-address-card text-lg w-6 text-center"></i>
+                                        <span class="nav-text ml-3">Empleados</span>
+                                    </a>
                                 </div>
                             </div>
 
                             <!-- Submenú Catalogos -->
                             <div class="nav-subitem pl-6">
                                 <div
-                                    class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 cursor-pointer">
+                                    class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300 cursor-pointer">
                                     <i class="fas fa-ellipsis text-lg w-6 text-center"></i>
                                     <span class="nav-text ml-3">Catalogos</span>
                                     <i
@@ -538,7 +550,7 @@
                                 <!-- Subniveles de Citas -->
                                 <div class="nav-sublevel pl-6 hidden">
                                     <a href="#"
-                                        class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700">
+                                        class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300">
                                         <i class="fas fa-rectangle-list text-lg w-6 text-center"></i>
                                         <span class="nav-text ml-3">Tipos de Permiso</span>
                                     </a>
@@ -585,7 +597,7 @@
 
             <!-- Page Heading -->
             @if (isset($header))
-                <header class="bg-white shadow-lg">
+                <header class="bg-white shadow-lg dark:bg-gray-800">
                     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                         <h1 class="text-2xl font-bold text-gray-800 animate-slide-in">
                             {{ $header }}
@@ -595,7 +607,7 @@
             @endif
 
             <!-- Page Content -->
-            <main class="py-6 px-4 sm:px-6 lg:px-8">
+            <main class="py-6 px-4 sm:px-6 lg:px-8 dark:bg-gray-900">
                 {{ $slot }}
             </main>
         </div>

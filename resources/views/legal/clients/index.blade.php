@@ -96,7 +96,7 @@
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                    <span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full 
+                                    <span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full
                                         {{ $client->type == 'physical' ? 'bg-purple-100 text-purple-800' : 'bg-blue-100 text-blue-800' }}">
                                         {{ $client->type == 'physical' ? 'Física' : 'Moral' }}
                                     </span>
@@ -105,8 +105,8 @@
                                     {{ $client->rfc }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                    <span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full 
-                                        {{ $client->status == 'active' ? 'bg-green-100 text-green-800' : 
+                                    <span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full
+                                        {{ $client->status == 'active' ? 'bg-green-100 text-green-800' :
                                            ($client->status == 'inactive' ? 'bg-red-100 text-red-800' : 'bg-yellow-100 text-yellow-800') }}">
                                         @if($client->status == 'active')
                                             Activo
@@ -119,13 +119,13 @@
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                     <div class="flex justify-end space-x-2">
-                                        <a href="{{ route('legal.clients.show', $client) }}" 
+                                        <a href="{{ route('legal.clients.show', $client) }}"
                                            class="text-indigo-600 hover:text-indigo-900 p-2 rounded-full hover:bg-indigo-50 transition-colors"
                                            title="Ver"
                                            data-tooltip-target="tooltip-view">
                                             <i class="fas fa-eye"></i>
                                         </a>
-                                        <a href="{{ route('legal.clients.edit', $client) }}" 
+                                        <a href="{{ route('legal.clients.edit', $client) }}"
                                            class="text-yellow-600 hover:text-yellow-900 p-2 rounded-full hover:bg-yellow-50 transition-colors"
                                            title="Editar"
                                            data-tooltip-target="tooltip-edit">
@@ -151,8 +151,8 @@
     <div class="flex-1 flex justify-between items-center">
         <div class="text-sm text-gray-700">
             @if($clients->count() > 0)
-                Mostrando <span class="font-medium">{{ $clients->firstItem() }}</span> a 
-                <span class="font-medium">{{ $clients->lastItem() }}</span> de 
+                Mostrando <span class="font-medium">{{ $clients->firstItem() }}</span> a
+                <span class="font-medium">{{ $clients->lastItem() }}</span> de
                 <span class="font-medium">{{ $clients->total() }}</span> resultados
             @else
                 No se encontraron resultados
@@ -168,7 +168,7 @@
                     Anterior
                 </a>
             @endif
-            
+
             @foreach ($clients->getUrlRange(1, $clients->lastPage()) as $page => $url)
                 @if ($page == $clients->currentPage())
                     <span class="px-3 py-1 rounded-md bg-indigo-600 text-white">
@@ -180,7 +180,7 @@
                     </a>
                 @endif
             @endforeach
-            
+
             @if ($clients->hasMorePages())
                 <a href="{{ $clients->nextPageUrl() }}" class="px-3 py-1 rounded-md bg-white text-gray-700 hover:bg-gray-50 transition-colors">
                     Siguiente
@@ -234,7 +234,7 @@
             const panel = document.getElementById('filterPanel');
             panel.classList.toggle('hidden');
             panel.classList.toggle('show');
-            
+
             // Cerrar al hacer clic fuera
             if (!panel.classList.contains('hidden')) {
                 setTimeout(() => {
@@ -248,7 +248,7 @@
         function closeFilterPanel(e) {
             const panel = document.getElementById('filterPanel');
             const button = document.getElementById('filterToggle');
-            
+
             if (!panel.contains(e.target) && !button.contains(e.target)) {
                 panel.classList.add('hidden');
                 panel.classList.remove('show');
@@ -260,11 +260,11 @@
         document.getElementById('quickSearch').addEventListener('input', function(e) {
             const searchTerm = e.target.value.toLowerCase();
             const rows = document.querySelectorAll('#clientTableBody tr');
-            
+
             rows.forEach(row => {
                 const name = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
                 const rfc = row.querySelector('td:nth-child(4)').textContent.toLowerCase();
-                
+
                 if (name.includes(searchTerm) || rfc.includes(searchTerm)) {
                     row.style.display = '';
                     row.classList.add('animate-pulse');
@@ -279,35 +279,35 @@
         document.querySelectorAll('.filter-select').forEach(select => {
             select.addEventListener('change', applyFilters);
         });
-        
+
         document.getElementById('globalSearch').addEventListener('input', applyFilters);
 
         function applyFilters() {
             const statusFilter = document.querySelector('select.filter-select:nth-of-type(1)').value;
             const typeFilter = document.querySelector('select.filter-select:nth-of-type(2)').value;
             const searchTerm = document.getElementById('globalSearch').value.toLowerCase();
-            
+
             const rows = document.querySelectorAll('#clientTableBody tr');
-            
+
             rows.forEach(row => {
                 const status = row.querySelector('td:nth-child(5) span').textContent.trim().toLowerCase();
                 const type = row.querySelector('td:nth-child(3) span').textContent.trim().toLowerCase();
                 const name = row.querySelector('td:nth-child(2) div.font-medium').textContent.toLowerCase();
                 const rfc = row.querySelector('td:nth-child(4)').textContent.toLowerCase();
-                
-                const statusMatch = !statusFilter || 
+
+                const statusMatch = !statusFilter ||
                     (statusFilter === 'active' && status === 'activo') ||
                     (statusFilter === 'inactive' && status === 'inactivo') ||
                     (statusFilter === 'pending' && status === 'pendiente');
-                
-                const typeMatch = !typeFilter || 
+
+                const typeMatch = !typeFilter ||
                     (typeFilter === 'physical' && type === 'física') ||
                     (typeFilter === 'moral' && type === 'moral');
-                
-                const searchMatch = !searchTerm || 
-                    name.includes(searchTerm) || 
+
+                const searchMatch = !searchTerm ||
+                    name.includes(searchTerm) ||
                     rfc.includes(searchTerm);
-                
+
                 if (statusMatch && typeMatch && searchMatch) {
                     row.style.display = '';
                     row.classList.add('animate-fadeIn');
@@ -324,12 +324,12 @@
                 const column = this.getAttribute('data-column');
                 const icon = this.querySelector('i');
                 const isAsc = icon.classList.contains('fa-sort-up');
-                
+
                 // Reset all icons
                 document.querySelectorAll('.sortable i').forEach(i => {
                     i.className = 'fas fa-sort ml-1';
                 });
-                
+
                 if (isAsc) {
                     icon.className = 'fas fa-sort-down ml-1';
                     sortTable(column, 'desc');
@@ -352,7 +352,7 @@
         document.getElementById('newClientBtn').addEventListener('mouseenter', function() {
             this.classList.add('animate-bounce');
         });
-        
+
         document.getElementById('newClientBtn').addEventListener('mouseleave', function() {
             this.classList.remove('animate-bounce');
         });

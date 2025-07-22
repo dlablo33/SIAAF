@@ -19,7 +19,7 @@ class Client extends Model
         'address',
         'status',
         'notes',
-        'empleado_id',
+        'user_id',
         'document_status',
         'documents'
     ];
@@ -30,9 +30,9 @@ class Client extends Model
     ];
 
     // Relaciones
-    public function empleado()
+    public function user()
     {
-        return $this->belongsTo(Empleado::class);
+        return $this->belongsTo(User::class);
     }
 
     public function companies()

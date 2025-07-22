@@ -37,7 +37,7 @@ class LegalClientController extends Controller
             'notes' => 'nullable|string'
         ]);
 
-        $client = Client::create($validated + ['empleado_id' => auth()->id()]);
+        $client = Client::create($validated + ['user_id' => auth()->id()]);
 
         // Procesar documentos
         $this->processDocuments($request, $client);

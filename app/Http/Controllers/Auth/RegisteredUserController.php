@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\Empleado;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -36,13 +36,13 @@ class RegisteredUserController extends Controller
             'nombre' => ['required', 'string', 'max:255'],
             'a_paterno' => ['required', 'string', 'max:255'],
             'a_materno' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.Empleado::class],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             // Agregar validación para el rol solo si es necesario
             // 'role' => ['sometimes', 'in:staff,coordinador,gerente,administrador']
         ]);
 
-        $empleadoData = [
+        $userData = [
             'nombre' => $request->nombre,
             'a_paterno' => $request->a_paterno,
             'a_materno' => $request->a_materno,
@@ -53,25 +53,25 @@ class RegisteredUserController extends Controller
 
         // Opción: Asignar rol diferente si el registro lo incluye (solo para casos específicos)
         // if ($request->has('role') && auth()->check() && auth()->user()->isAdministrador()) {
-        //     $empleadoData['role'] = $request->role;
+        //     $userData['role'] = $request->role;
         // }
 
-        $empleado = Empleado::create($empleadoData);
+        $user = User::create($userData);
 
-        event(new Registered($empleado));
+        event(new Registered($user));
 
-        Auth::login($empleado);
+        Auth::login($user);
 
         // Redirigir según el rol del usuario
-        return $this->redirectByRole($empleado);
+        return $this->redirectByRole($user);
     }
 
     /**
      * Redirige al usuario según su rol después del registro
      */
-    protected function redirectByRole(Empleado $empleado): RedirectResponse
+    protected function redirectByRole(User $user): RedirectResponse
     {
-        return match ($empleado->role) {
+        return match ($user->role) {
             'administrador' => redirect()->route('admin.dashboard'),
             'gerente' => redirect()->route('management.dashboard'),
             'coordinador' => redirect()->route('coordinator.dashboard'),
