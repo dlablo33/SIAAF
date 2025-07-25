@@ -11,11 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cat_almacen', function (Blueprint $table) {
+        Schema::create('cat_permiso_tipo', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
+            $table->unsignedBigInteger('id_estatus');
             $table->timestamps();
         });
+
+        Schema::table('cat_permiso_tipo', function ($table) {
+            $table->foreign('id_estatus')->references('id')->on('cat_estatus');
+        });;
     }
 
     /**
@@ -23,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('cat_almacen');
+        Schema::dropIfExists('cat_permiso_tipo');
     }
 };

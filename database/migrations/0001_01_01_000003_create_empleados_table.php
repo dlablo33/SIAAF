@@ -32,8 +32,8 @@ return new class extends Migration
             $table->unsignedBigInteger('id_empresa');
             $table->string('id_puesto')->nullable();
             $table->date('fecha_ingreso');
-            $table->date('fecha_baja');
-            $table->date('fecha_reingreso');
+            $table->date('fecha_baja')->nullable();
+            $table->date('fecha_reingreso')->nullable();
             $table->unsignedBigInteger('id_estatus');
             $table->timestamps();
         });

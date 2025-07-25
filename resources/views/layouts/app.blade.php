@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html class="dark" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="utf-8">
@@ -590,18 +590,25 @@
             </div>
 
         </aside>
-
         {{-- Contenido principal --}}
         <div class="main-content flex-1">
             @include('layouts.navigation')
 
             <!-- Page Heading -->
-            @if (isset($header))
+            @if (isset($header) && isset($backButton))
                 <header class="bg-white shadow-lg dark:bg-gray-800">
                     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        <h1 class="text-2xl font-bold text-gray-800 animate-slide-in">
+                        <div class="flex items-center space-x-4">
+
+                             @unless (request()->is('dashboard') || request()->is('dashboard/*'))
+                                <a href="{{ $backButton }}" class="flex items-center justify-center w-8 h-8 rounded-full bg-orange-500">
+                                    <i class="fa-solid fa-arrow-left text-white"></i>
+                                </a>
+                            @endunless
+                        <h1 class="text-2xl font-bold  text-gray-800 animate-slide-in">
                             {{ $header }}
                         </h1>
+                        </div>
                     </div>
                 </header>
             @endif

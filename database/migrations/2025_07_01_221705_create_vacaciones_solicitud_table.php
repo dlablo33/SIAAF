@@ -13,23 +13,24 @@ return new class extends Migration
     {
         Schema::create('vacaciones_solicitud', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('empleados_id');
-            $table->string('tipo');
-            $table->unsignedInteger('periodo');
-            $table->unsignedInteger('vac_disponibles');
-            $table->unsignedInteger('vac_restantes');
+            $table->unsignedBigInteger('id_empleado_vacaciones');
+            $table->string('concepto');
+            $table->date('fecha_solicitud');
             $table->date('fecha_inicio');
             $table->date('fecha_final');
             $table->double('prima');
             $table->text('obdervaciones');
-            $table->boolean('autorizacion');
+            $table->unsignedBigInteger('id_estatus');
             $table->timestamps();
         });
 
         Schema::table('vacaciones_solicitud', function ($table) {
-            $table->foreign('empleados_id')->references('id')->on('empleados');
+            $table->foreign('id_empleado_vacaciones')->references('id')->on('empleado_vacaciones');
         });
 
+        Schema::table('vacaciones_solicitud', function ($table) {
+            $table->foreign('id_estatus')->references('id')->on('cat_estatus');
+        });
     }
 
     /**

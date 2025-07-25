@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('prestamo_historial', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('prestamo_id');
-            $table->unsignedInteger('periodo');
+            $table->unsignedBigInteger('id_prestamo');
+            $table->date('fecha');
             $table->unsignedInteger('pago');
             $table->timestamps();
         });
 
         Schema::table('prestamo_historial', function ($table) {
-            $table->foreign('prestamo_id')->references('id')->on('prestamo');
+            $table->foreign('id_prestamo')->references('id')->on('prestamo');
         });
     }
 

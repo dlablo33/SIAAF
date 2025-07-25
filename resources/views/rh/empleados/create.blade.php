@@ -1,9 +1,13 @@
 <x-app-layout>
+    <x-slot name="backButton">
+        {{ route('rh.empleados.index') }}
+    </x-slot>
     <x-slot name="header">
         <h2 class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-300">
             Nuevo Empleado
         </h2>
     </x-slot>
+
     <div class="mx-auto max-w-6xl gap-y-2">
         <div class="overflow-hidden bg-white shadow-sm dark:bg-gray-950 sm:rounded-lg">
             <div class="border-b border-gray-200 bg-white p-6 dark:border-gray-900 dark:bg-gray-800">
@@ -44,19 +48,19 @@
                             <div class="mb-6">
                                 <label for="nombre" class="mb-2 block text-sm font-bold text-gray-800 dark:text-gray-300">Nombres</label>
                                 <input id="nombre" name="nombre" type="text" value="{{ old('nombre') }}"
-                                    class="required min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm dark:bg-gray-900 dark:text-gray-300">
+                                    class="min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm dark:bg-gray-900 dark:text-gray-300">
                             </div>
 
                             <!-- Apellidos -->
                             <div class="mb-6 grid grid-cols-1 gap-4 md:grid-cols-2">
                                 <div>
                                     <label for="a_paterno" class="mb-2 block text-sm font-bold text-gray-800 dark:text-gray-300">Apellido Paterno</label>
-                                    <input id="a_paterno" name="required a_paterno" type="text" value="{{ old('a_paterno') }}"
+                                    <input id="a_paterno" name="a_paterno" type="text" value="{{ old('a_paterno') }}"
                                         class="min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm dark:bg-gray-900 dark:text-gray-300">
                                 </div>
                                 <div>
                                     <label for="a_materno" class="mb-2 block text-sm font-bold text-gray-800 dark:text-gray-300">Apellido Materno</label>
-                                    <input id="a_materno" name="required a_materno" type="text" value="{{ old('a_materno') }}"
+                                    <input id="a_materno" name="a_materno" type="text" value="{{ old('a_materno') }}"
                                         class="min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm dark:bg-gray-900 dark:text-gray-300">
                                 </div>
                             </div>
@@ -91,8 +95,12 @@
                                 </div>
                                 <div>
                                     <label for="genero" class="mb-2 block text-sm font-bold text-gray-800 dark:text-gray-300">Genero</label>
-                                    <input id="genero" name="genero" type="text" value="{{ old('genero') }}"
-                                        class="min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm dark:bg-gray-900 dark:text-gray-300" />
+                                    <select name="genero" id="genero"
+                                        class="min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 font-normal shadow-sm dark:bg-gray-900 dark:text-gray-300">
+                                        <option value="">Seleccione género</option>
+                                        <option value="MASCULINO" {{ old('genero', $empleado->genero ?? '') == 'MASCULINO' ? 'selected' : '' }}>MASCULINO</option>
+                                        <option value="FEMENINO" {{ old('genero', $empleado->genero ?? '') == 'FEMENINO' ? 'selected' : '' }}>FEMENINO</option>
+                                    </select>
                                 </div>
                             </div>
 
@@ -100,7 +108,7 @@
                             <div class="mb-6 grid grid-cols-1 gap-4 md:grid-cols-2">
                                 <div>
                                     <label for="correo_interno" class="mb-2 block text-sm font-bold text-gray-800 dark:text-gray-300">Correo Interno</label>
-                                    <input id="correo_interno" name="required correo_interno" type="text" value="{{ old('correo_interno') }}"
+                                    <input id="correo_interno" name="correo_interno" type="text" value="{{ old('correo_interno') }}"
                                         class="min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm dark:bg-gray-900 dark:text-gray-300">
                                 </div>
                                 <div>
@@ -113,8 +121,9 @@
                             <!-- Domicilio y Telefono -->
                             <div class="mb-6 grid grid-cols-1 gap-4 md:grid-cols-2">
                                 <div>
-                                    <label for="domicilio" class="mb-2 block text-sm font-bold text-gray-800 dark:text-gray-300">Domicilio</label>
-                                    <input id="domicilio" name="domicilio" type="text" value="{{ old('domicilio') }}"
+                                    <label for="id_domicilio" class="mb-2 block text-sm font-bold text-gray-800 dark:text-gray-300">Domicilio</label>
+                                    <input id="id_domicilio" name="id_domicilio" type="text" value="{{ old('id_domicilio') }}" readonly
+                                        onclick="domicilioModal()"
                                         class="min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm dark:bg-gray-900 dark:text-gray-300">
                                 </div>
                                 <div>
@@ -152,8 +161,15 @@
                             <div class="mb-6 grid grid-cols-1 gap-4 md:grid-cols-2">
                                 <div>
                                     <label for="id_empresa" class="mb-2 block text-sm font-bold text-gray-800 dark:text-gray-300">Empresa</label>
-                                    <input id="id_empresa" name="id_empresa" type="text"
-                                        class="required min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm dark:bg-gray-900 dark:text-gray-300">
+
+                                    <select name="id_empresa" id="id_empresa"
+                                        class="min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm dark:bg-gray-900 dark:text-gray-300">
+                                        <option value="">Escoge una Empresa</option>
+                                        @foreach ($empresas as $empresa)
+                                            <option value="{{ $empresa->id }}">{{ $empresa->nombre }}</option>
+                                        @endforeach
+                                    </select>
+
                                 </div>
                                 <div>
                                     <label for="id_puesto" class="mb-2 block text-sm font-bold text-gray-800 dark:text-gray-300">Puesto</label>
@@ -323,6 +339,12 @@
                 locale: "es"
             });
         });
+    </script>
+
+    <script>
+        function domicilioModal() {
+            console.log('Entro');
+        }
     </script>
 
 </x-app-layout>

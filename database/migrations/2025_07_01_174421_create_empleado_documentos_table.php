@@ -11,27 +11,26 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('permiso_solicitud', function (Blueprint $table) {
+        Schema::create('empleado_documentos', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_empleado');
-            $table->unsignedBigInteger('id_tipo');
-            $table->string('razon');
-            $table->date('fecha');
-            $table->unsignedInteger('tiempo');
-            $table->string('obvervaciones');
-            $table->boolean('id_estatus');
+            $table->unsignedBigInteger('id_documento');
+            $table->string('path');
+            $table->date('fecha_alta');
+            $table->date('fecha_expiracion');
+            $table->unsignedBigInteger('id_estatus');
             $table->timestamps();
         });
 
-        Schema::table('permiso_solicitud', function ($table) {
+        Schema::table('empleado_documentos', function ($table) {
             $table->foreign('id_empleado')->references('id')->on('empleados');
         });
 
-        Schema::table('permiso_solicitud', function ($table) {
-            $table->foreign('id_tipo')->references('id')->on('cat_permiso_tipo');
+        Schema::table('empleado_documentos', function ($table) {
+            $table->foreign('id_documento')->references('id')->on('cat_documentos');
         });
 
-        Schema::table('permiso_solicitud', function ($table) {
+        Schema::table('empleado_documentos', function ($table) {
             $table->foreign('id_estatus')->references('id')->on('cat_estatus');
         });
     }
@@ -41,6 +40,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('permiso_solicitud');
+        Schema::dropIfExists('empleado_documentos');
     }
 };

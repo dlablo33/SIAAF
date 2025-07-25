@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Models\HR;
+namespace App\Models\RH;
 
-use App\Models\Client;
 use App\Models\Empleado;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class PermisoHistorial extends Client
+class PermisoHistorial extends Model
 {
 
     use HasFactory;

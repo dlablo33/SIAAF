@@ -11,24 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sugerencias', function (Blueprint $table) {
+        Schema::create('cat_estatus', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_empleado');
-            $table->string('sugerencia');
+            $table->string('descripcion');
             $table->timestamps();
         });
 
-        Schema::table('sugerencias', function ($table) {
-            $table->foreign('id_empleado')->references('id')->on('empleados');
-        });
-
     }
-
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('sugerencias');
+        Schema::dropIfExists('cat_estatus');
     }
 };

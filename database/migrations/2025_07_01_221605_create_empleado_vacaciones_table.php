@@ -11,25 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('prestamo', function (Blueprint $table) {
+        Schema::create('empleado_vacaciones', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_empleado');
-            $table->string('tipo');
-            $table->date('fecha_inicio');
-            $table->date('fecha_fin');
-            $table->unsignedInteger('pago_periodo');
-            $table->unsignedInteger('total');
-            $table->unsignedInteger('id_estatus');
+            $table->unsignedInteger('vacaciones_ley');
+            $table->unsignedInteger('vacaciones_restantes');
+            $table->unsignedBigInteger('id_estatus');
             $table->timestamps();
         });
 
-        Schema::table('prestamo', function ($table) {
-            $table->foreign('id_empleado')->references('id')->on('empleados');
+        Schema::table('empleado_vacaciones', function ($table) {
+            $table->foreign('id_empleado')->references('id')->on('empleado');
         });
 
-        Schema::table('prestamo', function ($table) {
+        Schema::table('empleado_vacaciones', function ($table) {
             $table->foreign('id_estatus')->references('id')->on('cat_estatus');
-        });
+        });;
 
     }
 
@@ -38,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('prestamos');
+        Schema::dropIfExists('empleado_vacaciones');
     }
 };

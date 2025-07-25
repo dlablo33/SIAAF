@@ -32,7 +32,7 @@
                                 Contraseña</button>
                         </div>
 
-                        <!-- Guarda Empleado -->
+                        <!-- Update Empleado -->
                         <div class="mb-6 flex flex-col items-center">
                             <button type="submit" form="saveEmpleado" class="mt-1 rounded-full border bg-blue-400 px-4 py-2 text-white dark:bg-blue-950">Guardar
                                 Empleado</button>
@@ -41,160 +41,145 @@
 
                     <!-- Contenedor Derecho -->
                     <div class="col-span-12 [-ms-overflow-style:none] [scrollbar-width:none] md:col-span-6 md:h-[750px] md:overflow-y-auto [&::-webkit-scrollbar]:hidden">
-                        <!-- Nombres -->
-                        <div class="mb-6">
-                            <label for="nombre" class="mb-2 block text-sm font-bold text-gray-800 dark:text-gray-300">Nombres</label>
-                            <div class="min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm dark:bg-gray-900 dark:text-gray-300">
-                                {{ $empleado->nombre }}
+                        <form id="saveEmpleado" method="POST" action="{{ route('rh.empleados.update', $empleado->id) }}">
+                            @csrf
+                            @method('PUT')
+                            <!-- Nombres -->
+                            <div class="mb-6">
+                                <label for="nombre" class="mb-2 block text-sm font-bold text-gray-800 dark:text-gray-300">Nombres</label>
+                                <input id="nombre" name="nombre" type="text" value="{{ $empleado->nombre }}"
+                                    class="min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm dark:bg-gray-900 dark:text-gray-300">
                             </div>
-                        </div>
 
-                        <!-- Apellidos -->
-                        <div class="mb-6 grid grid-cols-1 gap-4 md:grid-cols-2">
-                            <div>
-                                <label for="a_paterno" class="mb-2 block text-sm font-bold text-gray-800 dark:text-gray-300">Apellido Paterno</label>
-                                <div class="min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm dark:bg-gray-900 dark:text-gray-300">
-                                    {{ $empleado->a_paterno }}
+                            <!-- Apellidos -->
+                            <div class="mb-6 grid grid-cols-1 gap-4 md:grid-cols-2">
+                                <div>
+                                    <label for="a_paterno" class="mb-2 block text-sm font-bold text-gray-800 dark:text-gray-300">Apellido Paterno</label>
+                                    <input id="a_paterno" name="a_paterno" type="text" value="{{ $empleado->a_paterno }}"
+                                        class="min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm dark:bg-gray-900 dark:text-gray-300">
+                                </div>
+                                <div>
+                                    <label for="a_materno" class="mb-2 block text-sm font-bold text-gray-800 dark:text-gray-300">Apellido Materno</label>
+                                    <input id="a_materno" name="a_materno" type="text" value="{{ $empleado->a_materno }}"
+                                        class="min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm dark:bg-gray-900 dark:text-gray-300">
                                 </div>
                             </div>
-                            <div>
-                                <label for="a_materno" class="mb-2 block text-sm font-bold text-gray-800 dark:text-gray-300">Apellido Materno</label>
-                                <div class="min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm dark:bg-gray-900 dark:text-gray-300">
-                                    {{ $empleado->a_materno }}
-                                </div>
-                            </div>
-                        </div>
 
-                        <!-- CURP -->
-                        <div class="mb-6">
-                            <label for="curp" class="mb-2 block text-sm font-bold text-gray-800 dark:text-gray-300">CURP</label>
-                            <div class="min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm dark:bg-gray-900 dark:text-gray-300">
-                                {{ $empleado->curp }}
+                            <!-- CURP -->
+                            <div class="mb-6">
+                                <label for="curp" class="mb-2 block text-sm font-bold text-gray-800 dark:text-gray-300">CURP</label>
+                                <input id="curp" name="curp" type="text" value="{{ $empleado->curp }}"
+                                    class="min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm dark:bg-gray-900 dark:text-gray-300">
                             </div>
-                        </div>
 
-                        <!-- RFC y NSS -->
-                        <div class="mb-6 grid grid-cols-1 gap-4 md:grid-cols-2">
-                            <div>
-                                <label for="rfc" class="mb-2 block text-sm font-bold text-gray-800 dark:text-gray-300">RFC</label>
-                                <div class="min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm dark:bg-gray-900 dark:text-gray-300">
-                                    {{ $empleado->rfc }}
+                            <!-- RFC y NSS -->
+                            <div class="mb-6 grid grid-cols-1 gap-4 md:grid-cols-2">
+                                <div>
+                                    <label for="rfc" class="mb-2 block text-sm font-bold text-gray-800 dark:text-gray-300">RFC</label>
+                                    <input id="rfc" name="rfc" type="text" value="{{ $empleado->rfc }}"
+                                        class="min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm dark:bg-gray-900 dark:text-gray-300">
+                                </div>
+                                <div>
+                                    <label for="nss" class="mb-2 block text-sm font-bold text-gray-800 dark:text-gray-300">NSS</label>
+                                    <input id="nss" name="nss" type="text" value="{{ $empleado->nss }}"
+                                        class="min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm dark:bg-gray-900 dark:text-gray-300">
                                 </div>
                             </div>
-                            <div>
-                                <label for="nss" class="mb-2 block text-sm font-bold text-gray-800 dark:text-gray-300">NSS</label>
-                                <div class="min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm dark:bg-gray-900 dark:text-gray-300">
-                                    {{ $empleado->nss }}
-                                </div>
-                            </div>
-                        </div>
 
-                        <!-- Fecha Nacimiento y Genero -->
-                        <div class="mb-6 grid grid-cols-1 gap-4 md:grid-cols-2">
-                            <div>
-                                <label for="rfc" class="mb-2 block text-sm font-bold text-gray-800 dark:text-gray-300">Fecha de Nacimiento</label>
-                                <div class="min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm dark:bg-gray-900 dark:text-gray-300">
-                                    {{ $empleado->fecha_nacimiento }}
+                            <!-- Fecha Nacimiento y Genero -->
+                            <div class="mb-6 grid grid-cols-1 gap-4 md:grid-cols-2">
+                                <div>
+                                    <label for="fecha_nacimiento" class="mb-2 block text-sm font-bold text-gray-800 dark:text-gray-300">Fecha de Nacimiento</label>
+                                    <input id="fecha_nacimiento" name="fecha_nacimiento" type="text" value="{{ $empleado->fecha_nacimiento }}"
+                                        class="datepicker form-input min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm dark:bg-gray-900 dark:text-gray-300">
+                                </div>
+                                <div>
+                                    <label for="genero" class="mb-2 block text-sm font-bold text-gray-800 dark:text-gray-300">Genero</label>
+                                    <input id="genero" name="genero" type="text" value="{{ $empleado->genero }}"
+                                        class="min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm dark:bg-gray-900 dark:text-gray-300" />
                                 </div>
                             </div>
-                            <div>
-                                <label for="genero" class="mb-2 block text-sm font-bold text-gray-800 dark:text-gray-300">Genero</label>
-                                <div value="{{ old('genero') }}"
-                                    class="min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 dark:bg-gray-900 dark:text-gray-300">
-                                    {{ $empleado->genero }}
-                                </div>
-                            </div>
-                        </div>
 
-                        <!-- Correo Interno y Personal -->
-                        <div class="mb-6 grid grid-cols-1 gap-4 md:grid-cols-2">
-                            <div>
-                                <label for="correo_interno" class="mb-2 block text-sm font-bold text-gray-800 dark:text-gray-300">Correo Interno</label>
-                                <div class="min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm dark:bg-gray-900 dark:text-gray-300">
-                                    {{ $empleado->correo_interno }}
+                            <!-- Correo Interno y Personal -->
+                            <div class="mb-6 grid grid-cols-1 gap-4 md:grid-cols-2">
+                                <div>
+                                    <label for="correo_interno" class="mb-2 block text-sm font-bold text-gray-800 dark:text-gray-300">Correo Interno</label>
+                                    <input id="correo_interno" name="correo_interno" type="text" value="{{ $empleado->correo_interno }}"
+                                        class="min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm dark:bg-gray-900 dark:text-gray-300">
+                                </div>
+                                <div>
+                                    <label for="correo_personal" class="mb-2 block text-sm font-bold text-gray-800 dark:text-gray-300">Correo Personal</label>
+                                    <input id="correo_personal" name="correo_personal" type="text" value="{{ $empleado->correo_personal }}"
+                                        class="min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm dark:bg-gray-900 dark:text-gray-300">
                                 </div>
                             </div>
-                            <div>
-                                <label for="correo_personal" class="mb-2 block text-sm font-bold text-gray-800 dark:text-gray-300">Correo Personal</label>
-                                <div class="min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm dark:bg-gray-900 dark:text-gray-300">
-                                    {{ $empleado->correo_personal }}
-                                </div>
-                            </div>
-                        </div>
 
-                        <!-- Domicilio y Telefono -->
-                        <div class="mb-6 grid grid-cols-1 gap-4 md:grid-cols-2">
-                            <div>
-                                <label for="domicilio" class="mb-2 block text-sm font-bold text-gray-800 dark:text-gray-300">Domicilio</label>
-                                <div class="min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm dark:bg-gray-900 dark:text-gray-300">
-                                    {{ $empleado->id_domicilio }}
+                            <!-- Domicilio y Telefono -->
+                            <div class="mb-6 grid grid-cols-1 gap-4 md:grid-cols-2">
+                                <div>
+                                    <label for="domicilio" class="mb-2 block text-sm font-bold text-gray-800 dark:text-gray-300">Domicilio</label>
+                                    <input id="domicilio" name="domicilio" type="text" value="{{ $empleado->id_domicilio }}"
+                                        class="min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm dark:bg-gray-900 dark:text-gray-300">
+                                </div>
+                                <div>
+                                    <label for="telefono" class="mb-2 block text-sm font-bold text-gray-800 dark:text-gray-300">Telefono</label>
+                                    <input id="telefono" name="telefono" type="text" value="{{ $empleado->telefono }}"
+                                        class="min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm dark:bg-gray-900 dark:text-gray-300">
                                 </div>
                             </div>
-                            <div>
-                                <label for="telefono" class="mb-2 block text-sm font-bold text-gray-800 dark:text-gray-300">Telefono</label>
-                                <div class="min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm dark:bg-gray-900 dark:text-gray-300">
-                                    {{ $empleado->telefono }}
-                                </div>
-                            </div>
-                        </div>
 
-                        <!-- Contacto y Contacto Telefono -->
-                        <div class="mb-6 grid grid-cols-1 gap-4 md:grid-cols-2">
-                            <div>
-                                <label for="contacto" class="mb-2 block text-sm font-bold text-gray-800 dark:text-gray-300">Contacto</label>
-                                <div class="min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm dark:bg-gray-900 dark:text-gray-300">
-                                    {{ $empleado->contacto }}
+                            <!-- Contacto y Contacto Telefono -->
+                            <div class="mb-6 grid grid-cols-1 gap-4 md:grid-cols-2">
+                                <div>
+                                    <label for="contacto" class="mb-2 block text-sm font-bold text-gray-800 dark:text-gray-300">Contacto</label>
+                                    <input id="contacto" name="contacto" type="text" value="{{ $empleado->contacto }}"
+                                        class="min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm dark:bg-gray-900 dark:text-gray-300">
+                                </div>
+                                <div>
+                                    <label for="contecto_telefono" class="mb-2 block text-sm font-bold text-gray-800 dark:text-gray-300">Telefono</label>
+                                    <input id="contacto_telefono" name="contacto_telefono" type="text" value="{{ $empleado->contacto_telefono }}"
+                                        class="min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm dark:bg-gray-900 dark:text-gray-300">
                                 </div>
                             </div>
-                            <div>
-                                <label for="contecto_telefono" class="mb-2 block text-sm font-bold text-gray-800 dark:text-gray-300">Telefono</label>
-                                <div class="min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm dark:bg-gray-900 dark:text-gray-300">
-                                    {{ $empleado->contacto_telefono }}
-                                </div>
-                            </div>
-                        </div>
 
-                        <!-- Divider Informacion de la Empresa -->
-                        <div class="relative py-4">
-                            <div class="absolute inset-0 flex items-center">
-                                <div class="w-full border-b border-gray-300"></div>
+                            <!-- Divider Informacion de la Empresa -->
+                            <div class="relative py-4">
+                                <div class="absolute inset-0 flex items-center">
+                                    <div class="w-full border-b border-gray-300"></div>
+                                </div>
+                                <div class="relative flex justify-center">
+                                    <span class="bg-white px-4 text-sm font-bold text-gray-800 dark:bg-gray-800 dark:text-gray-300">Informacion de la Empresa</span>
+                                </div>
                             </div>
-                            <div class="relative flex justify-center">
-                                <span class="bg-white px-4 text-sm font-bold text-gray-800 dark:bg-gray-800 dark:text-gray-300">Informacion de la Empresa</span>
-                            </div>
-                        </div>
 
-                        <!-- Empresa y Puesto -->
-                        <div class="mb-6 grid grid-cols-1 gap-4 md:grid-cols-2">
-                            <div>
-                                <label for="empresa" class="mb-2 block text-sm font-bold text-gray-800 dark:text-gray-300">Empresa</label>
-                                <div class="min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm dark:bg-gray-900 dark:text-gray-300">
-                                    {{ $empleado->id_empresa }}
+                            <!-- Empresa y Puesto -->
+                            <div class="mb-6 grid grid-cols-1 gap-4 md:grid-cols-2">
+                                <div>
+                                    <label for="id_empresa" class="mb-2 block text-sm font-bold text-gray-800 dark:text-gray-300">Empresa</label>
+                                    <input id="id_empresa" name="id_empresa" type="text" value="{{ $empleado->id_empresa }}"
+                                        class="min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm dark:bg-gray-900 dark:text-gray-300">
+                                </div>
+                                <div>
+                                    <label for="id_puesto" class="mb-2 block text-sm font-bold text-gray-800 dark:text-gray-300">Puesto</label>
+                                    <input id="id_puesto" name="id_puesto" type="text" value="{{ $empleado->id_puesto }}"
+                                        class="min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm dark:bg-gray-900 dark:text-gray-300">
                                 </div>
                             </div>
-                            <div>
-                                <label for="puesto" class="mb-2 block text-sm font-bold text-gray-800 dark:text-gray-300">Puesto</label>
-                                <div class="min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm dark:bg-gray-900 dark:text-gray-300">
-                                    {{ $empleado->id_puesto }}
-                                </div>
-                            </div>
-                        </div>
 
-                        <!-- Fecha de ingreso y salida -->
-                        <div class="mb-6 grid grid-cols-1 gap-4 md:grid-cols-2">
-                            <div>
-                                <label for="fecha_ingreso" class="mb-2 block text-sm font-bold text-gray-800 dark:text-gray-300">Fecha de Ingreso</label>
-                                <div class="min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm dark:bg-gray-900 dark:text-gray-300">
-                                    {{ $empleado->fecha_ingreso }}
+                            <!-- Fecha de ingreso y salida -->
+                            <div class="mb-6 grid grid-cols-1 gap-4 md:grid-cols-2">
+                                <div>
+                                    <label for="fecha_ingreso" class="mb-2 block text-sm font-bold text-gray-800 dark:text-gray-300">Fecha de Ingreso</label>
+                                    <input id="fecha_ingreso" name="fecha_ingreso" type="text" value="{{ $empleado->fecha_ingreso }}"
+                                        class="datepicker form-input min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm dark:bg-gray-900 dark:text-gray-300">
+                                </div>
+                                <div>
+                                    <label for="fecha_baja" class="mb-2 block text-sm font-bold text-gray-800 dark:text-gray-300">Fecha de Baja</label>
+                                    <input id="fecha_baja" name="fecha_baja" type="text" value="{{ $empleado->fecha_baja }}"
+                                        class="datepicker form-input min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm dark:bg-gray-900 dark:text-gray-300">
                                 </div>
                             </div>
-                            <div>
-                                <label for="puesto" class="mb-2 block text-sm font-bold text-gray-800 dark:text-gray-300">Fecha de Baja</label>
-                                <div class="min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm dark:bg-gray-900 dark:text-gray-300">
-                                    {{ $empleado->fecha_baja }}
-                                </div>
-                            </div>
-                        </div>
+                        </form>
 
                         <!-- Divider Esquema de Pago -->
                         <div class="relative py-4">
@@ -210,7 +195,7 @@
                         <div class="mb-6 grid grid-cols-1 gap-4 md:grid-cols-4">
                             <div class="col-start-1 md:col-span-2 md:col-start-2">
                                 <label for="tipo_pago" class="mb-2 block text-sm font-bold text-gray-800 dark:text-gray-300">Tipo de Pago</label>
-                                <input id="tipo_pago" name="tipo_pago" type="text" required value="{{ old('tipo_pago') }}"
+                                <input id="tipo_pago" name="tipo_pago" type="text" value="{{ old('tipo_pago') }}"
                                     class="min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 dark:bg-gray-900 dark:text-gray-300" />
                             </div>
                         </div>
@@ -219,12 +204,12 @@
                         <div class="mb-6 grid grid-cols-1 gap-4 md:grid-cols-2">
                             <div>
                                 <label for="sueldo" class="mb-2 block text-sm font-bold text-gray-800 dark:text-gray-300">Sueldo</label>
-                                <input id="sueldo" name="sueldo" type="text" required value="{{ old('sueldo') }}"
+                                <input id="sueldo" name="sueldo" type="text" value="{{ old('sueldo') }}"
                                     class="min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 dark:bg-gray-900 dark:text-gray-300" />
                             </div>
                             <div>
                                 <label for="septimo_dia" class="mb-2 block text-sm font-bold text-gray-800 dark:text-gray-300">Septimo Dia</label>
-                                <input id="septimo_dia" name="septimo_dia" type="text" required value="{{ old('septimo_dia') }}"
+                                <input id="septimo_dia" name="septimo_dia" type="text" value="{{ old('septimo_dia') }}"
                                     class="min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 dark:bg-gray-900 dark:text-gray-300" />
                             </div>
                         </div>
@@ -233,12 +218,12 @@
                         <div class="mb-6 grid grid-cols-1 gap-4 md:grid-cols-2">
                             <div>
                                 <label for="bono_puntualidad" class="mb-2 block text-sm font-bold text-gray-800 dark:text-gray-300">Bono de Puntualidad</label>
-                                <input id="bono_puntualidad" name="bono_puntualidad" type="text" required value="{{ old('bono_puntualidad') }}"
+                                <input id="bono_puntualidad" name="bono_puntualidad" type="text" value="{{ old('bono_puntualidad') }}"
                                     class="min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 dark:bg-gray-900 dark:text-gray-300" />
                             </div>
                             <div>
                                 <label for="bono_asistencia" class="mb-2 block text-sm font-bold text-gray-800 dark:text-gray-300">Bono de Asistencia</label>
-                                <input id="bono_asistencia" name="bono_asistencia" type="text" required value="{{ old('bono_asistencia') }}"
+                                <input id="bono_asistencia" name="bono_asistencia" type="text" value="{{ old('bono_asistencia') }}"
                                     class="min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 dark:bg-gray-900 dark:text-gray-300" />
                             </div>
                         </div>
@@ -247,12 +232,12 @@
                         <div class="mb-6 grid grid-cols-1 gap-4 md:grid-cols-2">
                             <div>
                                 <label for="bono_despensa" class="mb-2 block text-sm font-bold text-gray-800 dark:text-gray-300">Bono de Despensa</label>
-                                <input id="bono_despensa" name="bono_despensa" type="text" required value="{{ old('bono_despensa') }}"
+                                <input id="bono_despensa" name="bono_despensa" type="text" value="{{ old('bono_despensa') }}"
                                     class="min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 dark:bg-gray-900 dark:text-gray-300" />
                             </div>
                             <div>
                                 <label for="bono_extra" class="mb-2 block text-sm font-bold text-gray-800 dark:text-gray-300">Bono Extra</label>
-                                <input id="bono_extra" name="bono_extra" type="text" required value="{{ old('bono_extra') }}"
+                                <input id="bono_extra" name="bono_extra" type="text" value="{{ old('bono_extra') }}"
                                     class="min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 dark:bg-gray-900 dark:text-gray-300" />
                             </div>
                         </div>
@@ -333,6 +318,15 @@
 
             })
         }
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            flatpickr(".datepicker", {
+                dateFormat: "Y-m-d",
+                locale: "es"
+            });
+        });
     </script>
 
 </x-app-layout>

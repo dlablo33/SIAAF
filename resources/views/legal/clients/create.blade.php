@@ -89,7 +89,7 @@
                                     }
 
                                     const data = await response.json();
-                                    
+
                                     if (!data.success || !data.data.rfc) {
                                         throw new Error(data.message || 'No se pudo extraer el RFC');
                                     }
@@ -166,10 +166,10 @@
                                 this.fileSelected = false;
                                 this.loading = false;
                                 this.requiredDocuments = [];
-                                
+
                                 const fileInput = document.querySelector('input[type=file][name=rfc_pdf]');
                                 if (fileInput) fileInput.value = '';
-                                
+
                                 this.updateHiddenFields();
                             },
 
@@ -213,10 +213,10 @@
                             <!-- Campo para subir el RFC -->
                             <div class="mb-6">
                                 <label class="block text-sm font-bold mb-2">Subir documento del RFC (PDF) *</label>
-                                <input 
-                                    type="file" 
+                                <input
+                                    type="file"
                                     name="rfc_pdf"
-                                    accept=".pdf" 
+                                    accept=".pdf"
                                     @change="uploadRFC($event.target.files[0])"
                                     class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
                                     x-bind:disabled="loading"
@@ -231,11 +231,11 @@
                             <!-- Mostrar datos extraídos -->
                             <div x-show="rfc" x-transition class="mb-6 p-4 border rounded-lg bg-gray-50">
                                 <h3 class="font-semibold text-lg text-gray-800 mb-4">Información extraída del RFC</h3>
-                                
+
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div>
                                         <label class="block text-sm font-bold mb-2">Tipo de Cliente</label>
-                                        <p x-text="clientType === 'physical' ? 'Persona Física' : 'Persona Moral'" 
+                                        <p x-text="clientType === 'physical' ? 'Persona Física' : 'Persona Moral'"
                                            class="p-2 bg-gray-100 rounded"></p>
                                     </div>
                                     <div>
@@ -259,7 +259,7 @@
                                         <p x-text="fechaEmision || 'No disponible'" class="p-2 bg-gray-100 rounded"></p>
                                     </div>
                                 </div>
-                                
+
                                 <div class="mt-4 flex justify-end">
                                     <button type="button" @click="resetForm()" class="text-sm text-red-600 hover:text-red-800">
                                         Subir otro RFC
@@ -271,12 +271,12 @@
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                                 <div>
                                     <label for="email" class="block text-sm font-bold mb-2">Correo Electrónico *</label>
-                                    <input id="email" name="email" type="email" required value="{{ old('email') }}" 
+                                    <input id="email" name="email" type="email" required value="{{ old('email') }}"
                                            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" />
                                 </div>
                                 <div>
                                     <label for="phone" class="block text-sm font-bold mb-2">Teléfono *</label>
-                                    <input id="phone" name="phone" type="text" required value="{{ old('phone') }}" 
+                                    <input id="phone" name="phone" type="text" required value="{{ old('phone') }}"
                                            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" />
                                 </div>
                             </div>
@@ -292,15 +292,15 @@
                                 <h3 class="font-semibold text-lg text-gray-800 mb-4">
                                     Documentación adicional para <span x-text="clientType === 'physical' ? 'Persona Física' : 'Persona Moral'"></span> *
                                 </h3>
-                                
+
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <template x-for="doc in requiredDocuments" :key="doc.key">
                                         <div>
                                             <label class="block text-sm font-bold mb-2" x-text="doc.label + (doc.required ? ' *' : '')"></label>
-                                            <input 
-                                                type="file" 
-                                                :name="doc.key" 
-                                                :accept="doc.accept" 
+                                            <input
+                                                type="file"
+                                                :name="doc.key"
+                                                :accept="doc.accept"
                                                 :required="doc.required"
                                                 class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" />
                                             <p class="text-sm text-gray-500 mt-2">No se eligió ningún archivo</p>
@@ -312,17 +312,17 @@
                             <!-- Notas -->
                             <div class="mb-6">
                                 <label for="notes" class="block text-sm font-bold mb-2">Notas</label>
-                                <textarea id="notes" name="notes" rows="3" 
+                                <textarea id="notes" name="notes" rows="3"
                                           class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">{{ old('notes') }}</textarea>
                             </div>
 
                             <!-- Botones -->
                             <div class="flex justify-end space-x-4">
-                                <a href="{{ route('legal.clients.index') }}" 
+                                <a href="{{ route('legal.clients.index') }}"
                                    class="px-4 py-2 bg-gray-300 text-gray-800 rounded-md hover:bg-gray-400 transition">
                                     Cancelar
                                 </a>
-                                <button type="submit" 
+                                <button type="submit"
                                         class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition">
                                     Guardar Cliente
                                 </button>

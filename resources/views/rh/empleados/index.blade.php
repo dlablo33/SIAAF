@@ -1,4 +1,7 @@
 <x-app-layout>
+    <x-slot name="backButton">
+        {{ route('dashboard') }}
+    </x-slot>
     <x-slot name="header">
         <div class="items center flex justify-between">
             <h2 class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-300">
@@ -35,27 +38,27 @@
                     <table class="min-w-full divide-y divide-gray-200" id="empleadosTable">
                         <thead class="bg-[#D3D8DB] dark:bg-gray-800">
                             <tr>
-                                <th class="sortable cursor-pointer px-6 py-4 text-left text-xs font-medium uppercase tracking-wider text-gray-500 hover:text-gray-700 dark:text-gray-300"
+                                <th class="sortable cursor-pointer px-6 py-4 text-left text-xs font-medium uppercase tracking-wider text-gray-500 hover:text-gray-900 dark:text-gray-300"
                                     scope="col" data-column="empleado">
                                     Empleado <i class="fas fa-sort ml-1"></i>
                                 </th>
-                                <th class="sortable cursor-pointer px-6 py-4 text-left text-xs font-medium uppercase tracking-wider text-gray-500 hover:text-gray-700 dark:text-gray-300"
+                                <th class="sortable cursor-pointer px-6 py-4 text-left text-xs font-medium uppercase tracking-wider text-gray-500 hover:text-gray-900 dark:text-gray-300"
                                     scope="col" data-column="cumpleaños">
                                     Fecha de Nacimiento <i class="fas fa-sort ml-1"></i>
                                 </th>
-                                <th class="sortable cursor-pointer px-6 py-4 text-left text-xs font-medium uppercase tracking-wider text-gray-500 hover:text-gray-700 dark:text-gray-300"
+                                <th class="sortable cursor-pointer px-6 py-4 text-left text-xs font-medium uppercase tracking-wider text-gray-500 hover:text-gray-900 dark:text-gray-300"
                                     scope="col" data-column="puesto">
                                     Puesto <i class="fas fa-sort ml-1"></i>
                                 </th>
-                                <th class="sortable cursor-pointer px-6 py-4 text-left text-xs font-medium uppercase tracking-wider text-gray-500 hover:text-gray-700 dark:text-gray-300"
+                                <th class="sortable cursor-pointer px-6 py-4 text-left text-xs font-medium uppercase tracking-wider text-gray-500 hover:text-gray-900 dark:text-gray-300"
                                     scope="col" data-column="ingreso">
                                     Fecha de Ingreso <i class="fas fa-sort ml-1"></i>
                                 </th>
-                                <th class="sortable cursor-pointer px-6 py-4 text-left text-xs font-medium uppercase tracking-wider text-gray-500 hover:text-gray-700 dark:text-gray-300"
+                                <th class="sortable cursor-pointer px-6 py-4 text-left text-xs font-medium uppercase tracking-wider text-gray-500 hover:text-gray-900 dark:text-gray-300"
                                     scope="col" data-column="antiguedad">
                                     Años Cumplidos <i class="fas fa-sort ml-1"></i>
                                 </th>
-                                <th class="sortable cursor-pointer px-6 py-4 text-left text-xs font-medium uppercase tracking-wider text-gray-500 hover:text-gray-700 dark:text-gray-300"
+                                <th class="sortable cursor-pointer px-6 py-4 text-left text-xs font-medium uppercase tracking-wider text-gray-500 hover:text-gray-900 dark:text-gray-300"
                                     scope="col" data-column="documentos">
                                     Documentos <i class="fas fa-sort ml-1"></i>
                                 </th>
@@ -66,9 +69,9 @@
                         </thead>
                         <tbody class="divide-y divide-[#A0B4CB] bg-white dark:bg-gray-700" id="empleadoTableBody">
                             @foreach ($empleados as $empleado)
-                                <tr class="transform transition-all hover:scale-[1.002] hover:bg-gray-50 dark:hover:bg-gray-600">
+                                <tr class="hover:bg-gray-2 00 transform transition-all hover:scale-[1.002] dark:hover:bg-gray-600">
                                     <td class="whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-900 dark:text-gray-300">
-                                        {{ $empleado->nombre . ' ' . $empleado->a_materno . ' ' . $empleado->a_paterno }}
+                                        {{ $empleado->nombre . ' ' . $empleado->a_paterno . ' ' . $empleado->a_materno }}
                                     </td>
                                     <td class="whitespace-nowrap px-6 py-4 text-center text-sm font-medium text-gray-900 dark:text-gray-300">
                                         {{ $empleado->fecha_nacimiento }}
@@ -96,8 +99,9 @@
                                                 data-tooltip-target="tooltip-view">
                                                 <i class="fas fa-eye"></i>
                                             </a>
-                                            <a href="" class="rounded-full p-2 text-yellow-600 transition-colors hover:bg-yellow-50 hover:text-yellow-900"
-                                                title="Editar" data-tooltip-target="tooltip-edit">
+                                            <a href="{{ route('rh.empleados.edit', $empleado) }}"
+                                                class="rounded-full p-2 text-yellow-600 transition-colors hover:bg-yellow-50 hover:text-yellow-900" title="Editar"
+                                                data-tooltip-target="tooltip-edit">
                                                 <i class="fas fa-edit"></i>
                                             </a>
                                             <button class="rounded-full p-2 text-red-600 transition-colors hover:bg-red-50 hover:text-red-900" title="Eliminar"
@@ -231,24 +235,6 @@
                 }
             }
 
-            // Filtrado rápido
-            document.getElementById('quickSearch').addEventListener('input', function(e) {
-                const searchTerm = e.target.value.toLowerCase();
-                const rows = document.querySelectorAll('#empleadoTableBody tr');
-
-                rows.forEach(row => {
-                    const name = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
-                    const rfc = row.querySelector('td:nth-child(4)').textContent.toLowerCase();
-
-                    if (name.includes(searchTerm) || rfc.includes(searchTerm)) {
-                        row.style.display = '';
-                        row.classList.add('animate-pulse');
-                        setTimeout(() => row.classList.remove('animate-pulse'), 300);
-                    } else {
-                        row.style.display = 'none';
-                    }
-                });
-            });
 
             // Filtros avanzados
             document.querySelectorAll('.filter-select').forEach(select => {
@@ -262,7 +248,7 @@
                 const typeFilter = document.querySelector('select.filter-select:nth-of-type(2)').value;
                 const searchTerm = document.getElementById('globalSearch').value.toLowerCase();
 
-                const rows = document.querySelectorAll('#empleadotTableBody tr');
+                const rows = document.querySelectorAll('#empleadoTableBody tr');
 
                 rows.forEach(row => {
                     const status = row.querySelector('td:nth-child(5) span').textContent.trim().toLowerCase();
@@ -299,6 +285,7 @@
                     const column = this.getAttribute('data-column');
                     const icon = this.querySelector('i');
                     const isAsc = icon.classList.contains('fa-sort-up');
+                    console.log('Entro a sort');
 
                     // Reset all icons
                     document.querySelectorAll('.sortable i').forEach(i => {
@@ -331,13 +318,41 @@
             document.getElementById('newEmpleadoBtn').addEventListener('mouseleave', function() {
                 this.classList.remove('animate-bounce');
             });
-
-            function confirmDelete(id) {
-                if (confirm('¿Estás seguro de que deseas eliminar este empleado?')) {
-                    // Aquí iría la lógica para eliminar el empleado
-                    console.log(`Eliminar empleado con ID: ${id}`);
-                }
-            }
         </script>
     @endpush
+
+    <script>
+        // Filtrado rápido
+        document.getElementById('quickSearch').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const rows = document.querySelectorAll('#empleadoTableBody tr');
+            rows.forEach(row => {
+                const empleado = row.querySelector('td:nth-child(1)').textContent.toLowerCase();
+                if (empleado.includes(searchTerm)) {
+                    row.style.display = '';
+                    row.classList.add('animate-pulse');
+                    setTimeout(() => row.classList.remove('animate-pulse'), 300);
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+
+
+        function confirmDelete(id) {
+            if (confirm('¿Estás seguro de que deseas eliminar este empleado?')) {
+                axios.post('{{ route('rh.empleados.destroy', ':id') }}'.replace(':id', id), {
+                        _method: 'DELETE', // El metodo destroy necesita DELETE
+                        _token: '{{ csrf_token() }}' // Pasamos el token
+                    })
+                    .then(response => {
+
+                    })
+                    .catch(error => {
+                        // Handle error
+                        console.error('Error deleting employee:', error);
+                    });
+            }
+        }
+    </script>
 </x-app-layout>

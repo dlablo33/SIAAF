@@ -11,17 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sugerencias', function (Blueprint $table) {
+        Schema::create('cat_area', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_empleado');
-            $table->string('sugerencia');
+            $table->string('nombre');
+            $table->unsignedBigInteger('id_estatus');
             $table->timestamps();
         });
 
-        Schema::table('sugerencias', function ($table) {
-            $table->foreign('id_empleado')->references('id')->on('empleados');
-        });
-
+        Schema::table('cat_area', function ($table) {
+            $table->foreign('id_estatus')->references('id')->on('cat_estatus');
+        });;
     }
 
     /**
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sugerencias');
+        Schema::dropIfExists('cat_area');
     }
 };

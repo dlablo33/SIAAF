@@ -1,4 +1,4 @@
-<<?php
+<?php
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -11,22 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('prestamo_solicitud', function (Blueprint $table) {
+        Schema::create('cat_domicilio', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('is_empleado');
-            $table->date('fecha_solicitud');
-            $table->unsignedInteger('monto_pedido');
+            $table->string('calle');
+            $table->unsignedInteger('numero');
+            $table->unsignedInteger('numero_interior');
+            $table->string('colonia');
+            $table->unsignedInteger('codigo_postal');
+            $table->string('municipio');
+            $table->string('estado');
             $table->unsignedBigInteger('id_estatus');
             $table->timestamps();
         });
 
-        Schema::table('prestamo_solicitud', function ($table) {
-            $table->foreign('is_empleado')->references('id')->on('empleados');
-        });
-
-        Schema::table('prestamo_solicitud', function ($table) {
+        Schema::table('cat_domicilio', function ($table) {
             $table->foreign('id_estatus')->references('id')->on('cat_estatus');
-        });
+        });;
     }
 
     /**
@@ -34,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('prestamo_solicitud');
+        Schema::dropIfExists('cat_domicilio');
     }
 };

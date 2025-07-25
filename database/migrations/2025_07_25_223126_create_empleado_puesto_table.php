@@ -11,17 +11,21 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sugerencias', function (Blueprint $table) {
+        Schema::create('empleado_puesto', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_empleado');
-            $table->string('sugerencia');
+            $table->unsignedBigInteger('id_puesto');
+            $table->unsignedBigInteger('id_estatus');
             $table->timestamps();
         });
 
-        Schema::table('sugerencias', function ($table) {
+        Schema::table('esquema_deducciones', function ($table) {
             $table->foreign('id_empleado')->references('id')->on('empleados');
         });
 
+        Schema::table('esquema_deducciones', function ($table) {
+            $table->foreign('id_puesto')->references('id')->on('cat_puestos');
+        });
     }
 
     /**
@@ -29,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sugerencias');
+        Schema::dropIfExists('empleado_puesto');
     }
 };

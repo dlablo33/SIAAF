@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Department;
-use App\Models\HR\EsquemaPago;
-use App\Models\HR\Papeleria;
-use App\Models\HR\VacacionesHistorial;
+use App\Models\RH\EsquemaPago;
+use App\Models\RH\Papeleria;
+use App\Models\RH\VacacionesHistorial;
 use Illuminate\Database\Eloquent\Model;
 
 class Empleado extends Model

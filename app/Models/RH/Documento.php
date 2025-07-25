@@ -1,23 +1,26 @@
 <?php
 
-namespace App\Models\RH;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PermisoTipo extends Model
+class Area extends Model
 {
 
     use HasFactory;
 
+    protected $table = 'cat_documento';
+
     protected $fillable = [
         'nombre',
+        'vigencia',
+        'id_estatus'
     ];
 
     // Relaciones
-    public function permisoSolicitud()
+    public function estatus()
     {
-        return $this->hasMany(PermisoSolicitud::class);
+        return $this->hasMany(Estatus::class);
     }
-
 }
