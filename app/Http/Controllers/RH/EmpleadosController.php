@@ -5,7 +5,6 @@ namespace App\Http\Controllers\RH;
 use App\Http\Controllers\Controller;
 use App\Models\Empleado;
 use App\Models\RH\Empresa;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
@@ -43,7 +42,7 @@ class EmpleadosController extends Controller
             'a_materno' => 'nullable|string',
             'correo_interno' => 'nullable|string',
             'correo_personal' => 'nullable|string',
-            'foto_perfil' => 'nullable|email|unique:clients,email',
+            'foto_perfil' => 'nullable|string',
             'curp' => 'nullable|string',
             'rfc' => 'nullable|string',
             'nss' => 'nullable|string',
@@ -63,7 +62,6 @@ class EmpleadosController extends Controller
         ]);
 
         $empleado = Empleado::create($validated +  ['id_estatus' => 1]);
-        Log::info($validated);
         return redirect()->route('rh.empleados.show', $empleado)
             ->with('success', 'Cliente creado correctamente');
     }
@@ -122,14 +120,14 @@ class EmpleadosController extends Controller
     // Cambiar la contraseña del usuario
     public function updatePassword(Request $request)
     {
-        $actual = Auth::user()->password;
+        // $actual = Auth::user()->password;
         $new = $request->password_new;
         $old = $request->password_old;
 
-        if (Hash::check($old, $actual)) {
-            Log::info("Password Verified");
+        // if (Hash::check($old, $actual)) {
+            // Log::info("Password Verified");
             // User::where('id', Auth::user()->id)->update(['password' => Hash::make($new)]);
-        }
+        // }
 
         return;
     }

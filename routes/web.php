@@ -13,6 +13,8 @@ use App\Http\Controllers\Legal\ProcedureController;
 use App\Http\Controllers\Legal\AppointmentController;
 
 use App\Http\Controllers\Cotizadora\CotizadorController;
+use App\Http\Controllers\RH\AreasController;
+use App\Http\Controllers\RH\DepartamentosController;
 use App\Http\Controllers\RH\EmpleadosController;
 use App\Http\Controllers\RH\NominaController;
 
@@ -66,6 +68,12 @@ Route::prefix('rh')->name('rh.')->middleware(['auth'])->group(function () {
     //Empleados
     Route::resource('empleados', EmpleadosController::class);
     Route::post('empleados/updatePassword', [EmpleadosController::class ,'updatePassword'])->name('empleados.updatePassword');
+
+    //Areas
+    Route::resource('area', AreasController::class);
+
+    //Departamentos
+    Route::resource('departamentos', DepartamentosController::class);
 });
 
 Route::resource('clients', LegalClientController::class);
