@@ -13,10 +13,18 @@ use App\Http\Controllers\Legal\ProcedureController;
 use App\Http\Controllers\Legal\AppointmentController;
 
 use App\Http\Controllers\Cotizadora\CotizadorController;
+use App\Http\Controllers\RetardosController;
 use App\Http\Controllers\RH\AreasController;
+use App\Http\Controllers\RH\DeduccionesController;
 use App\Http\Controllers\RH\DepartamentosController;
+use App\Http\Controllers\RH\DocumentoController;
 use App\Http\Controllers\RH\EmpleadosController;
+use App\Http\Controllers\RH\EmpresaController;
 use App\Http\Controllers\RH\NominaController;
+use App\Http\Controllers\RH\PermisoTipoController;
+use App\Http\Controllers\RH\PrestacionesController;
+use App\Http\Controllers\RH\PuestosController;
+use App\Models\RH\PermisoTipo;
 
 Route::get('/', function () {
     return view('welcome');
@@ -65,16 +73,40 @@ Route::prefix('rh')->name('rh.')->middleware(['auth'])->group(function () {
     // Nomina
     Route::resource('nomina', NominaController::class);
 
-    //Empleados
+    // Retardos
+    Route::get('retardos/{periodo}', [RetardosController::class, 'index'])
+        ->name('retardos.index');
+
+    // Empleados
     Route::resource('empleados', EmpleadosController::class);
     Route::post('empleados/updatePassword', [EmpleadosController::class ,'updatePassword'])->name('empleados.updatePassword');
 
-    //Areas
-    Route::resource('area', AreasController::class);
+    // Areas
+    Route::resource('areas', AreasController::class);
 
-    //Departamentos
+    // Departamentos
     Route::resource('departamentos', DepartamentosController::class);
+
+    // Puestos
+    Route::resource('puestos', PuestosController::class);
+
+    // Empresas
+    Route::resource('empresas', EmpresaController::class);
+
+    // PermisoTipo
+    Route::resource('permisoTipo', PermisoTipoController::class);
+
+    // Prestaciones
+    Route::resource('prestaciones', PrestacionesController::class);
+
+    // Deducciones
+    Route::resource('deducciones', DeduccionesController::class);
+
+    // Documento
+    Route::resource('documentos', DocumentoController::class);
 });
+
+Route::get('/import', [\App\Http\Controllers\ExcelController::class, 'checadorImport']);
 
 Route::resource('clients', LegalClientController::class);
 

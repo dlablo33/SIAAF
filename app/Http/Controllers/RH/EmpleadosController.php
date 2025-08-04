@@ -5,6 +5,7 @@ namespace App\Http\Controllers\RH;
 use App\Http\Controllers\Controller;
 use App\Models\Empleado;
 use App\Models\RH\Empresa;
+use App\Models\RH\Puesto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
@@ -24,12 +25,14 @@ class EmpleadosController extends Controller
     public function create()
     {
         $empresas = Empresa::get();
-        return view('rh.empleados.create', compact('empresas'));
+        $puestos = Puesto::get();
+        return view('rh.empleados.create', compact('empresas','puestos'));
     }
 
     // Mostrar detalles del empleado
     public function show(Empleado $empleado)
     {
+        $empleado->load('puesto');
         return view('rh.empleados.show', compact('empleado'));
     }
 
@@ -62,8 +65,7 @@ class EmpleadosController extends Controller
         ]);
 
         $empleado = Empleado::create($validated +  ['id_estatus' => 1]);
-        return redirect()->route('rh.empleados.show', $empleado)
-            ->with('success', 'Cliente creado correctamente');
+        return $empleado->id;
     }
 
     // Mostrar formulario de edición

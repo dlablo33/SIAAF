@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('esquema_prestaciones', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_empleado');
-            $table->string('tipo');
             $table->unsignedBigInteger('id_prestaciones');
+            $table->string('tipo');
             $table->unsignedInteger('cantidad');
             $table->unsignedBigInteger('id_estatus');
             $table->timestamps();
@@ -30,7 +30,7 @@ return new class extends Migration
         });
 
         Schema::table('esquema_prestaciones', function ($table) {
-            $table->foreign('id_estatus')->references('id')->on('id_estatus');
+            $table->foreign('id_estatus')->references('id')->on('cat_estatus');
         });
     }
 

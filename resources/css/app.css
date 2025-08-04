@@ -1,12 +1,13 @@
-/* resources/css/app.css */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Then Preline CSS */
+@import "../../node_modules/preline/variants.css";
+@source "../../node_modules/preline/dist/*.js";
+/* Optional: Tailwind Forms plugin */
 
 /* resources/css/app.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 
 /* Estilos personalizados */
 .login-container {

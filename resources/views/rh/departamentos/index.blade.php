@@ -18,15 +18,15 @@
                 <div class="flex items-center justify-between border-b border-gray-200 bg-white p-4 dark:bg-gray-700">
                     <div class="flex items-center space-x-4">
 
-                        {{-- Modal Nueva Area --}}
+                        {{-- Modal Nuevo Departamento --}}
                         <div x-data="{ isOpen: false }" class="relative flex justify-center">
-                            <button @click="isOpen = true" id="newAreaBtn"
+                            <button @click="isOpen = true" id="newDepartamentoBtn"
                                 class="mx-auto transform rounded-md bg-indigo-600 px-4 py-2 capitalize tracking-wide text-white transition-all hover:scale-105 hover:bg-indigo-700">
                                 <i class="fas fa-plus-circle mr-2"></i> Nuevo Departamento
                             </button>
 
                             <!-- Backdrop -->
-                            <div x-show="isOpen" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0"
+                            <div x-show="isOpen" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacit y-0"
                                 x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100"
                                 x-transition:leave-end="opacity-0" class="fixed inset-0 z-10 bg-gray-700 bg-opacity-75 transition-opacity" @click="isOpen = false"
                                 style="display: none;"></div>
@@ -41,15 +41,31 @@
                                 <div
                                     class="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left align-bottom font-semibold shadow-xl transition-all dark:bg-gray-900 sm:my-8 sm:w-full sm:max-w-sm sm:p-6 sm:align-middle">
                                     <div>
-                                        Agregar Area
+                                        Agregar Departamento
                                     </div>
-                                    <form method="POST" action="{{ route('rh.area.store') }}">
+                                    <form method="POST" action="{{ route('rh.departamentos.store') }}">
                                         @csrf
                                         <div class="mt-4">
-                                            <label class="text-sm text-gray-700 dark:text-gray-200" for="nombre">Nombre</label>
-                                            <div class="-mx-1 mt-2 flex items-center">
-                                                <input type="text" value="{{ old('nombre') }}" id="nombre" name="nombre"
-                                                    class="mx-1 block h-10 flex-1 rounded-md border border-gray-200 bg-white px-4 text-sm text-gray-700 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-blue-300">
+                                            <div>
+                                                <label class="text-sm text-gray-700 dark:text-gray-200" for="nombre">Nombre</label>
+                                                <div class="-mx-1 mt-2 flex items-center">
+                                                    <input type="text" value="{{ old('nombre') }}" id="nombre" name="nombre"
+                                                        class="mx-1 block h-10 flex-1 rounded-md border border-gray-200 bg-white px-4 text-sm text-gray-700 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-blue-300">
+                                                </div>
+                                            </div>
+
+                                            <div>
+                                                <label for="id_area" class="mb-2 block text-sm text-gray-800 dark:text-gray-300">Areas</label>
+                                                <select name="id_area" id="id_area"
+                                                    class="min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm dark:bg-gray-900 dark:text-gray-300"
+                                                    required>
+                                                    <option value="" disabled selected class="text-gray-400">Asigna un Area</option>
+
+                                                    @foreach ($areas as $area)
+                                                        <option value="{{ $area->id }}">{{ $area->nombre }}</option>
+                                                    @endforeach
+                                                    </optgroup>
+                                                </select>
                                             </div>
                                         </div>
 
@@ -69,19 +85,19 @@
                         </div>
 
                         <span class="rounded-full bg-white px-3 py-1 text-sm text-gray-600 shadow-sm dark:bg-gray-700 dark:text-gray-300">
-                            {{ count($areas) }} Areas
+                            {{ count($departamentos) }} Departamentos
                         </span>
                     </div>
                     <div class="relative">
-                        <input type="text" id="quickSearch" placeholder="Buscar area..."
+                        <input type="text" id="quickSearch" placeholder="Buscar departamento..."
                             class="w-64 rounded-lg border border-gray-300 py-2 pl-10 pr-4 transition-all focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 dark:bg-gray-800 dark:text-gray-300">
                         <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
                     </div>
                 </div>
 
                 {{-- Tabla --}}
-                <div x-data="{ isModalOpen: false, id: '', nombre: '' }" class="overflow-x-auto">
-                    <table class="min-w-full divide-y divide-gray-200" id="areasTable">
+                <div x-data="{ isModalOpen: false, id: '', nombre: '', area: '' }" class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200" id="departamentosTable">
                         <thead class="bg-[#D3D8DB] dark:bg-gray-800">
                             <tr>
                                 <th class="sortable cursor-pointer px-6 py-4 text-left text-xs font-medium uppercase tracking-wider text-gray-500 hover:text-gray-900 dark:text-gray-300"
@@ -89,32 +105,40 @@
                                     Nombre <i class="fas fa-sort ml-1"></i>
                                 </th>
                                 <th class="sortable cursor-pointer px-6 py-4 text-left text-xs font-medium uppercase tracking-wider text-gray-500 hover:text-gray-900 dark:text-gray-300"
+                                    scope="col" data-column="nombrre">
+                                    Area <i class="fas fa-sort ml-1"></i>
+                                </th>
+                                <th class="sortable cursor-pointer px-6 py-4 text-left text-xs font-medium uppercase tracking-wider text-gray-500 hover:text-gray-900 dark:text-gray-300"
                                     scope="col" data-column="gerente">
-                                    Gerente <i class="fas fa-sort ml-1"></i>
+                                    Coordinador <i class="fas fa-sort ml-1"></i>
                                 </th>
                                 <th class="px-6 py-4 text-center text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-300" scope="col">
                                     Acciones
                                 </th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-[#A0B4CB] bg-white dark:bg-gray-700" id="areaTableBody">
-                            @foreach ($areas as $area)
+                        <tbody class="divide-y divide-[#A0B4CB] bg-white dark:bg-gray-700" id="departamentoTableBody">
+                            @foreach ($departamentos as $departamento)
                                 <tr class="hover:bg-gray-2 00 transform transition-all hover:scale-[1.002] dark:hover:bg-gray-600">
                                     <td class="whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-900 dark:text-gray-300">
-                                        {{ $area->nombre }}
+                                        {{ $departamento->nombre }}
                                     </td>
                                     <td class="whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-900 dark:text-gray-300">
-                                        {{ $area->puesto?->gerente ?? 'N/A' }}
+                                        {{ $departamento->area->nombre }}
+                                    </td>
+                                    <td class="whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                        {{ $departamento->puesto?->coordinador ?? 'N/A' }}
                                     </td>
 
                                     <td class="whitespace-nowrap px-6 py-4 text-sm font-medium">
                                         <div class="flex justify-center space-x-2">
-                                            <button @click="isModalOpen = true; id = '{{ $area->id }}'; nombre = '{{ $area->nombre }}'" id="newAreaBtn"
-                                                class="rounded-full p-2 text-yellow-600 transition-colors hover:bg-yellow-50 hover:text-yellow-900">
+                                            <button
+                                                @click="isModalOpen = true; id = '{{ $departamento->id }}'; nombre = '{{ $departamento->nombre }}'; area = '{{ $departamento->id_area }}'"
+                                                id="newDepartamentoBtn" class="rounded-full p-2 text-yellow-600 transition-colors hover:bg-yellow-50 hover:text-yellow-900">
                                                 <i class="fas fa-edit"></i>
                                             </button>
                                             <button class="rounded-full p-2 text-red-600 transition-colors hover:bg-red-50 hover:text-red-900" title="Eliminar"
-                                                data-tooltip-target="tooltip-delete" onclick="confirmDelete({{ $area->id }})">
+                                                data-tooltip-target="tooltip-delete" onclick="confirmDelete({{ $departamento->id }})">
                                                 <i class="fas fa-trash-alt"></i>
                                             </button>
                                         </div>
@@ -151,12 +175,23 @@
                                             class="mx-1 block h-10 flex-1 rounded-md border border-gray-200 bg-white px-4 text-sm text-gray-700 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-blue-300">
                                     </div>
                                 </div>
+                                <div>
+                                    <label for="id_area" class="mb-2 block text-sm text-gray-800 dark:text-gray-300">Areas</label>
+                                    <select name="id_area" id="editArea" x-model="area"
+                                        class="min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm dark:bg-gray-900 dark:text-gray-300"
+                                        required>
+                                        <option value="" disabled class="text-gray-400">Asigna un Area</option>
+                                        @foreach ($areas as $area)
+                                            <option value="{{ $area->id }}">{{ $area->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                                 <div class="mt-4 sm:-mx-2 sm:mt-6 sm:flex sm:items-center">
                                     <button @click="isModalOpen = false" type="button"
                                         class="w-full transform rounded-md border border-gray-200 px-4 py-2 text-sm font-medium capitalize tracking-wide text-gray-700 transition-colors duration-300 hover:bg-gray-100 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-40 dark:border-gray-700 dark:text-gray-200 dark:hover:bg-gray-800 sm:mx-2 sm:w-1/2">
                                         Cancelar
                                     </button>
-                                    <button type="button" onclick="editArea()"
+                                    <button type="button" onclick="editDepartamento()"
                                         class="mt-3 w-full transform rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium capitalize tracking-wide text-white transition-colors duration-300 hover:bg-indigo-700 focus:outline-none sm:mx-2 sm:mt-0 sm:w-1/2">
                                         Guardar
                                     </button>
@@ -171,29 +206,29 @@
                 <div class="flex items-center justify-between border-t border-gray-200 bg-gray-50 px-4 py-3 dark:bg-gray-800 sm:px-6">
                     <div class="flex flex-1 items-center justify-between">
                         <div class="text-sm text-gray-700 dark:text-gray-300">
-                            @if ($areas->count() > 0)
-                                Mostrando <span class="font-medium">{{ $areas->firstItem() }}</span>
+                            @if ($departamentos->count() > 0)
+                                Mostrando <span class="font-medium">{{ $departamentos->firstItem() }}</span>
                                 a
-                                <span class="font-medium">{{ $areas->lastItem() }}</span> de
-                                <span class="font-medium">{{ $areas->total() }}</span> resultados
+                                <span class="font-medium">{{ $departamentos->lastItem() }}</span> de
+                                <span class="font-medium">{{ $departamentos->total() }}</span> resultados
                             @else
                                 No se encontraron resultados
                             @endif
                         </div>
                         <div class="flex space-x-2">
-                            @if ($areas->onFirstPage())
+                            @if ($departamentos->onFirstPage())
                                 <span class="cursor-not-allowed rounded-md bg-gray-100 px-3 py-1 text-gray-400 dark:bg-gray-600">
                                     Anterior
                                 </span>
                             @else
-                                <a href="{{ $areas->previousPageUrl() }}"
+                                <a href="{{ $departamentos->previousPageUrl() }}"
                                     class="rounded-md bg-white px-3 py-1 text-gray-700 transition-colors hover:bg-gray-50 dark:bg-gray-600">
                                     Anterior
                                 </a>
                             @endif
 
-                            @foreach ($areas->getUrlRange(1, $areas->lastPage()) as $page => $url)
-                                @if ($page == $areas->currentPage())
+                            @foreach ($departamentos->getUrlRange(1, $departamentos->lastPage()) as $page => $url)
+                                @if ($page == $departamentos->currentPage())
                                     <span class="rounded-md bg-indigo-600 px-3 py-1 text-white">
                                         {{ $page }}
                                     </span>
@@ -204,8 +239,8 @@
                                 @endif
                             @endforeach
 
-                            @if ($areas->hasMorePages())
-                                <a href="{{ $areas->nextPageUrl() }}"
+                            @if ($departamentos->hasMorePages())
+                                <a href="{{ $departamentos->nextPageUrl() }}"
                                     class="rounded-md bg-white px-3 py-1 text-gray-700 transition-colors hover:bg-gray-50 dark:bg-gray-600">
                                     Siguiente
                                 </a>
@@ -299,7 +334,7 @@
                 const typeFilter = document.querySelector('select.filter-select:nth-of-type(2)').value;
                 const searchTerm = document.getElementById('globalSearch').value.toLowerCase();
 
-                const rows = document.querySelectorAll('#areaTableBody tr');
+                const rows = document.querySelectorAll('#departamentoTableBody tr');
 
                 rows.forEach(row => {
                     const status = row.querySelector('td:nth-child(5) span').textContent.trim().toLowerCase();
@@ -362,11 +397,11 @@
             }
 
             // Animación para el botón nuevo
-            document.getElementById('newAreaBtn').addEventListener('mouseenter', function() {
+            document.getElementById('newDepartamentoBtn').addEventListener('mouseenter', function() {
                 this.classList.add('animate-bounce');
             });
 
-            document.getElementById('newAreaBtn').addEventListener('mouseleave', function() {
+            document.getElementById('newDepartamentoBtn').addEventListener('mouseleave', function() {
                 this.classList.remove('animate-bounce');
             });
         </script>
@@ -376,7 +411,7 @@
         // Filtrado rápido
         document.getElementById('quickSearch').addEventListener('input', function(e) {
             const searchTerm = e.target.value.toLowerCase();
-            const rows = document.querySelectorAll('#areaTableBody tr');
+            const rows = document.querySelectorAll('#departamentoTableBody tr');
             rows.forEach(row => {
                 const nombre = row.querySelector('td:nth-child(1)').textContent.toLowerCase();
                 if (nombre.includes(searchTerm)) {
@@ -391,8 +426,8 @@
 
 
         function confirmDelete(id) {
-            if (confirm('¿Estás seguro de que deseas eliminar esta area?')) {
-                axios.post('{{ route('rh.area.destroy', ':id') }}'.replace(':id', id), {
+            if (confirm('¿Estás seguro de que deseas eliminar este departamento?')) {
+                axios.post('{{ route('rh.departamentos.destroy', ':id') }}'.replace(':id', id), {
                         _method: 'DELETE', // El metodo destroy necesita DELETE
                         _token: '{{ csrf_token() }}' // Pasamos el token
                     })
@@ -401,19 +436,21 @@
                     })
                     .catch(error => {
                         // Handle error
-                        console.error('Error deleting area:', error);
+                        console.error('Error deleting departamento:', error);
                     });
             }
         }
 
-        function editArea() {
+        function editDepartamento() {
             let id = document.getElementById('editId').value;
             let nombre = document.getElementById('editNombre').value;
+            let area = document.getElementById('editArea').value;
             const formData = new FormData();
             formData.append('_method', 'PUT')
             formData.append('nombre', nombre);
+            formData.append('id_area',area);;
             console.log(id);
-            axios.post(`/rh/area/${id}`, formData, {
+            axios.post(`/rh/departamentos/${id}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
@@ -421,7 +458,7 @@
             }).then(response => {
                 window.location.reload();
             }).catch(error => {
-                console.log('Error updating area:', error);
+                console.log('Error updating departamento:', error);
             })
         }
     </script>

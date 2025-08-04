@@ -14,13 +14,18 @@ return new class extends Migration
         Schema::create('cat_departamento', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
+            $table->unsignedBigInteger('id_area');;
             $table->unsignedBigInteger('id_estatus');
             $table->timestamps();
         });
 
+        Schema::table('cat_departamento', function($table) {
+            $table->foreign('id_area')->references('id')->on('cat_area');
+        });
+
         Schema::table('cat_departamento', function ($table) {
             $table->foreign('id_estatus')->references('id')->on('cat_estatus');
-        });;
+        });
     }
 
     /**

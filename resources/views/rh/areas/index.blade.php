@@ -43,7 +43,7 @@
                                     <div>
                                         Agregar Area
                                     </div>
-                                    <form method="POST" action="{{ route('rh.area.store') }}">
+                                    <form method="POST" action="{{ route('rh.areas.store') }}">
                                         @csrf
                                         <div class="mt-4">
                                             <label class="text-sm text-gray-700 dark:text-gray-200" for="nombre">Nombre</label>
@@ -125,6 +125,7 @@
                         </tbody>
                     </table>
 
+                    <!-- Modal Editar -->
                     <div>
                         <!-- Backdrop -->
                         <div x-show="isModalOpen" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0"
@@ -392,7 +393,7 @@
 
         function confirmDelete(id) {
             if (confirm('¿Estás seguro de que deseas eliminar esta area?')) {
-                axios.post('{{ route('rh.area.destroy', ':id') }}'.replace(':id', id), {
+                axios.post('{{ route('rh.areas.destroy', ':id') }}'.replace(':id', id), {
                         _method: 'DELETE', // El metodo destroy necesita DELETE
                         _token: '{{ csrf_token() }}' // Pasamos el token
                     })
@@ -413,7 +414,7 @@
             formData.append('_method', 'PUT')
             formData.append('nombre', nombre);
             console.log(id);
-            axios.post(`/rh/area/${id}`, formData, {
+            axios.post(`/rh/areas/${id}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'

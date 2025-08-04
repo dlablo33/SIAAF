@@ -8,6 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use App\Models\Department;
 use App\Models\RH\EsquemaPago;
 use App\Models\RH\Papeleria;
+use App\Models\RH\Puesto;
 use App\Models\RH\VacacionesHistorial;
 use Illuminate\Database\Eloquent\Model;
 
@@ -46,10 +47,15 @@ class Empleado extends Model
         'id_estatus'
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
+    // Relaciones
+    public function puesto()
+    {
+        return $this->belongsTo(Puesto::class, 'id_puesto', 'id');
+    }
+
+    public function estatus()
+    {
+        return $this->belongsTo(Estatus::class, 'id_estatus', 'id');
+    }
 
 }

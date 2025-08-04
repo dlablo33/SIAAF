@@ -2,7 +2,7 @@
 
 namespace App\Models\RH;
 
-use App\Models\Department;
+use App\Models\RH\Departamento;
 use App\Models\Estatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -12,7 +12,7 @@ class Puesto extends Model
 
     use HasFactory;
 
-    protected $table = 'cat_puesto';
+    protected $table = 'cat_puestos';
 
     protected $fillable = [
         'nombre',
@@ -23,11 +23,11 @@ class Puesto extends Model
     // Relaciones
     public function departamento()
     {
-        return $this->hasMany(Department::class);
+        return $this->belongsTo(Departamento::class, 'id_departamento', 'id');
     }
 
     public function estatus()
     {
-        return $this->hasMany(Estatus::class);
+        return $this->belongsTo(Estatus::class, 'id_estatus', 'id');
     }
 }

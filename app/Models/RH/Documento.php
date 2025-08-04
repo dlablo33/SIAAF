@@ -6,12 +6,12 @@ use App\Models\Estatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Area extends Model
+class Documento extends Model
 {
 
     use HasFactory;
 
-    protected $table = 'cat_documento';
+    protected $table = 'cat_documentos';
 
     protected $fillable = [
         'nombre',
@@ -22,6 +22,6 @@ class Area extends Model
     // Relaciones
     public function estatus()
     {
-        return $this->hasMany(Estatus::class);
+        return $this->belongsTo(Estatus::class, 'id_estatus', 'id');
     }
 }

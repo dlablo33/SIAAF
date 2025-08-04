@@ -19,7 +19,7 @@ return new class extends Migration
             $table->date('fecha');
             $table->unsignedInteger('tiempo');
             $table->string('obvervaciones');
-            $table->boolean('id_estatus');
+            $table->unsignedBigInteger('id_estatus');
             $table->timestamps();
         });
 

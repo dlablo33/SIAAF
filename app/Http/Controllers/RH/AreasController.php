@@ -16,7 +16,7 @@ class AreasController extends Controller
         return view('rh.areas.index', compact('areas'));
     }
 
-    // Mostrar formulario de creación
+    // Crear nueva area
     public function store(Request $request)
     {
         $validated = $request->validate([

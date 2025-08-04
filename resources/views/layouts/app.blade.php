@@ -321,6 +321,153 @@
                     </a>
                     <!-- ============================================================================================================================ -->
 
+                    <!-- Menú principal Recursos Humanos (ahora desplegable) -->
+                    <div class="nav-main-item">
+                        <div class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300 cursor-pointer"
+                            data-tooltip="Dirección">
+                            <i class="fas fa-users text-lg w-6 text-center"></i>
+                            <span class="nav-text ml-3">Recursos Humanos</span>
+                            <i class="fas fa-chevron-down ml-auto text-xs transition-transform duration-300"></i>
+                        </div>
+
+                        <!-- Contenedor de submenús principales -->
+                        <div class="nav-main-submenu pl-2 hidden">
+
+                            <!-- Submenú Nominas -->
+                            <div class="nav-subitem pl-6">
+                                <div
+                                    class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300 cursor-pointer">
+                                    <a href="{{ route('rh.nomina.index') }}">
+                                        <i class="fas fa-money-check-dollar text-lg w-6 text-center"></i>
+                                        <span class="nav-text ml-3">Nomina</span>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Submenú Dispersion -->
+                            <div class="nav-subitem pl-6">
+                                <div
+                                    class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300 cursor-pointer">
+                                    <i class="fas fa-calendar-alt text-lg w-6 text-center"></i>
+                                    <span class="nav-text ml-3">Dispersion</span>
+                                    <i
+                                        class="fas fa-chevron-down ml-auto text-xs transition-transform duration-300"></i>
+                                </div>
+
+                                <!-- Subniveles de Dispersion -->
+                                <div class="nav-sublevel pl-6 hidden">
+                                    <a href="#"
+                                        class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300">
+                                        <i class="fas fa-money-bill text-lg w-6 text-center"></i>
+                                        <span class="nav-text ml-3">Fiscal</span>
+                                    </a>
+                                    <a href="#"
+                                        class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300">
+                                        <i class="fas fa-money-bill-1 text-lg w-6 text-center"></i>
+                                        <span class="nav-text ml-3">Complemento</span>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Submenú Retardos -->
+                            <div class="nav-subitem pl-6">
+                                <div
+                                    class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300 cursor-pointer">
+                                    @php
+                                        $now = now();
+                                        $currentWeek = $now->weekOfYear;
+                                    @endphp
+                                    <a href="{{ route('rh.retardos.index', ['periodo' => $currentWeek]) }}">
+                                        <i class="fas fa-user-clock text-lg w-6 text-center"></i>
+                                        <span class="nav-text ml-3">Retardos</span>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Submenú Prestamos -->
+                            <div class="nav-subitem pl-6">
+                                <div
+                                    class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300 cursor-pointer">
+                                    <i class="fas fa-money-bill-transfer text-lg w-6 text-center"></i>
+                                    <span class="nav-text ml-3">Prestamos</span>
+                                </div>
+                            </div>
+
+                            <!-- Submenú Prestamos -->
+                            <div class="nav-subitem pl-6">
+                                <div
+                                    class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300 cursor-pointer">
+                                    <a href="{{ route('rh.empleados.index') }}">
+                                        <i class="fas fa-solid fa-address-card text-lg w-6 text-center"></i>
+                                        <span class="nav-text ml-3">Empleados</span>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Submenú Catalogos -->
+                            <div class="nav-subitem pl-6">
+                                <div
+                                    class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300 cursor-pointer">
+                                    <i class="fas fa-ellipsis text-lg w-6 text-center"></i>
+                                    <span class="nav-text ml-3">Catalogos</span>
+                                    <i
+                                        class="fas fa-chevron-down ml-auto text-xs transition-transform duration-300"></i>
+                                </div>
+
+                                <!-- Subniveles de Citas -->
+                                <div class="nav-sublevel pl-6 hidden">
+                                    <a href="{{ route('rh.permisoTipo.index') }}"
+                                        class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300">
+                                        <i class="fas fa-rectangle-list text-lg w-6 text-center"></i>
+                                        <span class="nav-text ml-3">Tipos de Permiso</span>
+                                    </a>
+
+                                    <a href="{{ route('rh.areas.index') }}"
+                                        class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300">
+                                        <i class="fas fa-solid fa-users-rectangle text-lg w-6 text-center"></i>
+                                        <span class="nav-text ml-3">Areas</span>
+                                    </a>
+
+                                    <a href="{{ route('rh.departamentos.index')}}"
+                                        class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300">
+                                        <i class="fas fa-solid fa-user-group text-lg w-6 text-center"></i>
+                                        <span class="nav-text ml-3">Departamentos</span>
+                                    </a>
+
+                                    <a href="{{ route('rh.puestos.index') }}"
+                                        class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300">
+                                        <i class="fas fa-solid fa-building-user text-lg w-6 text-center"></i>
+                                        <span class="nav-text ml-3">Puestos</span>
+                                    </a>
+
+                                    <a href="{{ route('rh.empresas.index') }}"
+                                        class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300">
+                                        <i class="fas fa-solid fa-city text-lg w-6 text-center"></i>
+                                        <span class="nav-text ml-3">Empresas</span>
+                                    </a>
+
+                                    <a href="{{ route('rh.documentos.index') }}"
+                                        class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300">
+                                        <i class="fas fa-solid fa-file-contract text-lg w-6 text-center"></i>
+                                        <span class="nav-text ml-3">Documentos</span>
+                                    </a>
+
+                                    <a href="{{ route('rh.prestaciones.index') }}"
+                                        class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300">
+                                        <i class="fas fa-solid fa-sack-dollar text-lg w-6 text-center"></i>
+                                        <span class="nav-text ml-3">Prestaciones</span>
+                                    </a>
+
+                                    <a href="{{ route('rh.deducciones.index') }}"
+                                        class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300">
+                                        <i class="fas fa-solid fa-sack-xmark text-lg w-6 text-center"></i>
+                                        <span class="nav-text ml-3">Deducciones</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Menú principal Legal-Fiscal (ahora desplegable) -->
                     <div class="nav-main-item">
                         <div class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300 cursor-pointer"
@@ -460,128 +607,7 @@
                         <span class="nav-text ml-3">Sistemas</span>
                     </a>
 
-                    <!-- Menú principal Recursos Humanos (ahora desplegable) -->
-                    <div class="nav-main-item">
-                        <div class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300 cursor-pointer"
-                            data-tooltip="Dirección">
-                            <i class="fas fa-users text-lg w-6 text-center"></i>
-                            <span class="nav-text ml-3">Recursos Humanos</span>
-                            <i class="fas fa-chevron-down ml-auto text-xs transition-transform duration-300"></i>
-                        </div>
 
-                        <!-- Contenedor de submenús principales -->
-                        <div class="nav-main-submenu pl-2 hidden">
-
-                            <!-- Submenú Nominas -->
-                            <div class="nav-subitem pl-6">
-                                <div
-                                    class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300 cursor-pointer">
-                                    <a href="{{ route('rh.nomina.index') }}">
-                                        <i class="fas fa-money-check-dollar text-lg w-6 text-center"></i>
-                                        <span class="nav-text ml-3">Nomina</span>
-                                    </a>
-                                </div>
-                            </div>
-
-                            <!-- Submenú Dispersion -->
-                            <div class="nav-subitem pl-6">
-                                <div
-                                    class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300 cursor-pointer">
-                                    <i class="fas fa-calendar-alt text-lg w-6 text-center"></i>
-                                    <span class="nav-text ml-3">Dispersion</span>
-                                    <i
-                                        class="fas fa-chevron-down ml-auto text-xs transition-transform duration-300"></i>
-                                </div>
-
-                                <!-- Subniveles de Dispersion -->
-                                <div class="nav-sublevel pl-6 hidden">
-                                    <a href="#"
-                                        class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300">
-                                        <i class="fas fa-money-bill text-lg w-6 text-center"></i>
-                                        <span class="nav-text ml-3">Fiscal</span>
-                                    </a>
-                                    <a href="#"
-                                        class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300">
-                                        <i class="fas fa-money-bill-1 text-lg w-6 text-center"></i>
-                                        <span class="nav-text ml-3">Complemento</span>
-                                    </a>
-                                </div>
-                            </div>
-
-                            <!-- Submenú Retardos -->
-                            <div class="nav-subitem pl-6">
-                                <div
-                                    class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300 cursor-pointer">
-                                    <i class="fas fa-user-clock text-lg w-6 text-center"></i>
-                                    <span class="nav-text ml-3">Retardos</span>
-                                </div>
-                            </div>
-
-                            <!-- Submenú Prestamos -->
-                            <div class="nav-subitem pl-6">
-                                <div
-                                    class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300 cursor-pointer">
-                                    <i class="fas fa-money-bill-transfer text-lg w-6 text-center"></i>
-                                    <span class="nav-text ml-3">Prestamos</span>
-                                </div>
-                            </div>
-
-                            <!-- Submenú Prestamos -->
-                            <div class="nav-subitem pl-6">
-                                <div
-                                    class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300 cursor-pointer">
-                                    <a href="{{ route('rh.empleados.index') }}">
-                                        <i class="fas fa-solid fa-address-card text-lg w-6 text-center"></i>
-                                        <span class="nav-text ml-3">Empleados</span>
-                                    </a>
-                                </div>
-                            </div>
-
-                            <!-- Submenú Catalogos -->
-                            <div class="nav-subitem pl-6">
-                                <div
-                                    class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300 cursor-pointer">
-                                    <i class="fas fa-ellipsis text-lg w-6 text-center"></i>
-                                    <span class="nav-text ml-3">Catalogos</span>
-                                    <i
-                                        class="fas fa-chevron-down ml-auto text-xs transition-transform duration-300"></i>
-                                </div>
-
-                                <!-- Subniveles de Citas -->
-                                <div class="nav-sublevel pl-6 hidden">
-                                    <a href="#"
-                                        class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300">
-                                        <i class="fas fa-rectangle-list text-lg w-6 text-center"></i>
-                                        <span class="nav-text ml-3">Tipos de Permiso</span>
-                                    </a>
-
-                                    <a href="{{ route('rh.area.index') }}"
-                                        class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300">
-                                        <i class="fas fa-solid fa-users-rectangle text-lg w-6 text-center"></i>
-                                        <span class="nav-text ml-3">Areas</span>
-                                    </a>
-
-                                    <a href="{{ route('rh.departamentos.index')}}"
-                                        class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300">
-                                        <i class="fas fa-solid fa-user-group text-lg w-6 text-center"></i>
-                                        <span class="nav-text ml-3">Departamentos</span>
-                                    </a>
-
-                                    <a href="#"
-                                        class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300">
-                                        <i class="fas fa-solid fa-building-user text-lg w-6 text-center"></i>
-                                        <span class="nav-text ml-3">Puestos</span>
-                                    </a>
-
-                                    <a href="#"
-                                        class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300">
-                                        <i class="fas fa-solid fa-city text-lg w-6 text-center"></i>
-                                        <span class="nav-text ml-3">Empresas</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </nav>
             </div>
 

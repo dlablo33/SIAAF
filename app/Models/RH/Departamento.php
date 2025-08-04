@@ -22,11 +22,11 @@ class Departamento extends Model
     // Relaciones
     public function area()
     {
-        return $this->hasMany(Area::class);
+        return $this->belongsTo(Area::class, 'id_area', 'id');
     }
 
     public function estatus()
     {
-        return $this->hasMany(Estatus::class);
+        return $this->belongsTo(Estatus::class, 'id_estatus', 'id');
     }
 }

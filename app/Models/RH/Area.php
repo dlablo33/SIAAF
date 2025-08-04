@@ -21,6 +21,11 @@ class Area extends Model
     // Relaciones
     public function estatus()
     {
-        return $this->hasMany(Estatus::class);
+        return $this->belongsTo(Estatus::class);
+    }
+
+    public function departamentos()
+    {
+        return $this->hasMany(Departamento::class, 'id_area', 'id');
     }
 }

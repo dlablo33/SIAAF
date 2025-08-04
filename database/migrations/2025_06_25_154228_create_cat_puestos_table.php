@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cat_puesto', function (Blueprint $table) {
+        Schema::create('cat_puestos', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
             $table->unsignedBigInteger('id_departamento');
@@ -19,11 +19,11 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::table('cat_puesto', function ($table) {
+        Schema::table('cat_puestos', function ($table) {
             $table->foreign('id_estatus')->references('id')->on('cat_estatus');
         });
 
-        Schema::table('cat_puesto', function ($table){
+        Schema::table('cat_puestos', function ($table){
             $table->foreign('id_departamento')->references('id')->on('cat_departamento');
         });
     }
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('cat_puesto');
+        Schema::dropIfExists('cat_puestos');
     }
 };

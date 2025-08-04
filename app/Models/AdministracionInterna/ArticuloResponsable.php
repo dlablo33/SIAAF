@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\RH;
+namespace App\Models\AdministracionInterna;
 
 use App\Models\Client;
 use App\Models\Department;

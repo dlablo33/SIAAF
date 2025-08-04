@@ -19,12 +19,16 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::table('esquema_deducciones', function ($table) {
+        Schema::table('empleado_puesto', function ($table) {
             $table->foreign('id_empleado')->references('id')->on('empleados');
         });
 
-        Schema::table('esquema_deducciones', function ($table) {
+        Schema::table('empleado_puesto', function ($table) {
             $table->foreign('id_puesto')->references('id')->on('cat_puestos');
+        });
+
+        Schema::table('empleado_puesto', function ($table) {
+            $table->foreign('id_estatus')->references('id')->on('cat_estatus');
         });
     }
 

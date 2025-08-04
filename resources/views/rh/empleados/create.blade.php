@@ -33,7 +33,7 @@
                                 Contraseña</button>
                         </div>
 
-                        <!-- Guarda Contraseña Nueva -->
+                        <!-- Guardar Empleado -->
                         <div class="mb-6 flex flex-col items-center">
                             <button type="submit" form="saveEmpleado" class="mt-1 rounded-full border bg-blue-400 px-4 py-2 text-white dark:bg-blue-950">Guardar
                                 Empleado</button>
@@ -42,26 +42,35 @@
 
                     <!-- Contenedor Derecho -->
                     <div class="col-span-12 [-ms-overflow-style:none] [scrollbar-width:none] md:col-span-6 md:h-[750px] md:overflow-y-auto [&::-webkit-scrollbar]:hidden">
-                        <form id="saveEmpleado" method="POST" action="{{ route('rh.empleados.store') }}">
+                        <form id="saveEmpleado" novalidate method="POST" action="{{ route('rh.empleados.store') }}">
                             @csrf
                             <!-- Nombres -->
                             <div class="mb-6">
                                 <label for="nombre" class="mb-2 block text-sm font-bold text-gray-800 dark:text-gray-300">Nombres</label>
-                                <input id="nombre" name="nombre" type="text" value="{{ old('nombre') }}"
-                                    class="min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm dark:bg-gray-900 dark:text-gray-300">
+                                <input id="nombre" name="nombre" type="text" value="{{ old('nombre') }}" required
+                                    class="peer min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm outline-none focus:ring-1 dark:bg-gray-900 dark:text-gray-300 [.validated_&]:invalid:border-pink-600 [.validated_&]:invalid:ring-0">
+                                <p class="mt-1 hidden text-sm text-pink-600 [.validated_&]:peer-invalid:block">
+                                    Este campo es obligatorio
+                                </p>
                             </div>
 
                             <!-- Apellidos -->
                             <div class="mb-6 grid grid-cols-1 gap-4 md:grid-cols-2">
                                 <div>
                                     <label for="a_paterno" class="mb-2 block text-sm font-bold text-gray-800 dark:text-gray-300">Apellido Paterno</label>
-                                    <input id="a_paterno" name="a_paterno" type="text" value="{{ old('a_paterno') }}"
-                                        class="min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm dark:bg-gray-900 dark:text-gray-300">
+                                    <input id="a_paterno" name="a_paterno" type="text" value="{{ old('a_paterno') }}" required
+                                        class="peer min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm outline-none focus:ring-1 dark:bg-gray-900 dark:text-gray-300 [.validated_&]:invalid:border-pink-600 [.validated_&]:invalid:ring-0">
+                                    <p class="mt-1 hidden text-sm text-pink-600 [.validated_&]:peer-invalid:block">
+                                        Este campo es obligatorio
+                                    </p>
                                 </div>
                                 <div>
                                     <label for="a_materno" class="mb-2 block text-sm font-bold text-gray-800 dark:text-gray-300">Apellido Materno</label>
-                                    <input id="a_materno" name="a_materno" type="text" value="{{ old('a_materno') }}"
-                                        class="min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm dark:bg-gray-900 dark:text-gray-300">
+                                    <input id="a_materno" name="a_materno" type="text" value="{{ old('a_materno') }}" required
+                                        class="peer min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm outline-none focus:ring-1 dark:bg-gray-900 dark:text-gray-300 [.validated_&]:invalid:border-pink-600 [.validated_&]:invalid:ring-0">
+                                    <p class="mt-1 hidden text-sm text-pink-600 [.validated_&]:peer-invalid:block">
+                                        Este campo es obligatorio
+                                    </p>
                                 </div>
                             </div>
 
@@ -105,11 +114,18 @@
                             </div>
 
                             <!-- Correo Interno y Personal -->
-                            <div class="mb-6 grid grid-cols-1 gap-4 md:grid-cols-2">
-                                <div>
+                            <div class="mb-1 grid grid-cols-1 gap-4 md:grid-cols-2">
+                                <div class="mb-6">
                                     <label for="correo_interno" class="mb-2 block text-sm font-bold text-gray-800 dark:text-gray-300">Correo Interno</label>
-                                    <input id="correo_interno" name="correo_interno" type="text" value="{{ old('correo_interno') }}"
-                                        class="min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm dark:bg-gray-900 dark:text-gray-300">
+                                    <input id="correo_interno" name="correo_interno" type="email" value="{{ old('correo_interno') }}" required
+                                        class="placeholder:text-default focus:border-primary focus:ring-primary border-3 peer min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm outline-none focus:ring-1 dark:bg-gray-900 dark:text-gray-300 [.validated_&]:invalid:border-pink-600 [.validated_&]:invalid:ring-0">
+
+                                    <p class="mt-2 hidden text-sm text-pink-600 [.validated_&]:peer-placeholder-shown:peer-invalid:block">
+                                        Este campo es obligatorio
+                                    </p>
+                                    <p class="mt-2 hidden text-sm text-pink-600 [.validated_&]:peer-[:not(:placeholder-shown)]:peer-invalid:block">
+                                        Por favor ingrese un correo válido
+                                    </p>
                                 </div>
                                 <div>
                                     <label for="correo_personal" class="mb-2 block text-sm font-bold text-gray-800 dark:text-gray-300">Correo Personal</label>
@@ -162,28 +178,56 @@
                                 <div>
                                     <label for="id_empresa" class="mb-2 block text-sm font-bold text-gray-800 dark:text-gray-300">Empresa</label>
 
-                                    <select name="id_empresa" id="id_empresa"
-                                        class="min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm dark:bg-gray-900 dark:text-gray-300">
-                                        <option value="">Escoge una Empresa</option>
+                                    <select name="id_empresa" id="id_empresa" required
+                                        class="peer min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm outline-none focus:ring-1 dark:bg-gray-900 dark:text-gray-300 [.validated_&]:invalid:border-pink-600 [.validated_&]:invalid:ring-0">
+                                        <option value="" disabled selected class="text-gray-400">Escoge una Empresa</option>
                                         @foreach ($empresas as $empresa)
                                             <option value="{{ $empresa->id }}">{{ $empresa->nombre }}</option>
                                         @endforeach
                                     </select>
-
+                                    <p class="mt-1 hidden text-sm text-pink-600 [.validated_&]:peer-invalid:block">
+                                        Este campo es obligatorio
+                                    </p>
                                 </div>
                                 <div>
                                     <label for="id_puesto" class="mb-2 block text-sm font-bold text-gray-800 dark:text-gray-300">Puesto</label>
-                                    <input id="id_puesto" name="id_puesto" type="text" value="{{ old('id_puesto') }}"
-                                        class="min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm dark:bg-gray-900 dark:text-gray-300">
+
+                                    <select name="id_puesto" id="id_puesto"
+                                        data-hs-select='{
+                                            "hasSearch": true,
+                                            "searchPlaceholder": "Buscar...",
+                                            "placeholder": "Escoge un puesto",
+                                            "searchClasses": "block w-full text-sm border-gray-300 rounded-md focus:border-blue-500 py-2 px-3 dark:bg-gray-900 dark:border-gray-700 dark:text-gray-300",
+                                            "toggleClasses": "min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 font-normal shadow-sm dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700",
+                                            "dropdownClasses": "z-50 mt-1 w-full bg-white border border-gray-300 text-sm rounded-md shadow-sm dark:bg-gray-900 dark:border-gray-700",
+                                            "optionClasses": "py-2 px-3 text-gray-700 hover:bg-blue-100 dark:text-gray-300 dark:hover:bg-gray-800",
+                                            "disabledOptionClasses": "text-gray-400 dark:text-gray-500",
+                                            "extraMarkup": "<div class=\"pointer-events-none absolute inset-y-0 right-0 flex items-center pe-2\"><svg class=\"size-4 text-gray-700 dark:text-gray-400\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M19 9L12 16L5 9\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"/></svg></div>"
+                                            }'>
+
+                                        <option value="" disabled selected class="text-gray-400 dark:text-gray-500">Escoge un puesto</option>
+                                        @foreach ($puestos as $puesto)
+                                            <option value="{{ $puesto->id }}">
+                                                {{ $puesto->departamento->area->nombre }}/{{ $puesto->departamento->nombre }} -
+                                                {{ $puesto->nombre }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+
                                 </div>
+
                             </div>
 
                             <!-- Fecha de ingreso y salida -->
                             <div class="mb-6 grid grid-cols-1 gap-4 md:grid-cols-2">
                                 <div>
                                     <label for="fecha_ingreso" class="mb-2 block text-sm font-bold text-gray-800 dark:text-gray-300">Fecha de Ingreso</label>
-                                    <input id="fecha_ingreso" name="fecha_ingreso" type="text" value="{{ old('fecha_ingreso') }}"
-                                        class="datepicker form-input min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm dark:bg-gray-900 dark:text-gray-300">
+                                    <input id="fecha_ingreso" name="fecha_ingreso" type="text" value="{{ old('fecha_ingreso') }}" required
+                                        class="datepicker peer min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm outline-none focus:ring-1 dark:bg-gray-900 dark:text-gray-300 [.validated_&]:invalid:border-pink-600 [.validated_&]:invalid:ring-0"
+                                        placeholder="Seleccione fecha">
+                                    <p class="mt-1 hidden text-sm text-pink-600 [.validated_&]:peer-invalid:block">
+                                        Este campo es obligatorio
+                                    </p>
                                 </div>
                                 <div>
                                     <label for="fecha_baja" class="mb-2 block text-sm font-bold text-gray-800 dark:text-gray-300">Fecha de Baja</label>
@@ -194,12 +238,14 @@
                         </form>
 
                         <!-- Divider Esquema de Pago -->
-                        <div class="relative py-4">
-                            <div class="absolute inset-0 flex items-center">
-                                <div class="w-full border-b border-gray-300"></div>
+                        <div class="relative my-6">
+                            <div class="absolute inset-0 flex items-center" aria-hidden="true">
+                                <div class="w-full border-t border-gray-300 dark:border-gray-600"></div>
                             </div>
                             <div class="relative flex justify-center">
-                                <span class="bg-white px-4 text-sm font-bold text-gray-800 dark:bg-gray-800 dark:text-gray-300">Esquema de Pago</span>
+                                <span class="z-10 bg-white px-3 text-sm font-bold text-gray-800 dark:bg-gray-800 dark:text-gray-300">
+                                    Esquema de Pago
+                                </span>
                             </div>
                         </div>
 
@@ -330,21 +376,52 @@
 
             })
         }
-    </script>
 
-    <script>
         document.addEventListener('DOMContentLoaded', function() {
             flatpickr(".datepicker", {
-                dateFormat: "Y-m-d",
-                locale: "es"
+                dateFormat: "Y-m-d", // Formato de fecha
+                locale: "es", // Idioma
+                allowInput: true, // Con esto se puede validar
             });
         });
-    </script>
 
-    <script>
         function domicilioModal() {
             console.log('Entro');
         }
+    </script>
+
+    <script>
+        const form = document.getElementById("saveEmpleado");
+
+        form.addEventListener("submit", function(e) {
+            e.preventDefault();
+            form.classList.add("validated");
+            if (!form.checkValidity()) {
+                form.querySelectorAll(":invalid")[0].focus();
+                return;
+            }
+            const formData = new FormData(form);
+            const object = Object.fromEntries(formData);
+            const json = JSON.stringify(object);
+
+
+            axios.post(form.action, formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    }
+                }).then(response => {
+                    console.log(response.data);
+                    window.location.href = `/rh/empleados/${response.data}`;
+
+                }).catch(error => {
+                    console.log(error);
+                })
+                .then(function() {
+                    form.reset();
+                    form.classList.remove("validated");
+                });
+        });
     </script>
 
 </x-app-layout>

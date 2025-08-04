@@ -11,15 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cat_empresa', function (Blueprint $table) {
+        Schema::create('checador', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
-            $table->unsignedBigInteger('id_estatus');
+            $table->unsignedBigInteger('id_empleado');
+            $table->date('date');
+            $table->string('check_in');
+            $table->string('check_out');
             $table->timestamps();
         });
 
-        Schema::table('cat_empresa', function ($table) {
-            $table->foreign('id_estatus')->references('id')->on('cat_estatus');
+        Schema::table('checador', function ($table) {
+            $table->foreign('empleados_id')->references('id')->on('empleados');
         });
     }
 
@@ -28,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('cat_empresa');
+        Schema::dropIfExists('checador');
     }
 };

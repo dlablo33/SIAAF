@@ -19,7 +19,7 @@ return new class extends Migration
             $table->date('fecha_fin');
             $table->unsignedInteger('pago_periodo');
             $table->unsignedInteger('total');
-            $table->unsignedInteger('id_estatus');
+            $table->unsignedBigInteger('id_estatus');
             $table->timestamps();
         });
 

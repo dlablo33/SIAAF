@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('cat_documentos', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
-            $table->date('vigencia');
+            $table->string('vigencia');
             $table->unsignedBigInteger('id_estatus');
             $table->timestamps();
         });

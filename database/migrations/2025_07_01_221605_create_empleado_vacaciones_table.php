@@ -21,7 +21,7 @@ return new class extends Migration
         });
 
         Schema::table('empleado_vacaciones', function ($table) {
-            $table->foreign('id_empleado')->references('id')->on('empleado');
+            $table->foreign('id_empleado')->references('id')->on('empleados');
         });
 
         Schema::table('empleado_vacaciones', function ($table) {

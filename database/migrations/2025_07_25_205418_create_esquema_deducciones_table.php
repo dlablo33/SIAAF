@@ -30,7 +30,7 @@ return new class extends Migration
         });
 
         Schema::table('esquema_deducciones', function ($table) {
-            $table->foreign('id_estatus')->references('id')->on('id_estatus');
+            $table->foreign('id_estatus')->references('id')->on('cat_estatus');
         });
     }
 
