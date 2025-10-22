@@ -13,7 +13,8 @@ use App\Http\Controllers\Legal\ProcedureController;
 use App\Http\Controllers\Legal\AppointmentController;
 
 use App\Http\Controllers\Cotizadora\CotizadorController;
-use App\Http\Controllers\RetardosController;
+use App\Http\Controllers\ExcelController;
+use App\Http\Controllers\RH\RetardosController;
 use App\Http\Controllers\RH\AreasController;
 use App\Http\Controllers\RH\DeduccionesController;
 use App\Http\Controllers\RH\DepartamentosController;
@@ -71,15 +72,16 @@ Route::prefix('legal')->name('legal.')->middleware(['auth'])->group(function () 
 
 Route::prefix('rh')->name('rh.')->middleware(['auth'])->group(function () {
     // Nomina
-    Route::resource('nomina', NominaController::class);
+    Route::get('nomina/{periodo}', [NominaController::class, 'index'])->name('nomina.index');
 
     // Retardos
-    Route::get('retardos/{periodo}', [RetardosController::class, 'index'])
-        ->name('retardos.index');
+    Route::get('retardos/{periodo}', [RetardosController::class, 'index'])->name('retardos.index');
+    Route::post('retardos/import', [ExcelController::class, 'checadorImport'])->name('retardos.import');
+
 
     // Empleados
     Route::resource('empleados', EmpleadosController::class);
-    Route::post('empleados/updatePassword', [EmpleadosController::class ,'updatePassword'])->name('empleados.updatePassword');
+    Route::post('empleados/updatePassword', [EmpleadosController::class, 'updatePassword'])->name('empleados.updatePassword');
 
     // Areas
     Route::resource('areas', AreasController::class);
@@ -106,7 +108,6 @@ Route::prefix('rh')->name('rh.')->middleware(['auth'])->group(function () {
     Route::resource('documentos', DocumentoController::class);
 });
 
-Route::get('/import', [\App\Http\Controllers\ExcelController::class, 'checadorImport']);
 
 Route::resource('clients', LegalClientController::class);
 

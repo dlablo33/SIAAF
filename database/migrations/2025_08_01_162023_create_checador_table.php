@@ -15,13 +15,13 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('id_empleado');
             $table->date('date');
-            $table->string('check_in');
-            $table->string('check_out');
+            $table->string('check_in')->nullable();
+            $table->string('check_out')->nullable();
             $table->timestamps();
         });
 
         Schema::table('checador', function ($table) {
-            $table->foreign('empleados_id')->references('id')->on('empleados');
+            $table->foreign('id_empleado')->references('id')->on('empleados');
         });
     }
 

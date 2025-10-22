@@ -16,7 +16,7 @@ class EmpleadosController extends Controller
     // Mostrar lista de empleados con nomina
     public function index()
     {
-        $empleados = Empleado::where('id_estatus',1)->paginate(10);
+        $empleados = Empleado::where('id_estatus',1)->orderby('a_paterno')->paginate(10);
 
         return view('rh.empleados.index', compact('empleados'));
     }

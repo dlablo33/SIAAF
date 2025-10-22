@@ -20,7 +20,7 @@ class ChecadorImport extends DefaultValueBinder implements ToModel, WithStartRow
 
     public function model(array $row)
     {
-        // Log::debug('Processing row:', $row);
+         Log::debug('Processing row:', $row);
 
         // Skip fecha si es null o esta vacio
         if (empty($row[3])) {

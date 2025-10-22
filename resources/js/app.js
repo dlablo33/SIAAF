@@ -15,6 +15,13 @@ import { Spanish } from "flatpickr/dist/l10n/es.js";
 flatpickr.localize(Spanish);
 window.flatpickr = flatpickr;
 
-// Tailwind Components
-import 'preline'
+
+import $ from 'jquery';
+
+window.$ = $;
+window.jQuery = $;
+
+import 'datatables.net';
+import 'preline';
+
 

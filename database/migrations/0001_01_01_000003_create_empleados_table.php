@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('a_paterno');
             $table->string('a_materno');
-            $table->string('correo_interno')->unique();
+            $table->string('correo_interno')->unique()->nullable();
             $table->string('correo_personal')->nullable();
             $table->string('foto_perfil')->nullable();
             $table->string('curp')->nullable();

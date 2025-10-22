@@ -337,7 +337,11 @@
                             <div class="nav-subitem pl-6">
                                 <div
                                     class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300 cursor-pointer">
-                                    <a href="{{ route('rh.nomina.index') }}">
+                                    @php
+                                        $now = now();
+                                        $periodoActual = $now->weekOfYear;
+                                    @endphp
+                                    <a href="{{ route('rh.nomina.index', ['periodo' => $periodoActual]) }}">
                                         <i class="fas fa-money-check-dollar text-lg w-6 text-center"></i>
                                         <span class="nav-text ml-3">Nomina</span>
                                     </a>
@@ -375,9 +379,9 @@
                                     class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300 cursor-pointer">
                                     @php
                                         $now = now();
-                                        $currentWeek = $now->weekOfYear;
+                                        $periodoActual = $now->weekOfYear;
                                     @endphp
-                                    <a href="{{ route('rh.retardos.index', ['periodo' => $currentWeek]) }}">
+                                    <a href="{{ route('rh.retardos.index', ['periodo' => $periodoActual]) }}">
                                         <i class="fas fa-user-clock text-lg w-6 text-center"></i>
                                         <span class="nav-text ml-3">Retardos</span>
                                     </a>
@@ -787,7 +791,14 @@
             setupMenuToggle('.nav-main-item > .nav-item', '.nav-main-item');
             setupMenuToggle('.nav-subitem > .nav-item', '.nav-subitem');
         });
+
+
     </script>
+
+    <!-- If you're using jQuery version of DataTables -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    @stack('scripts')
 </body>
 
 </html>

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\RH;
 
+use App\Http\Controllers\Controller;
 use App\Models\RH\Checador;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
@@ -18,7 +19,7 @@ class RetardosController extends Controller
         $end = $cDate->endOfWeek()->toDateString(); // Tomamos el ultimo dia de la semana
 
         // Consulta de checador, se agrega tiempos de retraso y salida temprana y se agrupa por empleado
-        $checador = Checador::whereBetween('date', [$start, $end])
+        $checador = Checador::with('empleado')->whereBetween('date', [$start, $end])
             ->selectRaw(
                 '*,
                 GREATEST(0, TIMESTAMPDIFF(MINUTE, TIME("08:00:00"), TIME(check_in))) AS retraso,
@@ -26,6 +27,7 @@ class RetardosController extends Controller
             )
             ->get()
             ->groupBy('id_empleado');
+
 
         $empleadosList = []; // Se inicializa empleados
         $diasSemana = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes']; // Se usaran como llave
@@ -35,6 +37,13 @@ class RetardosController extends Controller
                 'id' => $id_empleado,
                 'semana' => array_fill_keys($diasSemana, null)
             ];
+
+            // Se agregan los nombres y apellidos vinculados al id
+            if (count($registros) > 0 && isset($registros[0]->empleado)) {
+                $empData = $registros[0]->empleado;
+                $empleado['nombre'] = $empData->nombre;
+                $empleado['apellidos'] = $empData->a_paterno . ' ' . $empData->a_materno;
+            }
 
             foreach ($registros as $registro) {
                 $fecha = Carbon::parse($registro->date);
@@ -52,23 +61,27 @@ class RetardosController extends Controller
             $empleadosList[] = $empleado;
         }
 
-        Log::info($empleadosList);
+        // Array con dias de la semana y fechas para header
+        $fechaDia = [];
+        for ($i = 1; $i <= 5; $i++) {
+            $dayDate = $cDate->copy()->startOfWeek()->addDays($i - 1);
+            $fechaDia[] = [
+                'nombre' => ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes'][$i - 1],
+                'fecha' => $dayDate->format('d/m')
+            ];
+        }
 
         // Pasar el array a paginate
         $page = request()->get('page', 1);
         $perPage = 10; // Items por pagina
         $offset = ($page - 1) * $perPage;
-        $empleados = new \Illuminate\Pagination\LengthAwarePaginator(
-            array_slice($empleadosList, $offset, $perPage),
-            count($empleadosList),
-            $perPage,
-            $page,
-            [
-                'path' => \Illuminate\Pagination\Paginator::resolveCurrentPath(),
-                'query' => request()->query()
-            ]
-        );
+        $empleados = $empleadosList;
 
-        return view('rh.retardos.index', compact('empleados'));
+        // Regresamos al periodo original y lo pasamos a la vista para poder seleccionarlo
+        $periodoOg = $periodo + 1;
+        // Si no hay registros del checador lo pasasmo vacio
+        $empleados = empty($checador) ? null : $empleados;
+
+        return view('rh.retardos.index', compact('empleados', 'fechaDia', 'periodoOg'));
     }
 }

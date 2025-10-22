@@ -1,5 +1,6 @@
 import defaultTheme from 'tailwindcss/defaultTheme';
 import forms from '@tailwindcss/forms';
+import plugin from 'tailwindcss/plugin';
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -9,6 +10,7 @@ export default {
         './resources/views/**/*.blade.php',
     ],
 
+
     theme: {
         extend: {
             fontFamily: {
@@ -17,7 +19,11 @@ export default {
         },
     },
 
-    plugins: [forms],
+    plugins: [forms,
+        plugin(function ({ addVariant }) {
+            addVariant('hs-tab-active', '&.active');
+        })
+    ],
 
 
     darkMode: 'class',
