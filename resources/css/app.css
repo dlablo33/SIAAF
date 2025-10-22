@@ -1,7 +1,11 @@
-/* Then Preline CSS */
-@import "../../node_modules/preline/variants.css";
-@source "../../node_modules/preline/dist/*.js";
-/* Optional: Tailwind Forms plugin */
+/* @import "tailwindcss"; */
+
+/* Preline UI */
+/* @import "./node_modules/preline/variants.css"; */
+@source "./node_modules/preline/dist/*.js";
+
+/* Plugins */
+@plugin "@tailwindcss/forms";
 
 /* resources/css/app.css */
 @tailwind base;
@@ -105,3 +109,13 @@
            bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900
            shadow-lg transform hover:scale-105 transition-all duration-300 active:scale-95;
 }
+
+.dataTables_filter,
+.dataTables_length,
+.dataTables_paginate,
+.dataTables_info {
+    display: none !important;
+}
+
+
+

@@ -3,22 +3,20 @@
 namespace App\Models\RH;
 
 use App\Models\Empleado;
-use App\Models\Estatus;
+use App\Models\RH\Deducciones;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Checador extends Model
+class EsquemaDeducciones extends Model
 {
-
     use HasFactory;
-
-    protected $table = 'checador';
 
     protected $fillable = [
         'id_empleado',
-        'date',
-        'check_in',
-        'check_out'
+        'id_deducciones',
+        'tipo',
+        'cantidad',
+        'id_estatus'
     ];
 
     // Relaciones
@@ -27,4 +25,8 @@ class Checador extends Model
         return $this->belongsTo(Empleado::class, 'id_empleado', 'id');
     }
 
+    public function deduccion()
+    {
+        return $this->belongsTo(Deducciones::class, 'id_deducciones', 'id');
+    }
 }

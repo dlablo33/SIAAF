@@ -48,11 +48,11 @@
                                 </th>
                                 <th class="sortable cursor-pointer px-6 py-4 text-left text-xs font-medium uppercase tracking-wider text-gray-500 hover:text-gray-900 dark:text-gray-300"
                                     scope="col" data-column="puesto">
-                                    Puesto <i class="fas fa-sort ml-1"></i>
+                                    Puesto
                                 </th>
                                 <th class="sortable cursor-pointer px-6 py-4 text-left text-xs font-medium uppercase tracking-wider text-gray-500 hover:text-gray-900 dark:text-gray-300"
                                     scope="col" data-column="ingreso">
-                                    Fecha de Ingreso <i class="fas fa-sort ml-1"></i>
+                                    Fecha de Ingreso
                                 </th>
                                 <th class="sortable cursor-pointer px-6 py-4 text-left text-xs font-medium uppercase tracking-wider text-gray-500 hover:text-gray-900 dark:text-gray-300"
                                     scope="col" data-column="antiguedad">
@@ -60,7 +60,7 @@
                                 </th>
                                 <th class="sortable cursor-pointer px-6 py-4 text-left text-xs font-medium uppercase tracking-wider text-gray-500 hover:text-gray-900 dark:text-gray-300"
                                     scope="col" data-column="documentos">
-                                    Documentos <i class="fas fa-sort ml-1"></i>
+                                    Documentos
                                 </th>
                                 <th class="px-6 py-4 text-center text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-300" scope="col">
                                     Acciones
@@ -71,7 +71,7 @@
                             @foreach ($empleados as $empleado)
                                 <tr class="hover:bg-gray-2 00 transform transition-all hover:scale-[1.002] dark:hover:bg-gray-600">
                                     <td class="whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-900 dark:text-gray-300">
-                                        {{ $empleado->nombre . ' ' . $empleado->a_paterno . ' ' . $empleado->a_materno }}
+                                        {{  $empleado->a_paterno . ' ' . $empleado->a_materno  . ' ' . $empleado->nombre }}
                                     </td>
                                     <td class="whitespace-nowrap px-6 py-4 text-center text-sm font-medium text-gray-900 dark:text-gray-300">
                                         {{ $empleado->fecha_nacimiento }}

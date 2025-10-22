@@ -21,8 +21,13 @@ export default defineConfig({
         vue(),
     ],
     resolve: {
-    alias: {
-      'vue': 'vue/dist/vue.esm-bundler.js',
-    }
-  }
+        alias: {
+            'vue': 'vue/dist/vue.esm-bundler.js',
+        },
+
+    },
+    optimizeDeps: {
+        include: ['jquery', 'datatables.net', 'preline'],
+    },
+
 });
