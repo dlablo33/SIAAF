@@ -15,7 +15,7 @@ return new class extends Migration
 Schema::create('legal_advice', function (Blueprint $table) {
     $table->id();
     $table->foreignId('client_id')->constrained()->onDelete('cascade');
-    $table->foreignId('user_id')->constrained()->onDelete('cascade');
+    $table->foreignId('empleado_id')->constrained()->onDelete('cascade');
     $table->text('topic');
     $table->text('notes');
     $table->date('date');

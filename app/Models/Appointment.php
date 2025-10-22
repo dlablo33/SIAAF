@@ -11,7 +11,7 @@ class Appointment extends Model
     use HasFactory;
 
     protected $fillable = [
-        'client_id', 'user_id', 'date_time', 'service_type', 'price', 'status', 'notes'
+        'client_id', 'empleado_id', 'date_time', 'service_type', 'price', 'status', 'notes'
     ];
 
     protected $casts = [
@@ -23,8 +23,8 @@ class Appointment extends Model
         return $this->belongsTo(Client::class);
     }
 
-    public function user()
+    public function empleado()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Empleado::class);
     }
 }

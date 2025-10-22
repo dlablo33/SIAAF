@@ -13,7 +13,7 @@ public function up()
 {
     Schema::table('users', function (Blueprint $table) {
         $table->enum('role', ['staff', 'coordinador', 'gerente', 'administrador'])
-              ->default('staff');
+              ->default('staff')->nullable();
     });
 }
 

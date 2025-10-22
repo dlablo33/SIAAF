@@ -89,7 +89,7 @@
 }
     </style>
 </head>
-<body class="bg-[#c1611a] dark:bg-[#01163d] text-[#1b1b18] flex flex-col items-center p-6 lg:p-8 min-h-screen">
+<body class="dark:bg-[#c1611a] bg-[#01163d] text-[#1b1b18] flex flex-col items-center p-6 lg:p-8 min-h-screen">
 
     <!-- Header -->
     <header class="w-full max-w-7xl mb-6 text-sm animate-fade-in">
@@ -111,9 +111,9 @@
         <!-- Lado Izquierdo - Imagen con overlay -->
         <div class="relative w-full lg:w-1/2 h-64 lg:h-auto bg-cover bg-center group overflow-hidden">
             <div class="absolute inset-0 bg-gradient-to-t from-[#01163d]/80 to-[#c1611a]/30 z-10"></div>
-            <img src="{{ asset('img/Fondo2.png') }}" alt="Imagen descriptiva" 
+            <img src="{{ asset('img/Fondo2.png') }}" alt="Imagen descriptiva"
                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-            
+
             <div class="absolute bottom-0 left-0 p-8 z-20 text-white">
                 <h2 class="text-2xl lg:text-3xl font-bold mb-2">¿Nuevo en nuestra plataforma?</h2>
                 <p class="text-[#d3d8db] max-w-md">Descubre cómo podemos ayudarte a alcanzar tus objetivos</p>
@@ -128,23 +128,23 @@
                     <h1 class="text-3xl font-bold text-[#00404a]">Bienvenido</h1>
                     <p class="text-[#01163d] mt-2">Accede a tu cuenta o regístrate para continuar.</p>
                 </div>
-                
+
                 <!-- Botones de acceso -->
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                        <a href="{{ route('login') }}" 
+                        <a href="{{ route('login') }}"
                            class="px-6 py-2 rounded-md text-[#01163d] bg-[#d3d8db] hover:bg-[#c1611a] hover:text-white
                                   transition-transform duration-300 hover:scale-105 shadow-md">
                             Acceder
                         </a>
                     @if (Route::has('register'))
-                            <a href="{{ route('register') }}" 
+                            <a href="{{ route('register') }}"
                                class="px-6 py-2 rounded-md text-white bg-[#00404a] hover:bg-[#022e35]
                                       transition-transform duration-300 hover:scale-105 shadow-md">
                                 Registrarse
                             </a>
                     @endif
                 </div>
-                
+
                 <!-- Separador -->
                 <div class="relative my-6">
                     <div class="absolute inset-0 flex items-center">
@@ -154,14 +154,14 @@
                         <span class="px-3 bg-white text-[#00404a] text-sm">¿No eres cliente aún?</span>
                     </div>
                 </div>
-                
+
                 <!-- Sección para no clientes -->
                 <!-- Sección Cotización con más diseño -->
 <div class="text-center bg-gradient-to-br from-[#f8f9fa] to-[#e6edf2] p-8 rounded-2xl border border-[#d3d8db] shadow-xl fade-up">
     <h3 class="text-2xl font-bold text-[#00404a] mb-4">¿Listo para dar el siguiente paso?</h3>
     <p class="text-[#01163d] mb-6 text-sm md:text-base">Solicita una cotización personalizada y descubre todos nuestros servicios</p>
-    
-    <a href="#" 
+
+    <a href="#"
        class="inline-flex items-center justify-center btn-primary py-3 px-8 rounded-full bg-[#00404a] hover:bg-[#022e35] text-white font-semibold
               transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 group">
         Solicitar Cotización
@@ -175,19 +175,19 @@
     <h4 class="text-base font-medium text-[#00404a] mb-3">También puedes contactarnos por</h4>
     <div class="flex justify-center gap-4">
         <!-- LinkedIn -->
-        <a href="https://www.linkedin.com/company/acci%C3%B3n-administrativa-y-fiscal/" target="_blank" 
+        <a href="https://www.linkedin.com/company/acci%C3%B3n-administrativa-y-fiscal/" target="_blank"
            class="contact-minimal-icon w-10 h-10 rounded-md flex items-center justify-center text-sm shadow-sm hover:shadow-md">
             <i class="fab fa-linkedin-in"></i>
         </a>
 
         <!-- WhatsApp -->
-        <a href="https://wa.me/528112905775" target="_blank" 
+        <a href="https://wa.me/528112905775" target="_blank"
            class="contact-minimal-icon w-10 h-10 rounded-md flex items-center justify-center text-sm shadow-sm hover:shadow-md">
             <i class="fab fa-whatsapp"></i>
         </a>
 
         <!-- Correo -->
-        <a href="mailto:csaucedo@aaf.mx" 
+        <a href="mailto:csaucedo@aaf.mx"
            class="contact-minimal-icon w-10 h-10 rounded-md flex items-center justify-center text-sm shadow-sm hover:shadow-md">
             <i class="fas fa-envelope"></i>
         </a>
