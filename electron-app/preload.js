@@ -1,0 +1,7 @@
+// preload.js - Lo expandiremos después
+const { contextBridge } = require('electron');
+
+contextBridge.exposeInMainWorld('electronAPI', {
+  isDesktop: true,
+  platform: process.platform
+});
