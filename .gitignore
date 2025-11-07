@@ -26,3 +26,4 @@ npm-debug.log
 Thumbs.db
 yarn-error.log
 electron-appnode_modules/
+electron-app/node_modules/
