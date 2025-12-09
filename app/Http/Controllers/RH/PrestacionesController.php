@@ -11,7 +11,7 @@ class PrestacionesController extends Controller
     //
     public function index()
     {
-        $prestaciones = Prestaciones::paginate(10);
+        $prestaciones = Prestaciones::get();
         return view('rh.prestaciones.index', compact('prestaciones'));
     }
 

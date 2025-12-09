@@ -11,7 +11,7 @@ class EmpresaController extends Controller
     //
     public function index()
     {
-        $empresas = Empresa::paginate(10);
+        $empresas = Empresa::where('id_estatus',1)->get();
         return view('rh.empresas.index', compact('empresas'));
     }
 

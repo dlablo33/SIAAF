@@ -16,9 +16,11 @@ class EmpleadosController extends Controller
     // Mostrar lista de empleados con nomina
     public function index()
     {
-        $empleados = Empleado::where('id_estatus',1)->orderby('a_paterno')->paginate(10);
+        $empleados = Empleado::where('id_estatus', 1)->orderby('a_paterno');
+        $empleadosCount = $empleados->count();
+        $empleados = $empleados->get();
 
-        return view('rh.empleados.index', compact('empleados'));
+        return view('rh.empleados.index', compact('empleados','empleadosCount'));
     }
 
     // Mostrar formulario de creación
@@ -26,13 +28,13 @@ class EmpleadosController extends Controller
     {
         $empresas = Empresa::get();
         $puestos = Puesto::get();
-        return view('rh.empleados.create', compact('empresas','puestos'));
+        return view('rh.empleados.create', compact('empresas', 'puestos'));
     }
 
     // Mostrar detalles del empleado
     public function show(Empleado $empleado)
     {
-        $empleado->load('puesto');
+        $empleado->load('puesto','empresa');
         return view('rh.empleados.show', compact('empleado'));
     }
 
@@ -127,8 +129,8 @@ class EmpleadosController extends Controller
         $old = $request->password_old;
 
         // if (Hash::check($old, $actual)) {
-            // Log::info("Password Verified");
-            // User::where('id', Auth::user()->id)->update(['password' => Hash::make($new)]);
+        // Log::info("Password Verified");
+        // User::where('id', Auth::user()->id)->update(['password' => Hash::make($new)]);
         // }
 
         return;

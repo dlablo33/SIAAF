@@ -12,20 +12,10 @@ export default defineConfig({
             input: [
                 'resources/css/app.css',
                 'resources/js/app.js',
-
-                // Componentes de Vue
-                'resources/js/rh/nomina/nomina.js',
             ],
             refresh: true,
         }),
-        vue(),
     ],
-    resolve: {
-        alias: {
-            'vue': 'vue/dist/vue.esm-bundler.js',
-        },
-
-    },
     optimizeDeps: {
         include: ['jquery', 'datatables.net', 'preline'],
     },

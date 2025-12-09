@@ -1,6 +1,14 @@
 <x-app-layout>
 
     <style>
+        /* Active Paginacion */
+        [data-hs-datatable-paging-pages]>.active {
+            --tw-bg-opacity: 1;
+            background-color: rgb(229 231 235 / var(--tw-bg-opacity, 1));
+            color: rgb(17 24 39);
+            font-weight: 600;
+        }
+
         /* The switch - the box around the slider */
         .switch {
             position: relative;
@@ -75,10 +83,9 @@
             </h2>
         </div>
     </x-slot>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <div class="py-2">
+    <div class="min-h-[100vh]">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="mb-2 flex gap-x-3">
                 <!-- Periodo -->
@@ -135,10 +142,17 @@
                     </div>
                 </div>
 
-                <div data-empleado="" data-empleados='@json($empleados)'
-                    class="btn-generar flex min-w-64 cursor-pointer items-center justify-center rounded-lg border border-slate-300 bg-white px-5 py-4 text-lg shadow-sm">
-                    <div class="font-semibold">
-                        Generar Reporte
+                <div id="total-box" class="flex hidden min-w-64 cursor-default items-center rounded-lg border border-slate-300 bg-white px-5 py-4 text-lg shadow-sm">
+                    <div class="text-xl font-semibold">
+                        <div class="text-sm text-gray-500">Total:</div>
+                        <div id="total"></div>
+                    </div>
+                </div>
+
+                <div id="generar-box" class="mx-auto flex items-center justify-center">
+                    <div data-empleado="" data-empleados='@json($empleados)'
+                        class="btn-generar h-1/2 cursor-pointer rounded-lg border border-slate-300 bg-blue-500 px-4 py-1 text-lg font-semibold text-white shadow-sm">
+                        Generar Reportes
                     </div>
                 </div>
             </div>
@@ -216,7 +230,15 @@
                                                 <tr>
                                                     <th class="sortable cursor-default px-6 py-4 text-left text-xs font-medium uppercase tracking-wider text-gray-500 hover:text-gray-900 dark:text-gray-300"
                                                         scope="col" data-column="empleado">
-                                                        Empleado
+                                                        <div class="flex cursor-pointer gap-1">
+                                                            Empleado
+                                                            <svg class="size-3.5 shrink-0 text-gray-500" xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                                stroke-linecap="round" stroke-linejoin="round">
+                                                                <path d="m7 15 5 5 5-5"></path>
+                                                                <path d="m7 9 5-5 5 5"></path>
+                                                            </svg>
+                                                        </div>
                                                     </th>
 
                                                     @foreach ($prestaciones as $prestacion)
@@ -277,7 +299,7 @@
                             </div>
                         </div>
 
-                        <div class="flex items-center justify-between border-t border-gray-200 bg-gray-50 px-4 py-3 dark:border-neutral-700 dark:bg-neutral-800 sm:px-6"
+                        <div class="flex items-center justify-between border-t border-gray-200 bg-[#D3D8DB] px-4 py-3 dark:border-neutral-700 dark:bg-neutral-800 sm:px-6"
                             data-hs-datatable-paging>
 
                             <div class="text-sm text-gray-700 dark:text-neutral-300">
@@ -359,7 +381,15 @@
                                                 <tr>
                                                     <th class="sortable cursor-default px-6 py-4 text-left text-xs font-medium uppercase tracking-wider text-gray-500 hover:text-gray-900 dark:text-gray-300"
                                                         scope="col" data-column="empleado">
-                                                        Empleado
+                                                        <div class="flex cursor-pointer gap-1">
+                                                            Empleado
+                                                            <svg class="size-3.5 shrink-0 text-gray-500" xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                                stroke-linecap="round" stroke-linejoin="round">
+                                                                <path d="m7 15 5 5 5-5"></path>
+                                                                <path d="m7 9 5-5 5 5"></path>
+                                                            </svg>
+                                                        </div>
                                                     </th>
 
                                                     @foreach ($deducciones as $deduccion)
@@ -419,7 +449,7 @@
                             </div>
                         </div>
 
-                        <div class="flex items-center justify-between border-t border-gray-200 bg-gray-50 px-4 py-3 dark:border-neutral-700 dark:bg-neutral-800 sm:px-6"
+                        <div class="flex items-center justify-between border-t border-gray-200 bg-[#D3D8DB] px-4 py-3 dark:border-neutral-700 dark:bg-neutral-800 sm:px-6"
                             data-hs-datatable-paging>
 
                             <div class="text-sm text-gray-700 dark:text-neutral-300">
@@ -501,7 +531,15 @@
                                                 <tr>
                                                     <th class="sortable cursor-default px-6 py-4 text-left text-xs font-medium uppercase tracking-wider text-gray-500 hover:text-gray-900 dark:text-gray-300"
                                                         scope="col" data-column="empleado">
-                                                        Empleado
+                                                        <div class="flex cursor-pointer gap-1">
+                                                            Empleado
+                                                            <svg class="size-3.5 shrink-0 text-gray-500" xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                                stroke-linecap="round" stroke-linejoin="round">
+                                                                <path d="m7 15 5 5 5-5"></path>
+                                                                <path d="m7 9 5-5 5 5"></path>
+                                                            </svg>
+                                                        </div>
                                                     </th>
                                                     <th class="--exclude-from-ordering cursor-default px-6 py-4 text-center text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-300"
                                                         scope="col" data-column="total">
@@ -614,7 +652,7 @@
                             </div>
                         </div>
 
-                        <div class="flex items-center justify-between border-t border-gray-200 bg-gray-50 px-4 py-3 dark:border-neutral-700 dark:bg-neutral-800 sm:px-6"
+                        <div class="flex items-center justify-between border-t border-gray-200 bg-[#D3D8DB] px-4 py-3 dark:border-neutral-700 dark:bg-neutral-800 sm:px-6"
                             data-hs-datatable-paging>
 
                             <div class="text-sm text-gray-700 dark:text-neutral-300">
@@ -700,7 +738,15 @@
                                                 <tr>
                                                     <th class="sortable cursor-default px-6 py-4 text-left text-xs font-medium uppercase tracking-wider text-gray-500 hover:text-gray-900 dark:text-gray-300"
                                                         scope="col" data-column="empleado">
-                                                        Empleado
+                                                        <div class="flex cursor-pointer gap-1">
+                                                            Empleado
+                                                            <svg class="size-3.5 shrink-0 text-gray-500" xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                                stroke-linecap="round" stroke-linejoin="round">
+                                                                <path d="m7 15 5 5 5-5"></path>
+                                                                <path d="m7 9 5-5 5 5"></path>
+                                                            </svg>
+                                                        </div>
                                                     </th>
 
                                                     @foreach ($prestaciones as $prestacion)
@@ -724,8 +770,8 @@
                                                         <!-- Empleado Info -->
                                                         <td class="whitespace-nowrap">
                                                             <div class="ml-2 flex flex-col space-y-0 py-2 font-semibold">
-                                                                <div>{{ $data['empleado']->nombre }}</div>
                                                                 <div>{{ $data['empleado']->a_paterno }} {{ $data['empleado']->a_materno }}</div>
+                                                                <div>{{ $data['empleado']->nombre }}</div>
                                                             </div>
                                                         </td>
 
@@ -761,7 +807,7 @@
 
                         </div>
 
-                        <div class="flex items-center justify-between border-t border-gray-200 bg-gray-50 px-4 py-3 dark:border-neutral-700 dark:bg-neutral-800 sm:px-6"
+                        <div class="flex items-center justify-between border-t border-gray-200 bg-[#D3D8DB] px-4 py-3 dark:border-neutral-700 dark:bg-neutral-800 sm:px-6"
                             data-hs-datatable-paging>
 
                             <div class="text-sm text-gray-700 dark:text-neutral-300">
@@ -844,7 +890,15 @@
                                                 <tr>
                                                     <th class="sortable cursor-default px-6 py-4 text-left text-xs font-medium uppercase tracking-wider text-gray-500 hover:text-gray-900 dark:text-gray-300"
                                                         scope="col" data-column="empleado">
-                                                        Empleado
+                                                        <div class="flex cursor-pointer gap-1">
+                                                            Empleado
+                                                            <svg class="size-3.5 shrink-0 text-gray-500" xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                                stroke-linecap="round" stroke-linejoin="round">
+                                                                <path d="m7 15 5 5 5-5"></path>
+                                                                <path d="m7 9 5-5 5 5"></path>
+                                                            </svg>
+                                                        </div>
                                                     </th>
 
                                                     @foreach ($deducciones as $deduccion)
@@ -906,7 +960,7 @@
 
                         </div>
 
-                        <div class="flex items-center justify-between border-t border-gray-200 bg-gray-50 px-4 py-3 dark:border-neutral-700 dark:bg-neutral-800 sm:px-6"
+                        <div class="flex items-center justify-between border-t border-gray-200 bg-[#D3D8DB] px-4 py-3 dark:border-neutral-700 dark:bg-neutral-800 sm:px-6"
                             data-hs-datatable-paging>
 
                             <div class="text-sm text-gray-700 dark:text-neutral-300">
@@ -989,7 +1043,15 @@
                                                 <tr>
                                                     <th class="sortable cursor-default px-6 py-4 text-left text-xs font-medium uppercase tracking-wider text-gray-500 hover:text-gray-900 dark:text-gray-300"
                                                         scope="col" data-column="empleado">
-                                                        Empleado
+                                                        <div class="flex cursor-pointer gap-1">
+                                                            Empleado
+                                                            <svg class="size-3.5 shrink-0 text-gray-500" xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                                stroke-linecap="round" stroke-linejoin="round">
+                                                                <path d="m7 15 5 5 5-5"></path>
+                                                                <path d="m7 9 5-5 5 5"></path>
+                                                            </svg>
+                                                        </div>
                                                     </th>
                                                     <th class="--exclude-from-ordering cursor-default px-6 py-4 text-center text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-300"
                                                         scope="col" data-column="total">
@@ -1057,8 +1119,8 @@
                                                         <td class="whitespace-nowrap px-6 py-4 text-center text-sm font-semibold text-gray-500">
                                                             {{ number_format($recibo, 2) }}</td>
                                                         <td class="text-center">
-                                                            <svg class="inline-block h-7 w-7 cursor-pointer" viewBox="0 0 24 24" fill="none"
-                                                                xmlns="http://www.w3.org/2000/svg">
+                                                            <svg class="btn-generar inline-block h-7 w-7 cursor-pointer" data-empleado="{{ $data['empleado']->id }}"
+                                                                data-empleados='' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                 <path
                                                                     d="M4 7C4 5.11438 4 4.17157 4.58579 3.58579C5.17157 3 6.11438 3 8 3H16C17.8856 3 18.8284 3 19.4142 3.58579C20 4.17157 20 5.11438 20 7V15C20 17.8284 20 19.2426 19.1213 20.1213C18.2426 21 16.8284 21 14 21H10C7.17157 21 5.75736 21 4.87868 20.1213C4 19.2426 4 17.8284 4 15V7Z"
                                                                     stroke="#33363F" stroke-width="2" />
@@ -1089,7 +1151,7 @@
 
                         </div>
 
-                        <div class="flex items-center justify-between border-t border-gray-200 bg-gray-50 px-4 py-3 dark:border-neutral-700 dark:bg-neutral-800 sm:px-6"
+                        <div class="flex items-center justify-between border-t border-gray-200 bg-[#D3D8DB] px-4 py-3 dark:border-neutral-700 dark:bg-neutral-800 sm:px-6"
                             data-hs-datatable-paging>
 
                             <div class="text-sm text-gray-700 dark:text-neutral-300">
@@ -1120,239 +1182,250 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
 
                 {{-- DISPERSION --}}
-                <div id="unstyled-tabs-3" class="relative hidden h-auto w-full" role="tabpanel" aria-labelledby="unstyled-tabs-item-3">
-                    {{-- DISPERSION FISCAL --}}
-                    <div class="grid grid-cols-3 gap-4">
-                        <!-- Lado Izquierdo: Table -->
-                        <div id="dispersion-fiscal"
-                            class="z-10 bg-white opacity-100 shadow-sm col-span-2 transition-all duration-500 hover:shadow-md dark:bg-gray-700 sm:rounded-t-lg"
-                            data-hs-datatable='{
-                                "pageLength": 10,
-                                "pagingOptions": {
-                                    "pageBtnClasses": "min-w-10 flex justify-center items-center text-gray-800 hover:bg-gray-200 focus:outline-hidden focus:bg-gray-500 py-2.5 text-sm rounded-lg disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:focus:bg-neutral-700 dark:hover:bg-neutral-700"
-                                }
-                            }'>
-
-                            <!-- Header -->
-                            <div class="flex items-center gap-10 border-b border-gray-200 bg-white p-4 dark:bg-gray-700">
-                                <div class="relative" data-hs-datatable-search>
-                                    <input type="text" placeholder="Buscar empleado..." data-hs-datatable-search-input
-                                        class="w-64 rounded-lg border border-gray-300 py-2 pl-10 pr-4 transition-all focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 dark:bg-gray-800 dark:text-gray-300">
-                                    <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                <div class="flex justify-center">
+                    <div id="unstyled-tabs-3" class="relative hidden h-auto w-3/4" role="tabpanel" aria-labelledby="unstyled-tabs-item-3">
+                        {{-- DISPERSION FISCAL --}}
+                        <div class="flex justify-center">
+                            <div id="dispersion-fiscal"
+                                class="z-10 w-full bg-white opacity-100 shadow-sm transition-all duration-500 hover:shadow-md dark:bg-gray-700 sm:rounded-t-lg"
+                                data-hs-datatable='{
+                                        "pageLength": 10,
+                                        "pagingOptions": {
+                                            "pageBtnClasses": "min-w-10 flex justify-center items-center text-gray-800 hover:bg-gray-200 focus:outline-hidden focus:bg-gray-500 py-2.5 text-sm rounded-lg disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:focus:bg-neutral-700 dark:hover:bg-neutral-700"
+                                        }
+                                    }'>
+                                <div class="flex items-center gap-10 border-b border-gray-200 bg-white p-4 dark:bg-gray-700">
+                                    <div class="relative" data-hs-datatable-search>
+                                        <input type="text" placeholder="Buscar empleado..." data-hs-datatable-search-input
+                                            class="w-64 rounded-lg border border-gray-300 py-2 pl-10 pr-4 transition-all focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 dark:bg-gray-800 dark:text-gray-300">
+                                        <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                                    </div>
+                                    <!-- Switch -->
+                                    <div class="flex items-center gap-2">
+                                        <span class="text-base font-bold text-gray-500">Fiscal</span>
+                                        <label class="switch">
+                                            <input id="dispersion-fis" type="checkbox">
+                                            <span class="slider round"></span>
+                                        </label>
+                                        <span class="text-base font-bold text-gray-500">Complemento</span>
+                                    </div>
                                 </div>
-
-                                <!-- Switch -->
-                                <div class="flex items-center gap-2">
-                                    <span class="text-base font-bold text-gray-500">Fiscal</span>
-                                    <label class="switch">
-                                        <input id="dispersion-fis" type="checkbox">
-                                        <span class="slider round"></span>
-                                    </label>
-                                    <span class="text-base font-bold text-gray-500">Complemento</span>
-                                </div>
-                            </div>
-
-                            <!-- Tabla -->
-                            <div class="flex flex-col">
-                                <div class="min-h-[32rem] overflow-auto">
-                                    <table class="min-w-full">
-                                        <thead class="bg-[#D3D8DB] dark:bg-gray-800">
-                                            <tr>
-                                                <th class="px-6 py-4 text-left text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-300">Empleado
-                                                </th>
-                                                <th class="px-6 py-4 text-center text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-300">Recibo
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="divide-y divide-slate-300 dark:divide-neutral-500">
-                                            @php
-                                                $dispersionFiscal = 0;
-                                            @endphp
-                                            @foreach ($empleados as $idEmpleado => $data)
-                                                @php
-                                                    $totalFiscal = $dispersion['FISCAL'][$idEmpleado]['total'] ?? 0;
-                                                    $dispersionFiscal += $totalFiscal;
-                                                @endphp
+                                <!-- Tabla -->
+                                <div class="flex flex-col">
+                                    <div class="min-h-[32rem] overflow-auto">
+                                        <table class="min-w-full">
+                                            <thead class="bg-[#D3D8DB] dark:bg-gray-800">
                                                 <tr>
-                                                    <td class="px-6 py-2">
-                                                        <div class="flex flex-col space-y-0 font-semibold">
-                                                            <div>{{ $data['empleado']->nombre }}</div>
-                                                            <div>{{ $data['empleado']->a_paterno }} {{ $data['empleado']->a_materno }}</div>
+                                                    <th class="px-6 py-4 text-left text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-300">
+                                                        <div class="flex cursor-pointer gap-1">
+                                                            Empleado
+                                                            <svg class="size-3.5 shrink-0 text-gray-500" xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                                stroke-linecap="round" stroke-linejoin="round">
+                                                                <path d="m7 15 5 5 5-5"></path>
+                                                                <path d="m7 9 5-5 5 5"></path>
+                                                            </svg>
                                                         </div>
-                                                    </td>
-                                                    <td class="text-center font-semibold">
-                                                        ${{ number_format($totalFiscal, 2) }}
-                                                    </td>
+                                                    </th>
+                                                    <th
+                                                        class="--exclude-from-ordering px-6 py-4 text-center text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-300">
+                                                        Monto
+                                                    </th>
                                                 </tr>
-                                            @endforeach
-                                            @if ($empleados->isEmpty())
-                                                <tr>
-                                                    <td class="px-6 py-1 text-left text-sm font-semibold text-gray-900 dark:text-white" colspan="2">
-                                                        No se encontraron resultados
-                                                    </td>
-                                                </tr>
-                                            @endif
-                                        </tbody>
-                                    </table>
+                                            </thead>
+                                            <tbody class="divide-y divide-slate-300 dark:divide-neutral-500">
+                                                @php
+                                                    $dispersionFiscal = 0;
+                                                @endphp
+                                                @foreach ($empleados as $idEmpleado => $data)
+                                                    @php
+                                                        $totalFiscal = $dispersion['FISCAL'][$idEmpleado]['total'] ?? 0;
+                                                        $dispersionFiscal += $totalFiscal;
+                                                    @endphp
+                                                    <tr>
+                                                        <td class="px-6 py-2">
+                                                            <div class="flex flex-col space-y-0 font-semibold">
+                                                                <div>{{ $data['empleado']->nombre }}</div>
+                                                                <div>{{ $data['empleado']->a_paterno }} {{ $data['empleado']->a_materno }}</div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-center font-semibold">
+                                                            ${{ number_format($totalFiscal, 2) }}
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                                @if ($empleados->isEmpty())
+                                                    <tr>
+                                                        <td class="px-6 py-1 text-left text-sm font-semibold text-gray-900 dark:text-white" colspan="2">
+                                                            No se encontraron resultados
+                                                        </td>
+                                                    </tr>
+                                                @endif
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <!-- Pagination -->
+                                <div class="flex items-center justify-between border-t border-gray-200 bg-[#D3D8DB] px-4 py-3 dark:border-neutral-700 dark:bg-neutral-800 sm:px-6"
+                                    data-hs-datatable-paging>
+                                    <div class="text-sm text-gray-700 dark:text-neutral-300">
+                                        <span data-hs-datatable-info>
+                                            Mostrando <span class="font-medium" data-hs-datatable-info-from></span>
+                                            a <span class="font-medium" data-hs-datatable-info-to></span> de
+                                            <span data-hs-datatable-info-length></span> resultados
+                                        </span>
+                                    </div>
+                                    <div class="flex space-x-1">
+                                        <button type="button" data-hs-datatable-paging-prev
+                                            class="flex min-w-10 items-center justify-center rounded-full p-2 text-gray-800 hover:bg-gray-100 disabled:pointer-events-none disabled:opacity-50 dark:text-white dark:hover:bg-neutral-700">
+                                            Anterior
+                                        </button>
+                                        <div class="flex space-x-1" data-hs-datatable-paging-pages></div>
+                                        <button type="button" data-hs-datatable-paging-next
+                                            class="flex min-w-10 items-center justify-center rounded-full p-2 text-gray-800 hover:bg-gray-100 disabled:pointer-events-none disabled:opacity-50 dark:text-white dark:hover:bg-neutral-700">
+                                            Siguiente
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-
-                            <!-- Pagination -->
-                            <div class="flex items-center justify-between border-t border-gray-200 bg-gray-50 px-4 py-3 dark:border-neutral-700 dark:bg-neutral-800 sm:px-6"
-                                data-hs-datatable-paging>
-                                <div class="text-sm text-gray-700 dark:text-neutral-300">
-                                    <span data-hs-datatable-info>
-                                        Mostrando <span class="font-medium" data-hs-datatable-info-from></span>
-                                        a <span class="font-medium" data-hs-datatable-info-to></span> de
-                                        <span data-hs-datatable-info-length></span> resultados
-                                    </span>
-                                </div>
-                                <div class="flex space-x-1">
-                                    <button type="button" data-hs-datatable-paging-prev
-                                        class="flex min-w-10 items-center justify-center rounded-full p-2 text-gray-800 hover:bg-gray-100 disabled:pointer-events-none disabled:opacity-50 dark:text-white dark:hover:bg-neutral-700">
-                                        Anterior
-                                    </button>
-                                    <div class="flex space-x-1" data-hs-datatable-paging-pages></div>
-                                    <button type="button" data-hs-datatable-paging-next
-                                        class="flex min-w-10 items-center justify-center rounded-full p-2 text-gray-800 hover:bg-gray-100 disabled:pointer-events-none disabled:opacity-50 dark:text-white dark:hover:bg-neutral-700">
-                                        Siguiente
-                                    </button>
+                            <!-- Total Fiscal -->
+                            <div class="flex hidden items-start justify-center">
+                                <div class="mt-20 rounded-2xl border border-gray-300 bg-white p-10 text-center shadow-md dark:border-gray-600 dark:bg-gray-800">
+                                    <h2 class="text-2xl font-bold text-gray-700 dark:text-gray-100">Total</h2>
+                                    <p class="mt-4 text-4xl font-semibold" id="totalFiscal">
+                                        ${{ number_format($dispersionFiscal ?? 0, 2) }}
+                                    </p>
                                 </div>
                             </div>
                         </div>
+                        {{-- DISPERSION COMPLEMENTO --}}
+                        <div class="flex justify-center">
+                            <div id="dispersion-complemento"
+                                class="pointer-events-none absolute inset-0 z-10 h-full bg-white opacity-0 transition-opacity duration-500 dark:bg-gray-700 sm:rounded-t-lg"
+                                data-hs-datatable='{
+                                        "pageLength": 10,
+                                        "pagingOptions": {
+                                            "pageBtnClasses": "min-w-10 flex justify-center items-center text-gray-800 hover:bg-gray-200 focus:outline-hidden focus:bg-gray-500 py-2.5 text-sm rounded-lg disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:focus:bg-neutral-700 dark:hover:bg-neutral-700"
+                                        }
+                                    }'>
+                                <div class="z-10 bg-white shadow-sm transition-all duration-500 hover:shadow-md dark:bg-gray-700 sm:rounded-t-lg">
+                                    <div class="flex items-center gap-10 border-b border-gray-200 bg-white p-4 dark:bg-gray-700">
+                                        <div class="relative" data-hs-datatable-search>
+                                            <input type="text" placeholder="Buscar empleado..." data-hs-datatable-search-input
+                                                class="w-64 rounded-lg border border-gray-300 py-2 pl-10 pr-4 transition-all focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 dark:bg-gray-800 dark:text-gray-300">
+                                            <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                                        </div>
+                                        <!-- Switch -->
+                                        <div class="flex items-center gap-2">
+                                            <span class="text-base font-bold text-gray-500">Fiscal</span>
+                                            <label class="switch">
+                                                <input id="dispersion-comp" type="checkbox">
+                                                <span class="slider round"></span>
+                                            </label>
+                                            <span class="text-base font-bold text-gray-500">Complemento</span>
+                                        </div>
+                                    </div>
+                                    <!-- Tabla -->
+                                    <div class="flex flex-col">
+                                        <div class="min-h-[32rem] overflow-auto">
+                                            <table class="min-w-full">
+                                                <thead class="bg-[#D3D8DB] dark:bg-gray-800">
+                                                    <tr>
+                                                        <th class="px-6 py-4 text-left text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-300">
+                                                            <div class="flex cursor-pointer gap-1">
+                                                                Empleado
+                                                                <svg class="size-3.5 shrink-0 text-gray-500" xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                    height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                                    stroke-linecap="round" stroke-linejoin="round">
+                                                                    <path d="m7 15 5 5 5-5"></path>
+                                                                    <path d="m7 9 5-5 5 5"></path>
+                                                                </svg>
+                                                            </div>
+                                                        </th>
+                                                        <th
+                                                            class="--exclude-from-ordering px-6 py-4 text-center text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-300">
+                                                            Monto
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="divide-y divide-slate-300 dark:divide-neutral-500">
+                                                    @php
+                                                        $dispersionComplemento = 0;
+                                                    @endphp
+                                                    @foreach ($empleados as $idEmpleado => $data)
+                                                        @php
+                                                            $totalComplemento = $dispersion['COMPLEMENTO'][$idEmpleado]['total'] ?? 0;
+                                                            $dispersionComplemento += $totalComplemento;
+                                                        @endphp
+                                                        <tr>
+                                                            <td class="px-6 py-2">
+                                                                <div class="flex flex-col font-semibold">
+                                                                    <div>{{ $data['empleado']->nombre }}</div>
+                                                                    <div>{{ $data['empleado']->a_paterno }} {{ $data['empleado']->a_materno }}</div>
+                                                                </div>
+                                                            </td>
+                                                            <td class="text-center font-semibold">
+                                                                ${{ number_format($totalComplemento, 2) }}
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                    @if ($empleados->isEmpty())
+                                                        <tr>
+                                                            <td colspan="2" class="px-6 py-2 text-left text-sm font-semibold text-gray-900 dark:text-white">
+                                                                No se encontraron resultados
+                                                            </td>
+                                                        </tr>
+                                                    @endif
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
 
-                        <!-- RIGHT SIDE: Total -->
-                        <div class="flex items-start justify-center">
-                            <div class="rounded-2xl mt-20 border border-gray-300 bg-white p-10 text-center shadow-md dark:border-gray-600 dark:bg-gray-800">
-                                <h2 class="text-2xl font-bold text-gray-700 dark:text-gray-100">Total</h2>
-                                <p class="mt-4 text-4xl font-semibold">
-                                    ${{ number_format($dispersionFiscal ?? 0, 2) }}
-                                </p>
+                                    <!-- Pagination -->
+                                    <div class="flex items-center justify-between border-t border-gray-200 bg-[#D3D8DB] px-4 py-3 dark:border-neutral-700 dark:bg-neutral-800 sm:px-6"
+                                        data-hs-datatable-paging>
+                                        <div class="text-sm text-gray-700 dark:text-neutral-300">
+                                            <span data-hs-datatable-info>
+                                                Mostrando <span class="font-medium" data-hs-datatable-info-from></span>
+                                                a <span class="font-medium" data-hs-datatable-info-to></span> de
+                                                <span data-hs-datatable-info-length></span> resultados
+                                            </span>
+                                        </div>
+                                        <div class="flex space-x-1">
+                                            <button type="button" data-hs-datatable-paging-prev
+                                                class="flex min-w-10 items-center justify-center rounded-full p-2 text-gray-800 hover:bg-gray-100 disabled:pointer-events-none disabled:opacity-50 dark:text-white dark:hover:bg-neutral-700">
+                                                Anterior
+                                            </button>
+                                            <div class="flex space-x-1" data-hs-datatable-paging-pages></div>
+                                            <button type="button" data-hs-datatable-paging-next
+                                                class="flex min-w-10 items-center justify-center rounded-full p-2 text-gray-800 hover:bg-gray-100 disabled:pointer-events-none disabled:opacity-50 dark:text-white dark:hover:bg-neutral-700">
+                                                Siguiente
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Total Complemento -->
+                                <div class="flex hidden items-start justify-center">
+                                    <div class="mt-20 rounded-2xl border border-gray-300 bg-white p-10 text-center shadow-md dark:border-gray-600 dark:bg-gray-800">
+                                        <h2 class="text-2xl font-bold text-gray-700 dark:text-gray-100">Total</h2>
+                                        <p class="mt-4 text-4xl font-semibold" id="totalComplemento">
+                                            ${{ number_format($dispersionComplemento ?? 0, 2) }}
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-
-                    {{-- DISPERSION COMPLEMENTO --}}
-                    <div id="dispersion-complemento"
-                        class="pointer-events-none absolute inset-0 z-10 grid h-full grid-cols-3 gap-4 bg-white opacity-0 transition-opacity duration-500 dark:bg-gray-700 sm:rounded-t-lg"
-                        data-hs-datatable='{
-                            "pageLength": 10,
-                            "pagingOptions": {
-                                "pageBtnClasses": "min-w-10 flex justify-center items-center text-gray-800 hover:bg-gray-200 focus:outline-hidden focus:bg-gray-500 py-2.5 text-sm rounded-lg disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:focus:bg-neutral-700 dark:hover:bg-neutral-700"
-                            }
-                        }'>
-
-                        <!-- LEFT HALF: Table -->
-                        <div class="z-10 bg-white shadow-sm transition-all col-span-2 duration-500 hover:shadow-md dark:bg-gray-700 sm:rounded-t-lg">
-                            <!-- Header -->
-                            <div class="flex items-center gap-10 border-b border-gray-200 bg-white p-4 dark:bg-gray-700">
-                                <div class="relative" data-hs-datatable-search>
-                                    <input type="text" placeholder="Buscar empleado..." data-hs-datatable-search-input
-                                        class="w-64 rounded-lg border border-gray-300 py-2 pl-10 pr-4 transition-all focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 dark:bg-gray-800 dark:text-gray-300">
-                                    <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
-                                </div>
-
-                                <!-- Switch -->
-                                <div class="flex items-center gap-2">
-                                    <span class="text-base font-bold text-gray-500">Fiscal</span>
-                                    <label class="switch">
-                                        <input id="dispersion-comp" type="checkbox">
-                                        <span class="slider round"></span>
-                                    </label>
-                                    <span class="text-base font-bold text-gray-500">Complemento</span>
-                                </div>
-                            </div>
-
-                            <!-- Table -->
-                            <div class="flex flex-col">
-                                <div class="min-h-[32rem] overflow-auto">
-                                    <table class="min-w-full">
-                                        <thead class="bg-[#D3D8DB] dark:bg-gray-800">
-                                            <tr>
-                                                <th class="px-6 py-4 text-left text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-300">Empleado
-                                                </th>
-                                                <th class="px-6 py-4 text-center text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-300">Monto
-                                                </th>
-                                            </tr>
-                                        </thead>
-
-                                        <tbody class="divide-y divide-slate-300 dark:divide-neutral-500">
-                                            @php
-                                                $dispersionComplemento = 0;
-                                            @endphp
-                                            @foreach ($empleados as $idEmpleado => $data)
-                                                @php
-                                                    $totalComplemento = $dispersion['COMPLEMENTO'][$idEmpleado]['total'] ?? 0;
-                                                    $dispersionComplemento += $totalComplemento;
-                                                @endphp
-                                                <tr>
-                                                    <td class="px-6 py-2">
-                                                        <div class="flex flex-col font-semibold">
-                                                            <div>{{ $data['empleado']->nombre }}</div>
-                                                            <div>{{ $data['empleado']->a_paterno }} {{ $data['empleado']->a_materno }}</div>
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-center font-semibold">
-                                                        ${{ number_format($totalComplemento, 2) }}
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-
-                                            @if ($empleados->isEmpty())
-                                                <tr>
-                                                    <td colspan="2" class="px-6 py-2 text-left text-sm font-semibold text-gray-900 dark:text-white">
-                                                        No se encontraron resultados
-                                                    </td>
-                                                </tr>
-                                            @endif
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-
-                            <!-- Pagination -->
-                            <div class="flex items-center justify-between border-t border-gray-200 bg-gray-50 px-4 py-3 dark:border-neutral-700 dark:bg-neutral-800 sm:px-6"
-                                data-hs-datatable-paging>
-                                <div class="text-sm text-gray-700 dark:text-neutral-300">
-                                    <span data-hs-datatable-info>
-                                        Mostrando <span class="font-medium" data-hs-datatable-info-from></span>
-                                        a <span class="font-medium" data-hs-datatable-info-to></span> de
-                                        <span data-hs-datatable-info-length></span> resultados
-                                    </span>
-                                </div>
-                                <div class="flex space-x-1">
-                                    <button type="button" data-hs-datatable-paging-prev
-                                        class="flex min-w-10 items-center justify-center rounded-full p-2 text-gray-800 hover:bg-gray-100 disabled:pointer-events-none disabled:opacity-50 dark:text-white dark:hover:bg-neutral-700">
-                                        Anterior
-                                    </button>
-                                    <div class="flex space-x-1" data-hs-datatable-paging-pages></div>
-                                    <button type="button" data-hs-datatable-paging-next
-                                        class="flex min-w-10 items-center justify-center rounded-full p-2 text-gray-800 hover:bg-gray-100 disabled:pointer-events-none disabled:opacity-50 dark:text-white dark:hover:bg-neutral-700">
-                                        Siguiente
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- RIGHT HALF: Total -->
-                        <div class="flex items-start justify-center">
-                            <div class="rounded-2xl mt-20 border border-gray-300 bg-white p-10 text-center shadow-md dark:border-gray-600 dark:bg-gray-800">
-                                <h2 class="text-2xl font-bold text-gray-700 dark:text-gray-100">Total</h2>
-                                <p class="mt-4 text-4xl font-semibold">
-                                    ${{ number_format($dispersionComplemento ?? 0, 2) }}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="mt-40"></div>
 
     <div id="loadingOverlay" class="fixed inset-0 z-50 flex hidden flex-col items-center justify-center bg-black/60 text-white backdrop-blur-sm">
         <!-- Spinner -->
@@ -1438,9 +1511,17 @@
             dispersionSwitches.forEach(sw => {
                 sw.addEventListener('change', e => {
                     const checked = e.target.checked;
+
                     dispersionSwitches.forEach(other => (other.checked = checked));
                     localStorage.setItem('dispersionState', checked);
                     toggleTotal(checked);
+
+                    const activeTab = document.querySelector('[id^="unstyled-tabs-item-"].active');
+                    if (activeTab && activeTab.id === 'unstyled-tabs-item-3') {
+                        const totalFiscal = document.getElementById('totalFiscal')?.textContent.replace(/\s+/g, '') || '';
+                        const totalComplemento = document.getElementById('totalComplemento')?.textContent.replace(/\s+/g, '') || '';
+                        document.getElementById('total').textContent = checked ? totalComplemento : totalFiscal;
+                    }
                 });
             });
 
@@ -1450,90 +1531,152 @@
             }
         });
 
-        document.querySelectorAll('.btn-generar').forEach(btn => {
+        document.querySelectorAll('[id^="unstyled-tabs-item-"]').forEach(btn => {
             btn.addEventListener('click', () => {
-                let empleado = btn.dataset.empleado;
-                if (empleado === "null" || empleado === "") empleado = null;
-                const empleados = JSON.parse(btn.dataset.empleados || '[]');
-                generarReporte(empleado, empleados);
+                const activeId = btn.id; // example: unstyled-tabs-item-3
+
+                let totalFiscal = document.getElementById('totalFiscal').textContent.replace(/\s+/g, '');
+                let totalComplemento = document.getElementById('totalComplemento').textContent.replace(/\s+/g, '');
+
+                const isSwitchOn = localStorage.getItem('dispersionState') === 'true';
+
+                const totalBox = document.getElementById('total-box');
+                const generarBox = document.getElementById('generar-box');
+                const totalDisplay = document.getElementById('total');
+
+                // If tab 3 is active → Show totals
+                if (activeId === 'unstyled-tabs-item-3') {
+                    totalBox.classList.remove('hidden');
+                    generarBox.classList.add('hidden');
+
+                    // Put correct amount depending on switch
+                    totalDisplay.textContent = isSwitchOn ? totalComplemento : totalFiscal;
+                } else {
+                    // Any other tab → hide total box, show button
+                    totalBox.classList.add('hidden');
+                    generarBox.classList.remove('hidden');
+                }
             });
         });
 
 
-        async function generarReporte(empleado, empleados) {
-            try {
-                showLoadingOverlay();
-
+        document.querySelectorAll('.btn-generar').forEach(btn => {
+            btn.addEventListener('click', async () => {
+                let empleado = btn.dataset.empleado;
+                const empleados = JSON.parse(btn.dataset.empleados || '[]');
                 const periodo = document.getElementById('periodo').value;
 
-                try {
-                    const response = await fetch(`/rh/nomina/${periodo}/reporte?empleado=${empleado}`, {
-                        method: 'GET',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
-                        },
-                    });
-
-                    if (response.status === 204) {
-                        Swal.fire({
-                            icon: 'warning',
-                            title: 'Sin archivo',
-                            text: 'No se han generado los reportes para este periodo.',
-                            backdrop: "rgb(0 0 0 / 0.6)"
-                        });
-                    }
-                } catch (error) {
-
+                // Normalize empleado
+                if (empleado === "null" || empleado === "") {
+                    empleado = null;
                 }
 
                 if (empleado) {
-                    // Single empleado → GET download
-                    const url = `/rh/nomina/${periodo}/reporte?empleado=${empleado}`;
-                    const a = document.createElement('a');
-                    a.href = url;
-                    a.download = '';
-                    a.style.display = 'none';
-                    document.body.appendChild(a);
-                    a.click();
-                    document.body.removeChild(a);
+                    // Un reporte
+                    await handleSingleReport(empleado, periodo);
+                } else {
+                    // Todos los reportes
+                    await handleMultipleReports(empleados, periodo);
+                }
+            });
+        });
+
+        async function handleSingleReport(empleado, periodo) {
+            try {
+                showLoadingOverlay();
+
+                // Checamos si existe un reporte
+                const response = await axios.get(`/rh/nomina/${periodo}/check`, {
+                    params: {
+                        empleado
+                    }
+                });
+                console.log(response);
+
+                if (!response.data.exists) {
+                    Swal.fire({
+                        icon: "warning",
+                        title: "Reporte no encontrado",
+                        text: "No se ha generado el reporte para este empleado.",
+                        backdrop: "rgba(0,0,0,0.6)"
+                    });
                     return;
                 }
 
-                const response = await fetch(`/rh/nomina/${periodo}/reporte`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
-                    },
-                });
-
-                if (response.status === 200) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: '¡Reportes generados!',
-                        text: 'Los reportes se generaron correctamente.',
-                        confirmButtonText: 'Aceptar',
-                        backdrop: "rgb(0 0 0 / 0.6)"
-                    });
-                }
-                if (!response.ok) throw new Error(await response.text());
-
+                // Descargamos el reporte
+                const downloadUrl = `/rh/nomina/${periodo}/reporte/download?path=${encodeURIComponent(response.data.path)}`;
+                window.location.href = downloadUrl;
 
             } catch (error) {
-                console.error('Error:', await response.text());
+                console.log(error);
                 Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: await response.text(),
-                    confirmButtonText: 'Cerrar',
-                    backdrop: "rgb(0 0 0 / 0.6)"
+                    icon: "error",
+                    title: "Error",
+                    text: error.response?.data?.error || error || "Ocurrió un error.",
+                    backdrop: "rgba(0,0,0,0.6)"
                 });
 
             } finally {
                 hideLoadingOverlay();
             }
+        }
 
+        async function handleMultipleReports(empleados, periodo) {
+            try {
+                showLoadingOverlay();
+
+                // Checamos si hay reportes creados
+                
+                const existing = await axios.get(`/rh/nomina/${periodo}/check-all`);
+
+                if (existing.data.exists) {
+                    const confirm = await Swal.fire({
+                        title: "Reportes ya generados",
+                        icon: "warning",
+                        text: "Ya existen reportes para este periodo. Si los generas de nuevo serán sobreescritos.",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Sobrescribir",
+                        cancelButtonText: "Cancelar",
+                        backdrop: "rgba(0,0,0,0.6)"
+                    });
+
+                    if (!confirm.isConfirmed) {
+                        return;
+                    }
+                }
+
+
+                // Generamos todos los reportes
+                const response = await fetch(`/rh/nomina/${periodo}/reporte`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').content,
+                    }
+                });
+
+                if (!response.ok) throw new Error(await response.text());
+
+                Swal.fire({
+                    icon: "success",
+                    title: "¡Reportes generados!",
+                    text: "Los reportes se generaron correctamente.",
+                    confirmButtonText: "Aceptar",
+                    backdrop: "rgba(0,0,0,0.6)"
+                });
+
+            } catch (error) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: error.message,
+                    backdrop: "rgba(0,0,0,0.6)"
+                });
+            } finally {
+                hideLoadingOverlay();
+            }
         }
     </script>
 

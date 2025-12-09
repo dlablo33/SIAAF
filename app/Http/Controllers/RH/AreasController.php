@@ -4,6 +4,7 @@ namespace App\Http\Controllers\RH;
 
 use App\Http\Controllers\Controller;
 use App\Models\RH\Area;
+use App\Models\RH\Departamento;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,7 @@ class AreasController extends Controller
 
     public function index()
     {
-        $areas = Area::where('id_estatus', 1)->paginate(10);
+        $areas = Area::where('id_estatus', 1)->get();
         return view('rh.areas.index', compact('areas'));
     }
 
@@ -43,9 +44,18 @@ class AreasController extends Controller
     // Eliminar area
     public function destroy($id)
     {
-        $area = Area::find($id);
-        $area->update(['id_estatus' => 2]);
+        $departamentos = Departamento::where('id_area', $id)->where('id_estatus', 1)->get();
+        Log::info($departamentos);
+        if ($departamentos->isNotEmpty()) {
+            return response()->json([
+                'message' => 'Esta area tiene departamentos asignados. Por favor, deshabilitalos antes de continuar.'
+            ], 202);
+        } else {
+            $area = Area::findOrFail($id);
+            $area->update(['id_estatus' => 2]);
+            $area->delete();
 
-        return redirect()->back();
+            return response('Succes', 200);
+        }
     }
 }

@@ -15,12 +15,17 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('id_empleado');
             $table->string('sugerencia');
+            $table->unsignedBigInteger('id_estatus');
             $table->timestamps();
             $table->softDeletes('deleted_at', precision: 0);
         });
 
         Schema::table('sugerencias', function ($table) {
             $table->foreign('id_empleado')->references('id')->on('empleados');
+        });
+
+        Schema::table('sugerencias', function ($table) {
+            $table->foreign('id_estatus')->references('id')->on('cat_estatus');
         });
 
     }

@@ -459,6 +459,17 @@
                             <div class="nav-subitem pl-6">
                                 <div
                                     class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300 cursor-pointer">
+                                    <a href="{{ route('rh.solicitud.index') }}">
+                                        <i class="fa-solid fa-file-circle-check text-lg w-6 text-center"></i>
+                                        <span class="nav-text ml-3">Solicitudes</span>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Submenú Nominas -->
+                            <div class="nav-subitem pl-6">
+                                <div
+                                    class="nav-item flex items-center px-4 py-3 rounded-lg hover:bg-gray-300 text-gray-700 dark:text-gray-300 cursor-pointer">
                                     @php
                                         $now = now();
                                         $periodoActual = $now->weekOfYear;
@@ -918,5 +929,131 @@
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     @stack('scripts')
 </body>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Inicializar DataTables en todas las tablas con la clase 'datatable'
+        const tables = document.querySelectorAll('.datatable');
+        tables.forEach(table => {
+            $(table).DataTable({
+                // Configuración personalizada (opcional)
+                paging: true,
+                searching: true,
+                info: true,
+                responsive: true,
+            });
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Inicializar tooltips personalizados
+        const tooltipElements = document.querySelectorAll('[data-tooltip]');
+        tooltipElements.forEach(el => {
+            el.addEventListener('mouseenter', function() {
+                const tooltipText = this.getAttribute('data-tooltip');
+                let tooltipDiv = document.createElement('div');
+                tooltipDiv.className = 'custom-tooltip';
+                tooltipDiv.innerText = tooltipText;
+                document.body.appendChild(tooltipDiv);
+
+                const rect = this.getBoundingClientRect();
+                tooltipDiv.style.left = rect.left + (rect.width / 2) - (tooltipDiv.offsetWidth / 2) + 'px';
+                tooltipDiv.style.top = rect.top - tooltipDiv.offsetHeight - 8 + 'px';
+
+                this._tooltipDiv = tooltipDiv;
+            });
+
+            el.addEventListener('mouseleave', function() {
+                if (this._tooltipDiv) {
+                    document.body.removeChild(this._tooltipDiv);
+                    this._tooltipDiv = null;
+                }
+            });
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Inicializar tooltips personalizados
+        const tooltipElements = document.querySelectorAll('[data-tooltip]');
+        tooltipElements.forEach(el => {
+            el.addEventListener('mouseenter', function() {
+                const tooltipText = this.getAttribute('data-tooltip');
+                let tooltipDiv = document.createElement('div');
+                tooltipDiv.className = 'custom-tooltip';
+                tooltipDiv.innerText = tooltipText;
+                document.body.appendChild(tooltipDiv);
+
+                const rect = this.getBoundingClientRect();
+                tooltipDiv.style.left = rect.left + (rect.width / 2) - (tooltipDiv.offsetWidth / 2) + 'px';
+                tooltipDiv.style.top = rect.top - tooltipDiv.offsetHeight - 8 + 'px';
+
+                this._tooltipDiv = tooltipDiv;
+            });
+
+            el.addEventListener('mouseleave', function() {
+                if (this._tooltipDiv) {
+                    document.body.removeChild(this._tooltipDiv);
+                    this._tooltipDiv = null;
+                }
+            });
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Inicializar tooltips personalizados
+        const tooltipElements = document.querySelectorAll('[data-tooltip]');
+        tooltipElements.forEach(el => {
+            el.addEventListener('mouseenter', function() {
+                const tooltipText = this.getAttribute('data-tooltip');
+                let tooltipDiv = document.createElement('div');
+                tooltipDiv.className = 'custom-tooltip';
+                tooltipDiv.innerText = tooltipText;
+                document.body.appendChild(tooltipDiv);
+
+                const rect = this.getBoundingClientRect();
+                tooltipDiv.style.left = rect.left + (rect.width / 2) - (tooltipDiv.offsetWidth / 2) + 'px';
+                tooltipDiv.style.top = rect.top - tooltipDiv.offsetHeight - 8 + 'px';
+
+                this._tooltipDiv = tooltipDiv;
+            });
+
+            el.addEventListener('mouseleave', function() {
+                if (this._tooltipDiv) {
+                    document.body.removeChild(this._tooltipDiv);
+                    this._tooltipDiv = null;
+                }
+            });
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Inicializar tooltips personalizados
+        const tooltipElements = document.querySelectorAll('[data-tooltip]');
+        tooltipElements.forEach(el => {
+            el.addEventListener('mouseenter', function() {
+                const tooltipText = this.getAttribute('data-tooltip');
+                let tooltipDiv = document.createElement('div');
+                tooltipDiv.className = 'custom-tooltip';
+                tooltipDiv.innerText = tooltipText;
+                document.body.appendChild(tooltipDiv);
+
+                const rect = this.getBoundingClientRect();
+                tooltipDiv.style.left = rect.left + (rect.width / 2) - (tooltipDiv.offsetWidth / 2) + 'px';
+                tooltipDiv.style.top = rect.top - tooltipDiv.offsetHeight - 8 + 'px';
+
+                this._tooltipDiv = tooltipDiv;
+            });
+
+            el.addEventListener('mouseleave', function() {
+                if (this._tooltipDiv) {
+                    document.body.removeChild(this._tooltipDiv);
+                    this._tooltipDiv = null;
+                }
+            });
+        });
+    });
+
+
+</script>
 
 </html>

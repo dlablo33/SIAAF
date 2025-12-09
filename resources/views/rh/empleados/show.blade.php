@@ -169,7 +169,7 @@
                             <div>
                                 <label for="empresa" class="mb-2 block text-sm font-bold text-gray-800 dark:text-gray-300">Empresa</label>
                                 <div class="min-h-10 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm dark:bg-gray-900 dark:text-gray-300">
-                                    {{ $empleado->id_empresa }}
+                                    {{ $empleado->empresa->nombre }}
                                 </div>
                             </div>
                             <div>

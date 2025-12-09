@@ -2,29 +2,28 @@
 
 namespace App\Models\RH;
 
+use App\Models\Empleado;
 use App\Models\Estatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Departamento extends Model
+class SolicitudPrestamo extends Model
 {
 
     use HasFactory;
-    use SoftDeletes;
 
-    protected $table = 'cat_departamento';
+    protected $table = 'prestamo_solicitud';
 
     protected $fillable = [
-        'nombre',
-        'id_area',
+        'id_empleado',
+        'monto_pedido',
         'id_estatus'
     ];
 
     // Relaciones
-    public function area()
+    public function empleado()
     {
-        return $this->belongsTo(Area::class, 'id_area', 'id');
+        return $this->belongsTo(Empleado::class, 'id_empleado', 'id');
     }
 
     public function estatus()

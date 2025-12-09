@@ -6,11 +6,13 @@ use App\Models\RH\Departamento;
 use App\Models\Estatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Puesto extends Model
 {
 
     use HasFactory;
+    use SoftDeletes;
 
     protected $table = 'cat_puestos';
 

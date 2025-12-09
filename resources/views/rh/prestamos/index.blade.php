@@ -12,8 +12,34 @@
 
     <div class="py-6" x-data="{ isModalOpen: false, id: '', nombre: '' }" @open-modal.window="isModalOpen = true; id = $event.detail.id; nombre = $event.detail.nombre">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-4">
-            {{-- Targeta Principal --}}
 
+            <div class="mb-2 flex gap-x-3">
+                <!-- Disponible -->
+                <div class="flex min-w-64 cursor-default items-center rounded-lg border border-slate-300 bg-white px-5 py-4 text-lg shadow-sm">
+                    <div class="font-semibold">
+                        <div class="text-sm text-gray-700">Disponible:</div>
+                        ${{ number_format($saldoDisponible, 2) }}
+                    </div>
+                </div>
+
+                <!-- Prestado -->
+                <div class="flex min-w-64 cursor-default items-center rounded-lg border border-slate-300 bg-white px-5 py-4 text-lg shadow-sm">
+                    <div class="font-semibold">
+                        <div class="text-sm text-gray-700">Prestado:</div>
+                        ${{ number_format($saldoPrestado, 2) }}
+                    </div>
+                </div>
+
+                <!-- Total -->
+                <div class="flex min-w-64 cursor-default items-center rounded-lg border border-slate-300 bg-white px-5 py-4 text-lg shadow-sm">
+                    <div class="font-semibold">
+                        <div class="text-sm text-gray-700">Total:</div>
+                        ${{ number_format($saldoDisponible, 2) }}
+                    </div>
+                </div>
+            </div>
+
+            {{-- Targeta Principal --}}
             <div class="z-10 bg-white shadow-sm hover:shadow-md dark:bg-gray-700 sm:rounded-t-lg"
                 data-hs-datatable='{
                             "pageLength": 10,
@@ -124,10 +150,10 @@
                                                     {{ $weeksLeft }}
                                                 </td>
                                                 <td class="whitespace-nowrap px-6 py-4 text-center text-sm font-semibold text-gray-500">
-                                                    {{ $weeksPassed * $data->pago_periodo }}
+                                                    ${{ number_format($weeksPassed * $data->pago_periodo, 2) }}
                                                 </td>
                                                 <td class="whitespace-nowrap px-6 py-4 text-center text-sm text-gray-500">
-                                                    {{ ($weeksPassed + $weeksLeft) * $data->pago_periodo }}
+                                                    ${{ number_format(($weeksPassed + $weeksLeft) * $data->pago_periodo, 2) }}
                                                 </td>
                                                 <td class="text-center">
 
@@ -203,9 +229,10 @@
             <!-- Modal Historial -->
             <div>
                 <!-- Backdrop -->
-                <div x-show="isModalOpen" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
-                    x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
-                    class="fixed inset-0 z-10 bg-gray-700 bg-opacity-75 transition-opacity" @click="isModalOpen = false" style="display: none;"></div>
+                <div x-show="isModalOpen" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0"
+                    x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100"
+                    x-transition:leave-end="opacity-0" class="fixed inset-0 z-10 bg-gray-700 bg-opacity-75 transition-opacity" @click="isModalOpen = false"
+                    style="display: none;"></div>
                 <!-- Modal Contenido -->
                 <div x-show="isModalOpen" x-transition:enter="transition duration-300 ease-out"
                     x-transition:enter-start="translate-y-4 opacity-0 sm:translate-y-0 sm:scale-95" x-transition:enter-end="translate-y-0 opacity-100 sm:scale-100"
@@ -240,7 +267,7 @@
                         </div>
                         {{-- Footer --}}
                         <div class="mt-4 sm:-mx-2 sm:mt-6 sm:flex sm:items-center">
-                            <button @click="isModalOpen = false" type="button" onclick="cleanHistorial()"
+                            <button @click="isModalOpen = false" type="button"
                                 class="w-full transform rounded-md border border-gray-200 bg-blue-500 px-4 py-2 text-sm font-medium capitalize tracking-wide text-white transition-colors duration-300 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-40 dark:border-gray-700 dark:text-gray-200 dark:hover:bg-gray-800 sm:mx-2 sm:w-1/2">
                                 Confirmar
                             </button>
@@ -296,30 +323,32 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
- 
             document.querySelectorAll('[id^="open"]').forEach(el => {
                 el.addEventListener('click', async () => {
                     clearHistorial();
                     const id = el.id.replace('open-', '');
-                    const nombre = el.dataset.nombre; 
+                    const nombre = el.dataset.nombre;
 
                     try {
-                    await getHistorial(id);
+                        await getHistorial(id);
 
-                    window.dispatchEvent(new CustomEvent('open-modal', {
-                        detail: { id, nombre }
-                    }));
-                } catch (err) {
-                    console.error('Error loading historial:', err);
-                }
+                        window.dispatchEvent(new CustomEvent('open-modal', {
+                            detail: {
+                                id,
+                                nombre
+                            }
+                        }));
+                    } catch (err) {
+                        console.error('Error loading historial:', err);
+                    }
+                });
             });
-        });
 
             if (window.HSStaticMethods) {
                 window.HSStaticMethods.autoInit();
                 console.log('Preline inicializado'); // Debug
             } else {
-                console.error('❌ Preline no está disponible');
+                console.error('Preline no está disponible');
             }
         });
     </script>
@@ -340,16 +369,6 @@
                 const tbody = document.getElementById('historialBody');
                 tbody.innerHTML = '';
 
-                if (data.length === 0) {
-                    tbody.innerHTML = `
-                        <tr>
-                            <td colspan="2" class="text-center py-2 text-gray-500">
-                                No se encontró historial
-                            </td>
-                        </tr>
-                    `;
-                    return;
-                }
                 data.forEach(item => {
                     const row = document.createElement('tr');
                     row.innerHTML = `
@@ -371,7 +390,7 @@
                 tbody.innerHTML = `
                     <tr>
                         <td colspan="2" class="text-center py-2 text-gray-400">
-                            Cargando...
+                            No se encontró historial
                         </td>
                     </tr>
                 `;

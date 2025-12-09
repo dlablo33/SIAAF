@@ -15,13 +15,15 @@ import { Spanish } from "flatpickr/dist/l10n/es.js";
 flatpickr.localize(Spanish);
 window.flatpickr = flatpickr;
 
-
+// Preline Datatables
 import $ from 'jquery';
-
 window.$ = $;
 window.jQuery = $;
-
 import 'datatables.net';
 import 'preline';
+
+// Alerts
+import Swal from 'sweetalert2';
+window.Swal = Swal;
 
 

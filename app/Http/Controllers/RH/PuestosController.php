@@ -13,8 +13,7 @@ class PuestosController extends Controller
     //
     public function index()
     {
-        $puestos = Puesto::with('departamento')->paginate(10);
-        Log::info($puestos);
+        $puestos = Puesto::with('departamento')->get();
         $departamentos = Departamento::get();
         return view('rh.puestos.index', compact('departamentos', 'puestos'));
     }
@@ -47,9 +46,10 @@ class PuestosController extends Controller
     // Eliminar puesto
     public function destroy($id)
     {
-        $puesto = Puesto::find($id);
+        $puesto = Puesto::findOrFail($id);
         $puesto->update(['id_estatus' => 2]);
+        $puesto->delete();
 
-        return redirect()->back();
+        return response('Succes', 200);
     }
 }

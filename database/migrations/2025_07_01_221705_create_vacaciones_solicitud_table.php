@@ -15,11 +15,10 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('id_empleado_vacaciones');
             $table->string('concepto');
-            $table->date('fecha_solicitud');
             $table->date('fecha_inicio');
             $table->date('fecha_final');
             $table->double('prima');
-            $table->text('obdervaciones');
+            $table->text('observaciones');
             $table->unsignedBigInteger('id_estatus');
             $table->timestamps();
             $table->softDeletes('deleted_at', precision: 0);

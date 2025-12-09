@@ -22,6 +22,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'id_empleado',
         'role' // Añade este campo
     ];
 
@@ -49,23 +50,27 @@ class User extends Authenticatable
     }
 
     public function isAdministrador()
-{
-    return $this->role === 'administrador';
-}
+    {
+        return $this->role === 'administrador';
+    }
 
-public function isGerente()
-{
-    return $this->role === 'gerente';
-}
+    public function isGerente()
+    {
+        return $this->role === 'gerente';
+    }
 
-public function isCoordinador()
-{
-    return $this->role === 'coordinador';
-}
+    public function isCoordinador()
+    {
+        return $this->role === 'coordinador';
+    }
 
-public function isStaff()
-{
-    return $this->role === 'staff';
-}
+    public function isStaff()
+    {
+        return $this->role === 'staff';
+    }
 
+    public function empleado()
+    {
+        return $this->belongsTo(Empleado::class, 'id_empleado', 'id');
+    }
 }

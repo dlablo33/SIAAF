@@ -385,7 +385,7 @@
                 window.HSStaticMethods.autoInit();
                 console.log('Preline inicializado'); // Debug
             } else {
-                console.error('❌ Preline no está disponible');
+                console.error('Preline no está disponible');
             }
         });
     </script>

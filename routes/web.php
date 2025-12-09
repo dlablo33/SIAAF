@@ -29,6 +29,8 @@ use App\Models\RH\PermisoTipo;
 use App\Http\Controllers\Cotizadora\CotizadoraController;
 use App\Http\Controllers\RH\PrestamosController;
 use App\Http\Controllers\RH\ReportesController;
+use App\Http\Controllers\RH\SolicitudController;
+use App\Models\RH\Prestaciones;
 
 Route::get('/', function () {
     return view('welcome');
@@ -74,19 +76,31 @@ Route::prefix('legal')->name('legal.')->middleware(['auth'])->group(function () 
 });
 
 Route::prefix('rh')->name('rh.')->middleware(['auth'])->group(function () {
+    //Solicitudes
+    Route::get('solicitud', [SolicitudController::class, 'index'])->name('solicitud.index');
+    Route::post('solicitud/getSolicitud', [SolicitudController::class, 'getSolicitud'])->name('solicitud.getSolicitud');
+    Route::post('solicitud/updateSolicitud', [SolicitudController::class, 'updateSolicitud'])->name('solicitud.updateSolicitud');
+
+    Route::get('solicitud/vacaciones', [SolicitudController::class, 'vacaciones'])->name('solicitud.vacaciones');
+    Route::post('solicitud/vacaciones/save', [SolicitudController::class, 'saveVacaciones'])->name('solicitud.saveVacaciones');
+    Route::get('solicitud/permiso', [SolicitudController::class, 'permiso'])->name('solicitud.permiso');
+    Route::post('solicitud/permiso/save', [SolicitudController::class, 'savePermiso'])->name('solicitud.saveVacaciones');
+    Route::get('solicitud/prestamo', [SolicitudController::class, 'prestamo'])->name('solicitud.prestamo');
+    Route::post('solicitud/prestamo/save', [SolicitudController::class, 'savePrestamo'])->name('solicitud.savePrestamo');
+
     // Nomina
     Route::get('nomina/{periodo}', [NominaController::class, 'index'])->name('nomina.index');
-    Route::post('nomina/{periodo}/reporte', [ReportesController::class, 'generateReporte'])->name('nomina.reporte');
-    Route::get('nomina/{periodo}/reporte', [ReportesController::class, 'generateReporte'])->name('nomina.reporte');
+    Route::get('nomina/{periodo}/check', [ReportesController::class, 'checkReporte'])->name('nomina.checkReporte');
+    Route::get('nomina/{periodo}/check-all', [ReportesController::class, 'checkReportes'])->name('nomina.checkReportes');
+    Route::post('nomina/{periodo}/reporte', [ReportesController::class, 'generateReporte'])->name('nomina.generateReporte');
+    Route::get('nomina/{periodo}/reporte/download', [ReportesController::class, 'getReporte'])->name('nomina.getReporte');
 
     // Dispersion
     Route::get('dispersion/{periodo}', [DispersionController::class, 'index'])->name('dispersion.index');
 
-
     // Retardos
     Route::get('retardos/{periodo}', [RetardosController::class, 'index'])->name('retardos.index');
     Route::post('retardos/import', [ExcelController::class, 'checadorImport'])->name('retardos.import');
-
 
     // Empleados
     Route::resource('empleados', EmpleadosController::class);
@@ -113,6 +127,7 @@ Route::prefix('rh')->name('rh.')->middleware(['auth'])->group(function () {
     //Prestamos
     Route::get('prestamos', [PrestamosController::class, 'index'])->name('prestamos.index');
     Route::get('prestamos/getHistorial', [PrestamosController::class, 'getHistorial'])->name('empleados.getHistorial');
+    Route::get('prestamos/calculadora', [PrestamosController::class, 'calculadora'])->name('prestamos.calculadora');
 
     // Deducciones
     Route::resource('deducciones', DeduccionesController::class);
@@ -133,3 +148,19 @@ Route::get('/clients/{client}/download/{document}', [LegalClientController::clas
 
 Route::get('/cotizadora', [CotizadoraController::class, 'index'])->name('cotizadora.index');
 Route::post('/cotizaciones/guardar', [CotizadoraController::class, 'guardar'])->name('cotizaciones.guardar');
+// Rutas para el módulo legal
+Route::prefix('legal')->name('legal.')->group(function () {
+    // Ruta para verificar RFC (DEBE ir antes del resource)
+    Route::post('/clients/check-rfc', [LegalClientController::class, 'checkRfc'])
+        ->name('clients.check-rfc');
+
+    // Rutas resource para clients
+    Route::resource('clients', LegalClientController::class);
+});
+// routes/web.php
+Route::middleware(['auth'])->prefix('legal')->group(function () {
+    Route::resource('clients', App\Http\Controllers\Legal\LegalClientController::class);
+});
+Route::prefix('legal')->name('legal.')->group(function () {
+    Route::resource('clients', LegalClientController::class);
+});

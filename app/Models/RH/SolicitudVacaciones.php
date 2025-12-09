@@ -5,26 +5,27 @@ namespace App\Models\RH;
 use App\Models\Estatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Departamento extends Model
+class SolicitudVacaciones extends Model
 {
-
     use HasFactory;
-    use SoftDeletes;
 
-    protected $table = 'cat_departamento';
+    protected $table = 'vacaciones_solicitud';
 
     protected $fillable = [
-        'nombre',
-        'id_area',
+        'id_empleado_vacaciones',
+        'concepto',
+        'fecha_inicio',
+        'fecha_final',
+        'prima',
+        'observaciones',
         'id_estatus'
     ];
 
     // Relaciones
-    public function area()
+    public function empleadoVacaciones()
     {
-        return $this->belongsTo(Area::class, 'id_area', 'id');
+        return $this->belongsTo(EmpleadoVacaciones::class, 'id_empleado_vacaciones', 'id');
     }
 
     public function estatus()

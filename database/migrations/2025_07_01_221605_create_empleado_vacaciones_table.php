@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('empleado_vacaciones', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_empleado');
-            $table->unsignedInteger('vacaciones_ley');
+            $table->unsignedInteger('ano');
+            $table->unsignedInteger('vacaciones_disponibles');
             $table->unsignedInteger('vacaciones_restantes');
             $table->unsignedBigInteger('id_estatus');
             $table->timestamps();

@@ -11,7 +11,7 @@ class DeduccionesController extends Controller
     //
     public function index()
     {
-        $deducciones = Deducciones::paginate(10);
+        $deducciones = Deducciones::where('id_estatus',1)->get();
         return view('rh.deducciones.index', compact('deducciones'));
     }
 

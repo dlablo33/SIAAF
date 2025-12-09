@@ -12,7 +12,9 @@ use App\Services\NominaJsonBuilderService;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class NominaController extends Controller
 {
@@ -134,11 +136,8 @@ class NominaController extends Controller
 
         $periodoOg = $periodo + 1;
 
-
         $json = new NominaJsonBuilderService();
         $json->build($empleados, $periodoOg, $fechaPeriodo, $fechaNomina);
-
-
 
         return view('rh.nomina.index', compact('periodoOg', 'fechaPeriodo', 'fechaNomina', 'prestaciones', 'empleados', 'deducciones', 'dispersion'));
     }

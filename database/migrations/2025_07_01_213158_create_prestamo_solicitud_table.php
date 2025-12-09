@@ -13,8 +13,7 @@ return new class extends Migration
     {
         Schema::create('prestamo_solicitud', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('is_empleado');
-            $table->date('fecha_solicitud');
+            $table->unsignedBigInteger('id_empleado');
             $table->unsignedInteger('monto_pedido');
             $table->unsignedBigInteger('id_estatus');
             $table->timestamps();

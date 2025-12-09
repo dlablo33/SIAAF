@@ -11,7 +11,7 @@ class PermisoTipoController extends Controller
     //
     public function index()
     {
-        $permisoTipo = PermisoTipo::paginate(10);
+        $permisoTipo = PermisoTipo::get();
         return view('rh.permisoTipo.index', compact('permisoTipo'));
     }
 

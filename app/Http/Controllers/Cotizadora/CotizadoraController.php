@@ -81,7 +81,7 @@ public function guardar(Request $request)
             
             Log::info('📂 Cotización guardada en archivo de backup');
         } catch (\Exception $e) {
-            Log::error('❌ Error al guardar en backup: ' . $e->getMessage());
+            Log::error('Error al guardar en backup: ' . $e->getMessage());
         }
     }
 
